@@ -1,0 +1,1 @@
+var tipuesearch = {"pages":[{"title":"Re-open","text":"Finally re-open my blog at 2020. Keep going!!","tags":"misc","url":"https://jneo8.github.io/re-open.html","loc":"https://jneo8.github.io/re-open.html"}]};
