@@ -64,6 +64,14 @@ github: publish  ## upload the web site via gh-pages
 
 .PHONY: html help clean regenerate serve serve-global devserver publish github
 
+##@ Download
+
+download-themes:  ## Download themes to local
+	git clone --recursive https://github.com/getpelican/pelican-themes themes
+
+download-plugins:  ## Download plugins to local
+	git clone --recursive https://github.com/getpelican/pelican-plugins plugins
+
 ##@ Help
 
 .PHONY: help
