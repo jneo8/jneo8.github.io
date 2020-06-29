@@ -1,0 +1,1 @@
+var tipuesearch = {"pages":[{"title":"Re-open","text":"Finally re-open my blog at 2020. Keep going!!","tags":"misc","url":"/re-open.html","loc":"/re-open.html"}]};
