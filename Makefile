@@ -4,11 +4,12 @@ PELICANOPTS=
 
 BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/content
-OUTPUTDIR=$(BASEDIR)/..
+OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
 GITHUB_PAGES_BRANCH=master
+GITHUB_FLUSH_BRANCH=master
 
 
 DEBUG ?= 0
@@ -58,10 +59,9 @@ publish:  ## generate using production settings
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
 github: clean publish  ## upload the web site via gh-pages
-	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
-	git push origin $(GITHUB_PAGES_BRANCH)
-	# ghp-import $(OUTPUTDIR) -b gh-pages
-	# git push origin gh-pages:$(GITHUB_PAGES_BRANCH)
+	ghp-import -m "Generate Pelican site" -b gh-pages $(OUTPUTDIR)
+	git push -f origin $(GITHUB_FLUSH_BRANCH):$(GITHUB_PAGES_BRANCH)
+	git branch -D $(GITHUB_FLUSH_BRANCH)
 
 
 .PHONY: html help clean regenerate serve serve-global devserver publish github
