@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
-    <link>http://example.org/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <title>jeno8 blog</title>
+    <link>https://jneo8.github.io/</link>
+    <description>Recent content on jeno8 blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 21 Jul 2020 00:01:21 +0800</lastBuildDate>
     
-	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jneo8.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Awesome go</title>
-      <link>http://example.org/posts/awesome-go/</link>
+      <link>https://jneo8.github.io/posts/awesome-go/</link>
       <pubDate>Tue, 21 Jul 2020 00:01:21 +0800</pubDate>
       
-      <guid>http://example.org/posts/awesome-go/</guid>
+      <guid>https://jneo8.github.io/posts/awesome-go/</guid>
       <description>A curated list of awesome golang articles, frameworks, libraries, software and resources.
-Libraries Misc  gocity  Configuration  viper  Command-line Interface Development  cobra  Dependency Injection  dig fx wire  Logging  logrus logrus-filename  Design Pattern  go-patterns   Articles &amp;amp;&amp;amp; Videos Misc   Practical Go - Dave Chency
-  The Zen of Go - Dave Chency
-  The Go Programming Language Specification</description>
+Libraries Misc  gocity  Configuration  viper  Command-line Interface Development  cobra  Dependency Injection  dig fx wire  Logging  logrus logrus-filename  Design Pattern  go-patterns  Databases Drivers  NoSQL Databases  Cassandra  gocqlx       Articles &amp;amp;&amp;amp; Videos Misc   Practical Go - Dave Chency</description>
     </item>
     
     <item>
       <title>Mermaid - golang tool help user doing dependency more easily</title>
-      <link>http://example.org/posts/mermaid/</link>
+      <link>https://jneo8.github.io/posts/mermaid/</link>
       <pubDate>Mon, 29 Jun 2020 10:41:57 +0800</pubDate>
       
-      <guid>http://example.org/posts/mermaid/</guid>
+      <guid>https://jneo8.github.io/posts/mermaid/</guid>
       <description>Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.
 Project link: mermaid
 Mermaid 這個專案的誕生, 是因為自己工作上時常需要寫cli tool而誕生的一個golang專案
