@@ -3,9 +3,9 @@
 	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>jneo8.github.io | 404 Page not found</title>
-	<meta name="description" content="404 Page not found">
-	
+	<title>jneo8.github.io | Mermaid - golang tool help user doing dependency more easily</title>
+	<meta name="description" content="Mermaid - golang tool help user doing dependency more easily">
+	<meta name="author" content="jneo8">
 	
 	<link rel="stylesheet" href="/css/sk3.css">
 	
@@ -38,7 +38,7 @@
 		<b>Share</b> 
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2f404.html"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fposts%2fmermaid%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -46,7 +46,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2f404.html&title=404%20Page%20not%20found"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fposts%2fmermaid%2f&title=Mermaid%20-%20golang%20tool%20help%20user%20doing%20dependency%20more%20easily"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -56,7 +56,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2f404.html&amp;title=404%20Page%20not%20found"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fposts%2fmermaid%2f&amp;title=Mermaid%20-%20golang%20tool%20help%20user%20doing%20dependency%20more%20easily"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -64,7 +64,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2f404.html&amp;text=404%20Page%20not%20found"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fposts%2fmermaid%2f&amp;text=Mermaid%20-%20golang%20tool%20help%20user%20doing%20dependency%20more%20easily"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -181,9 +181,290 @@
 	</div>
 
 </header><div id="content">
-<div class="txt-center-h">
-	<h1>404</h1>
-	<h3>Page Not Found.</h3>
+<div class="main">
+
+	<div></div>
+
+	
+	
+	<heading>
+		<h1>Mermaid - golang tool help user doing dependency more easily</h1>
+	</heading>
+	
+
+	<div></div>
+
+	
+	
+	
+	<section class="box sk3-margin-v-10">
+		<div class="collapsible">☰ Table of Content</div>
+		<sk3-toc><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#project">Project</a></li>
+        <li><a href="#dependency-injection">Dependency Injection</a></li>
+        <li><a href="#config">Config</a></li>
+        <li><a href="#logger">Logger</a></li>
+        <li><a href="#testing">Testing</a></li>
+        <li><a href="#summary">Summary</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></sk3-toc>
+	</section>
+	
+	
+
+	
+	<content class="sk3-margin-v-10"><p>Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.</p>
+<h2 id="project">Project</h2>
+<p>link: <strong><a href="https://github.com/jneo8/mermaid">mermaid</a></strong></p>
+<p>Mermaid 這個專案的誕生, 是因為自己工作上時常需要寫cli tool而誕生的一個golang專案</p>
+<p>介紹Mermaid之前, 可能需要先介紹一些使用場景:</p>
+<ul>
+<li>
+<p>希望透過 <code>-h</code>, <code>--username</code> 類似的指令把參數帶給entrypoint</p>
+</li>
+<li>
+<p>有讀取環境參數或者設定檔的需求</p>
+</li>
+<li>
+<p>Logger</p>
+</li>
+<li>
+<p>Dependency Injection</p>
+</li>
+<li>
+<p>Testing(這很重要)</p>
+</li>
+</ul>
+<p>如果上述需求你有符合, 那你就可以用Mermaid來開發你的程式
+下面來說說這個專案的一些想法以及開發過程
+最後再說使用方式</p>
+<hr>
+<p>首先要達到上述的需求會有一些困難需要克服</p>
+<h2 id="dependency-injection">Dependency Injection</h2>
+<ul>
+<li>DI是可以手動完成的</li>
+<li>如果你有很多重複性高的指令, 手動注入依舊可行, 但免不了需要寫大量的code, 以及來回驗證參數沒有打錯來確保正確性跟一致性</li>
+<li>生為一個懶惰的工程師, 直接放棄手動注入(是說一開始我也是手動做的, 手真的會酸)</li>
+<li>所以 DI 最後選擇透過<a href="https://github.com/uber-go/dig">dig</a> 這個libary來完成</li>
+<li>因為使用了DI Libary, 所以如果有參數漏傳或者設定錯誤是會直接噴error的, 間接免去了檢查的時間</li>
+</ul>
+<h2 id="config">Config</h2>
+<p>談config 之前, 我們可以先想看看有哪些東西是我們需要處理的範圍</p>
+<ul>
+<li>
+<p><code>Default variable</code>: Default var, 會寫在程式內</p>
+</li>
+<li>
+<p><code>Config file</code>: Config file, e.g., yaml.</p>
+</li>
+<li>
+<p><code>environment variable</code>: Get from environment.</p>
+</li>
+<li>
+<p><code>Input arguments</code>: From cli args input.</p>
+</li>
+</ul>
+<p>一般來說要符合使用, 引用順序應該會是</p>
+<p><strong><code>default</code> -&gt; <code>config</code> -&gt; <code>environment</code> -&gt; <code>input args</code></strong></p>
+<ul>
+<li>後段的會覆蓋前面的. 這樣的順序應該不論是cli或者container都適用</li>
+</ul>
+<p>最後lib 選擇</p>
+<ul>
+<li>
+<p><code>config</code> &amp; <code>environment variable</code>使用的是<a href="https://github.com/spf13/viper">viper</a></p>
+</li>
+<li>
+<p><code>default variable</code> &amp; <code>input args</code> 使用的是 <a href="https://github.com/spf13/cobra">cobra</a></p>
+</li>
+</ul>
+<p>而我們為了把所有的設定都給DI, 決定把他變成一個唯一的entity -&gt; <a href="https://godoc.org/github.com/spf13/viper#Viper">viper.Viper</a>. 所以實作上</p>
+<ul>
+<li><code>default</code>, <code>input args</code> -&gt; <strong>cobra</strong></li>
+<li><code>config</code>, <code>environment</code> -&gt; <strong>viper</strong></li>
+<li><strong>cobra</strong> -&gt; <strong>viper</strong></li>
+</ul>
+<p>後續我們只需要處理<strong>viper</strong>跟<strong>dig</strong>之間的綁定就好</p>
+<h2 id="logger">Logger</h2>
+<p>為什麼會把 Logger 抽出來說, 是因為我認為一個好的cli tool, 他的Logger需要有一些特點:</p>
+<ul>
+<li>
+<p>獨立的entity</p>
+<ul>
+<li>
+<p>大部份的logger lib, 都有一個global的entity</p>
+<ul>
+<li>這件事會讓你的測試比較困難, global的東西互相影響不好測試</li>
+<li>但如果你每次寫新的command, 都要new一次, 也是滿煩的</li>
+</ul>
+</li>
+<li>
+<p>不同的component, 不同的logger. 這件事就是看開發或者業務需要</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Customized</p>
+<ul>
+<li>算必須. 大部份的lib也都有</li>
+</ul>
+</li>
+</ul>
+<p>Logger lib 是用 <a href="https://github.com/sirupsen/logrus">logrus</a></p>
+<h2 id="testing">Testing</h2>
+<p>global的東西真的不好測試, 所以為了讓東西變得測試容易</p>
+<ul>
+<li>
+<p><strong>cobra</strong> 只負責抓default跟args, 還有當進入點.</p>
+</li>
+<li>
+<p><strong>viper</strong> 基本上runtime才會init, command 之間不會影響</p>
+</li>
+<li>
+<p>Logger同上</p>
+</li>
+</ul>
+<p>這樣的意思是說, 每個cmd之間, config跟logger都是獨立的, 這會讓測試變得容易許多</p>
+<hr>
+<h2 id="summary">Summary</h2>
+<p>嗯, 說了一些實作上的想法.
+Project本身沒什麼難度, 但其實省去了個人很多的開發時間, 希望大家可以使用看看</p>
+<p>最後再附上一次連結
+<a href="https://github.com/jneo8/mermaid">mermaid</a></p>
+</content>
+
+	<div></div>
+
+	
+	<section class="sk3-margin-v-10">
+		
+		
+<section class="sk3-flex sk3-flex-center-h">
+
+	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			
+<sk3-social>
+	
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fposts%2fmermaid%2f"
+		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
+			<use xlink:href="#facebook"></use>
+		</svg>
+	</a>
+	
+	
+	<a target="_blank" rel="noopener noreferrer"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fposts%2fmermaid%2f&title=Mermaid%20-%20golang%20tool%20help%20user%20doing%20dependency%20more%20easily"
+		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
+			<use xlink:href="#linkedin"></use>
+		</svg>
+	</a>
+	
+	
+	
+	
+	
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fposts%2fmermaid%2f&amp;title=Mermaid%20-%20golang%20tool%20help%20user%20doing%20dependency%20more%20easily"
+		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
+			<use xlink:href="#telegram"></use>
+		</svg>
+	</a>
+	
+	
+	<a target="_blank" rel="noopener noreferrer"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fposts%2fmermaid%2f&amp;text=Mermaid%20-%20golang%20tool%20help%20user%20doing%20dependency%20more%20easily"
+		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
+			<use xlink:href="#twitter"></use>
+		</svg>
+	</a>
+	
+	
+
+	
+	
+
+
+
+
+</sk3-social>
+
+		</div>
+	</div>
+	
+
+	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			<div class="sk3-margin-h"><h3>jneo8</h3></div>
+			
+			<div class="sk3-margin-h sk3-margin-down">Update: 2020-06-29</div>
+		</div>
+	</div>
+	
+
+	
+	
+
+	
+	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			
+			
+			<a class="sk3-margin-h txt-center-h" href="/posts/awesome-go/">
+				<h3>Awesome go >></h3>
+			</a>
+		</div>
+	</div>
+	
+	
+
+	
+	
+	
+
+</section>
+		
+	</section>
+
+	<div></div>
+
+	
+	
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jneo8" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+
 </div>
 
 	</div><footer class="sk3-flex sk3-flex-center-h sk3-margin-v-10 sk3-pad-v-10">
@@ -208,15 +489,38 @@
 
 
 
-<meta property="og:title" content="404 Page not found" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://jneo8.github.io/404.html" />
-<meta property="og:site_name" content="jneo8.github.io" />
+<meta property="og:title" content="Mermaid - golang tool help user doing dependency more easily" />
+<meta property="og:description" content="Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.
+Project link: mermaid
+Mermaid 這個專案的誕生, 是因為自己工作上時常需要寫cli tool而誕生的一個golang專案
+介紹Mermaid之前, 可能需要先介紹一些使用場景:
+  希望透過 -h, --username 類似的指令把參數帶給entrypoint
+  有讀取環境參數或者設定檔的需求
+  Logger
+  Dependency Injection
+  Testing(這很重要)
+  如果上述需求你有符合, 那你就可以用Mermaid來開發你的程式 下面來說說這個專案的一些想法以及開發過程 最後再說使用方式
+ 首先要達到上述的需求會有一些困難需要克服
+Dependency Injection  DI是可以手動完成的 如果你有很多重複性高的指令, 手動注入依舊可行, 但免不了需要寫大量的code, 以及來回驗證參數沒有打錯來確保正確性跟一致性 生為一個懶惰的工程師, 直接放棄手動注入(是說一開始我也是手動做的, 手真的會酸) 所以 DI 最後選擇透過dig 這個libary來完成 因為使用了DI Libary, 所以如果有參數漏傳或者設定錯誤是會直接噴error的, 間接免去了檢查的時間  Config 談config 之前, 我們可以先想看看有哪些東西是我們需要處理的範圍" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jneo8.github.io/posts/mermaid/" />
+<meta property="article:published_time" content="2020-06-29T10:41:57+08:00" />
+<meta property="article:modified_time" content="2020-06-29T10:41:57+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="404 Page not found"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Mermaid - golang tool help user doing dependency more easily"/>
+<meta name="twitter:description" content="Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.
+Project link: mermaid
+Mermaid 這個專案的誕生, 是因為自己工作上時常需要寫cli tool而誕生的一個golang專案
+介紹Mermaid之前, 可能需要先介紹一些使用場景:
+  希望透過 -h, --username 類似的指令把參數帶給entrypoint
+  有讀取環境參數或者設定檔的需求
+  Logger
+  Dependency Injection
+  Testing(這很重要)
+  如果上述需求你有符合, 那你就可以用Mermaid來開發你的程式 下面來說說這個專案的一些想法以及開發過程 最後再說使用方式
+ 首先要達到上述的需求會有一些困難需要克服
+Dependency Injection  DI是可以手動完成的 如果你有很多重複性高的指令, 手動注入依舊可行, 但免不了需要寫大量的code, 以及來回驗證參數沒有打錯來確保正確性跟一致性 生為一個懶惰的工程師, 直接放棄手動注入(是說一開始我也是手動做的, 手真的會酸) 所以 DI 最後選擇透過dig 這個libary來完成 因為使用了DI Libary, 所以如果有參數漏傳或者設定錯誤是會直接噴error的, 間接免去了檢查的時間  Config 談config 之前, 我們可以先想看看有哪些東西是我們需要處理的範圍"/>
 
 
 
