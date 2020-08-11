@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flink on jneo8.github.io</title>
+    <link>https://jneo8.github.io/flink/</link>
+    <description>Recent content in Flink on jneo8.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Aug 2020 22:11:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://jneo8.github.io/flink/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Flink 學習初心者心得</title>
+      <link>https://jneo8.github.io/flink/first_experience/</link>
+      <pubDate>Tue, 11 Aug 2020 22:11:12 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/flink/first_experience/</guid>
+      <description>講講最近flink學習的心得好了
+Cons: 嗯，以台灣來說真的很冷門
+至少個人接觸到的很少人有寫過
+Pros： 跟k8s整合性還不錯, 整體來說適性滿好的, 這也是當初想接觸的動機之一
+operator 現在是用Google Cloud Platform 的 flink-on-k8s-operator
+operator的code是golang, 剛好最近也在看CDK相關的東西, 也許之後會有機會貢獻
+對我是跑在k8s上喔
+Dataset 跟 Data streaming, flink用一個通用的方式去同時處理Unbounded streams &amp;amp; bounded streams 實際使用過然後掃過源碼之後只能說優雅
+為什麼要掃源碼, 只能說scala的example少的可憐, 相比java來說
+之後等理解更多之後應該會寫一些分享文出來</description>
+    </item>
+    
+  </channel>
+</rss>
