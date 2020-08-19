@@ -3,8 +3,8 @@
 	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>jneo8.github.io | Flink</title>
-	<meta name="description" content="Flink">
+	<title>jneo8.github.io | [Flink] Bounded And UnBounded</title>
+	<meta name="description" content="[Flink] Bounded And UnBounded">
 	
 	
 	<link rel="stylesheet" href="/css/sk3.css">
@@ -38,7 +38,7 @@
 		<b>Share</b> 
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fflink%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fflink%2fboundedandunbounded%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -46,7 +46,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fflink%2f&title=Flink"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fflink%2fboundedandunbounded%2f&title=%5bFlink%5d%20Bounded%20And%20UnBounded"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -56,7 +56,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fflink%2f&amp;title=Flink"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fflink%2fboundedandunbounded%2f&amp;title=%5bFlink%5d%20Bounded%20And%20UnBounded"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -64,7 +64,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fflink%2f&amp;text=Flink"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fflink%2fboundedandunbounded%2f&amp;text=%5bFlink%5d%20Bounded%20And%20UnBounded"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -196,101 +196,116 @@
 
 	
 	
-	
-	<h1>
-		<heading>Flink</heading>
-	</h1>
-	
-	
-	<div>
-		<article><p><img src="/img/flink-header-logo.svg" alt="flink-logo"></p>
-<h1 id="flink-學習全紀錄">Flink 學習全紀錄</h1>
-</article>
-	</div>
-	
-	
-
-	
-	
-	
-	
+	<heading>
+		<h1>[Flink] Bounded And UnBounded</h1>
+	</heading>
 	
 
 	<div></div>
 
 	
-	<div class="sk3-flex sk3-flex-center-h">
-		<sk3-pager>
-
-</sk3-pager>
-	</div>
-
-	<div></div>
-
 	
-	<section class="sk3-flex sk3-flex-center-h">
-		
-		<div class="sk3-card box">
-			<div class="sk3-flex">
-				<a class="sk3-flex-inline" href="/flink/boundedandunbounded/">
-					<h3>[Flink] Bounded And UnBounded</h3>
-				</a>
-				
-				
-				<div class="sk3-flex-right sk3-flex-down">2020-08-18</div>
-				
-				
-			</div>
-			
-		</div>
-		
-		<div class="sk3-card box">
-			<div class="sk3-flex">
-				<a class="sk3-flex-inline" href="/flink/first_experience/">
-					<h3>[Flink] Flink 學習初心者心得</h3>
-				</a>
-				
-				
-				<div class="sk3-flex-right sk3-flex-down">2020-08-11</div>
-				
-				
-			</div>
-			
-		</div>
-		
+	
+	<section class="box sk3-margin-v-10">
+		<div class="collapsible">☰ Table of Content</div>
+		<sk3-toc><nav id="TableOfContents">
+  <ul>
+    <li><a href="#unbounded-and-bounded">Unbounded and Bounded</a>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#unbounded">Unbounded:</a></li>
+                <li><a href="#bounded">Bounded:</a></li>
+                <li><a href="#flink-用了一套相同的engine--_flink-runtime_--去處理unbounded--bounded數據">Flink 用了一套相同的Engine ( <em>flink runtime</em> ) 去處理unbounded &amp;&amp; bounded數據</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></sk3-toc>
 	</section>
+	
+	
+
+	
+	<content class="sk3-margin-v-10"><p><img src="/img/flink-header-logo.svg" alt="flink-logo"></p>
+<h1 id="unbounded-and-bounded">Unbounded and Bounded</h1>
+<ul>
+<li>
+<p>相較於平時聽到的 <em>Batch vs Streaming</em>, flink 提出了不同的解釋 &ndash; <em>Unbounded vs Bounded</em></p>
+</li>
+<li>
+<h4 id="unbounded">Unbounded:</h4>
+<ul>
+<li>
+<p>定義開始, 沒有定義結束</p>
+</li>
+<li>
+<p>流式處理, event 必需在進入系統後立即處理</p>
+</li>
+<li>
+<p>因為數據是無界的, 所以不會有數據結束的時候 -&gt; 無法確認數據是否全部抵達</p>
+</li>
+<li>
+<p>需要定義事件的時間順序來處理 -&gt; <em>Time Attributes</em></p>
+</li>
+</ul>
+</li>
+<li>
+<h4 id="bounded">Bounded:</h4>
+<ul>
+<li>
+<p>定義開始與結束</p>
+</li>
+<li>
+<p>可以知道數據的終點</p>
+</li>
+<li>
+<p>因為可以排序，有序的讀取數據並不是必需</p>
+</li>
+<li>
+<p>Equal to batch processing</p>
+</li>
+</ul>
+</li>
+<li>
+<h4 id="flink-用了一套相同的engine--_flink-runtime_--去處理unbounded--bounded數據">Flink 用了一套相同的Engine ( <em>flink runtime</em> ) 去處理unbounded &amp;&amp; bounded數據</h4>
+</li>
+</ul>
+<p><img src="/img/flink-runtime.png" alt="flink-runtime"></p>
+<p><em>runtime</em> 是flink的核心運算架構, 之後會提到</p>
+</content>
 
 	<div></div>
 
 	
-	<div class="sk3-flex sk3-flex-center-h">
-		<sk3-pager>
-
-</sk3-pager>
-	</div>
-
-	
-	
-	<div class="sk3-flex sk3-flex-center-h">
+	<section class="sk3-margin-v-10">
 		
+		
+<section class="sk3-flex sk3-flex-center-h">
 
+	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			
 <sk3-social>
 	
-	
-	
-	
-	
-	
-	<a href="https://github.com/jneo8/"><svg class="sk3-social-fab">
-			<use xlink:href="#github"></use>
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fflink%2fboundedandunbounded%2f"
+		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
+			<use xlink:href="#facebook"></use>
 		</svg>
 	</a>
 	
 	
-	
-	
-	
-	<a href="https://www.linkedin.com/in/james-lin-735548115/"><svg class="sk3-social-fab">
+	<a target="_blank" rel="noopener noreferrer"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fflink%2fboundedandunbounded%2f&title=%5bFlink%5d%20Bounded%20And%20UnBounded"
+		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
 	</a>
@@ -299,33 +314,99 @@
 	
 	
 	
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fflink%2fboundedandunbounded%2f&amp;title=%5bFlink%5d%20Bounded%20And%20UnBounded"
+		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
+			<use xlink:href="#telegram"></use>
+		</svg>
+	</a>
 	
 	
-	
-	
-	
-	
-	
-	
-	<a href="https://twitter.com/lin_jneo8"><svg class="sk3-social-fab">
+	<a target="_blank" rel="noopener noreferrer"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fflink%2fboundedandunbounded%2f&amp;text=%5bFlink%5d%20Bounded%20And%20UnBounded"
+		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
 	</a>
 	
 	
+
 	
 	
-	
-	
-	
-	
+
+
+
+
 </sk3-social>
 
-
+		</div>
 	</div>
 	
 
+	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			
+			
+			<div class="sk3-margin-h sk3-margin-down">Update: 2020-08-18</div>
+		</div>
+	</div>
+	
+
+	
+	
+
+	
+	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			<a class="sk3-margin-h txt-center-h" href="/flink/first_experience/">
+				<h3>
+					&lt;&lt; [Flink] Flink 學習初心者心得</h3>
+			</a> 
+			
+			
+		</div>
+	</div>
+	
+	
+
+	
+	
+	
+
+</section>
+		
+	</section>
+
 	<div></div>
+
+	
+	
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jneo8" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 
 </div>
 
@@ -362,15 +443,34 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<meta property="og:title" content="Flink" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://jneo8.github.io/flink/" />
-<meta property="og:updated_time" content="2020-08-11T22:11:55+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
+<meta property="og:title" content="[Flink] Bounded And UnBounded" />
+<meta property="og:description" content="Unbounded and Bounded   相較於平時聽到的 Batch vs Streaming, flink 提出了不同的解釋 &ndash; Unbounded vs Bounded
+  Unbounded:   定義開始, 沒有定義結束
+  流式處理, event 必需在進入系統後立即處理
+  因為數據是無界的, 所以不會有數據結束的時候 -&gt; 無法確認數據是否全部抵達
+  需要定義事件的時間順序來處理 -&gt; Time Attributes
+    Bounded:   定義開始與結束
+  可以知道數據的終點
+  因為可以排序，有序的讀取數據並不是必需
+  Equal to batch processing
+    Flink 用了一套相同的Engine ( flink runtime ) 去處理unbounded &amp;&amp; bounded數據   runtime 是flink的核心運算架構, 之後會提到" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jneo8.github.io/flink/boundedandunbounded/" />
+<meta property="article:published_time" content="2020-08-18T16:25:45+08:00" />
+<meta property="article:modified_time" content="2020-08-18T16:25:45+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Flink"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="[Flink] Bounded And UnBounded"/>
+<meta name="twitter:description" content="Unbounded and Bounded   相較於平時聽到的 Batch vs Streaming, flink 提出了不同的解釋 &ndash; Unbounded vs Bounded
+  Unbounded:   定義開始, 沒有定義結束
+  流式處理, event 必需在進入系統後立即處理
+  因為數據是無界的, 所以不會有數據結束的時候 -&gt; 無法確認數據是否全部抵達
+  需要定義事件的時間順序來處理 -&gt; Time Attributes
+    Bounded:   定義開始與結束
+  可以知道數據的終點
+  因為可以排序，有序的讀取數據並不是必需
+  Equal to batch processing
+    Flink 用了一套相同的Engine ( flink runtime ) 去處理unbounded &amp;&amp; bounded數據   runtime 是flink的核心運算架構, 之後會提到"/>
 
 
 

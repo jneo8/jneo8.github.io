@@ -6,13 +6,27 @@
     <description>Recent content in Flink on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Aug 2020 22:11:55 +0800</lastBuildDate>
-    
-	<atom:link href="https://jneo8.github.io/flink/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 11 Aug 2020 22:11:55 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/flink/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Flink] Bounded And UnBounded</title>
+      <link>https://jneo8.github.io/flink/boundedandunbounded/</link>
+      <pubDate>Tue, 18 Aug 2020 16:25:45 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/flink/boundedandunbounded/</guid>
+      <description>Unbounded and Bounded   相較於平時聽到的 Batch vs Streaming, flink 提出了不同的解釋 &amp;ndash; Unbounded vs Bounded
+  Unbounded:   定義開始, 沒有定義結束
+  流式處理, event 必需在進入系統後立即處理
+  因為數據是無界的, 所以不會有數據結束的時候 -&amp;gt; 無法確認數據是否全部抵達
+  需要定義事件的時間順序來處理 -&amp;gt; Time Attributes
+    Bounded:   定義開始與結束
+  可以知道數據的終點
+  因為可以排序，有序的讀取數據並不是必需
+  Equal to batch processing
+    Flink 用了一套相同的Engine ( flink runtime ) 去處理unbounded &amp;amp;&amp;amp; bounded數據   runtime 是flink的核心運算架構, 之後會提到</description>
+    </item>
     
     <item>
-      <title>Flink 學習初心者心得</title>
+      <title>[Flink] Flink 學習初心者心得</title>
       <link>https://jneo8.github.io/flink/first_experience/</link>
       <pubDate>Tue, 11 Aug 2020 22:11:12 +0800</pubDate>
       
