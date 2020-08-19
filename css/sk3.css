@@ -5,7 +5,6 @@
   --font-size: 1em;
   --html-width: 1200px;
   --line-height: 1.429em;
-  --line-height-a: 1.7em;
   --link-color: #3d84ff;
   --margin-pad-full: 0.7em;
   --margin-pad-half: 0.35em;
@@ -48,10 +47,6 @@ html {
   line-height: var(--line-height);
 }
 
-a {
-  line-height: var(--line-height-a);
-}
-
 body {
   margin-left: auto;
   margin-right: auto;
@@ -75,7 +70,6 @@ a:hover {
 }
 
 header a,
-header h1,
 header h2,
 header h3,
 header h4 {
@@ -127,6 +121,12 @@ td {
   border-top: 1px solid;
 }
 
+.header-h1 {
+  font-size: var(--size-h1);
+  font-weight: bold;
+  line-height: var(--line-height);
+}
+
 .txt-center-h {
   text-align: center;
 }
@@ -145,10 +145,6 @@ td {
   top: 0;
   width: var(--sidebar-width);
   z-index: 2;
-}
-
-.sidebar h1 {
-  font-size: var(--size-h1);
 }
 
 .sidebar-mask {

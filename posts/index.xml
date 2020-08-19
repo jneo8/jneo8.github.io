@@ -13,8 +13,7 @@
       <pubDate>Tue, 21 Jul 2020 00:01:21 +0800</pubDate>
       
       <guid>https://jneo8.github.io/posts/awesome-go/</guid>
-      <description>A curated list of awesome golang articles, frameworks, libraries, software and resources.
-Libraries Misc  gocity  Configuration  viper  Command-line Interface Development  cobra  Dependency Injection  dig fx wire  Logging  logrus logrus-filename  Design Pattern  go-patterns  Databases Drivers  NoSQL Databases  Cassandra  gocqlx       Articles &amp;amp;&amp;amp; Videos Misc   Practical Go - Dave Chency</description>
+      <description>&lt;p&gt;&lt;em&gt;A curated list of awesome golang articles, frameworks, libraries, software and resources.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -23,18 +22,7 @@ Libraries Misc  gocity  Configuration  viper  Command-line Interface Development
       <pubDate>Mon, 29 Jun 2020 10:41:57 +0800</pubDate>
       
       <guid>https://jneo8.github.io/posts/mermaid/</guid>
-      <description>Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.
-Project link: mermaid
-Mermaid 這個專案的誕生, 是因為自己工作上時常需要寫cli tool而誕生的一個golang專案
-介紹Mermaid之前, 可能需要先介紹一些使用場景:
-  希望透過 -h, --username 類似的指令把參數帶給entrypoint
-  有讀取環境參數或者設定檔的需求
-  Logger
-  Dependency Injection
-  Testing(這很重要)
-  如果上述需求你有符合, 那你就可以用Mermaid來開發你的程式 下面來說說這個專案的一些想法以及開發過程 最後再說使用方式
- 首先要達到上述的需求會有一些困難需要克服
-Dependency Injection  DI是可以手動完成的 如果你有很多重複性高的指令, 手動注入依舊可行, 但免不了需要寫大量的code, 以及來回驗證參數沒有打錯來確保正確性跟一致性 生為一個懶惰的工程師, 直接放棄手動注入(是說一開始我也是手動做的, 手真的會酸) 所以 DI 最後選擇透過dig 這個libary來完成 因為使用了DI Libary, 所以如果有參數漏傳或者設定錯誤是會直接噴error的, 間接免去了檢查的時間  Config 談config 之前, 我們可以先想看看有哪些東西是我們需要處理的範圍</description>
+      <description>&lt;p&gt;Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.&lt;/p&gt;</description>
     </item>
     
   </channel>

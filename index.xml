@@ -8,21 +8,21 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 09 Aug 2020 19:31:42 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>[Flink] Architecture</title>
+      <link>https://jneo8.github.io/wip/architecture/</link>
+      <pubDate>Wed, 19 Aug 2020 14:40:00 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/wip/architecture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>[Flink] Bounded And UnBounded</title>
       <link>https://jneo8.github.io/flink/boundedandunbounded/</link>
       <pubDate>Tue, 18 Aug 2020 16:25:45 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/boundedandunbounded/</guid>
-      <description>Unbounded and Bounded   相較於平時聽到的 Batch vs Streaming, flink 提出了不同的解釋 &amp;ndash; Unbounded vs Bounded
-  Unbounded:   定義開始, 沒有定義結束
-  流式處理, event 必需在進入系統後立即處理
-  因為數據是無界的, 所以不會有數據結束的時候 -&amp;gt; 無法確認數據是否全部抵達
-  需要定義事件的時間順序來處理 -&amp;gt; Time Attributes
-    Bounded:   定義開始與結束
-  可以知道數據的終點
-  因為可以排序，有序的讀取數據並不是必需
-  Equal to batch processing
-    Flink 用了一套相同的Engine ( flink runtime ) 去處理unbounded &amp;amp;&amp;amp; bounded數據   runtime 是flink的核心運算架構, 之後會提到</description>
+      <description>&lt;p&gt;flink Unbounded and Bounded&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,16 +31,7 @@
       <pubDate>Tue, 11 Aug 2020 22:11:12 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/first_experience/</guid>
-      <description>講講最近flink學習的心得好了
-Cons: 嗯，以台灣來說真的很冷門
-至少個人接觸到的很少人有寫過
-Pros： 跟k8s整合性還不錯, 整體來說適性滿好的, 這也是當初想接觸的動機之一
-operator 現在是用Google Cloud Platform 的 flink-on-k8s-operator
-operator的code是golang, 剛好最近也在看CDK相關的東西, 也許之後會有機會貢獻
-對我是跑在k8s上喔
-Dataset 跟 Data streaming, flink用一個通用的方式去同時處理Unbounded streams &amp;amp; bounded streams 實際使用過然後掃過源碼之後只能說優雅
-為什麼要掃源碼, 只能說scala的example少的可憐, 相比java來說
-之後等理解更多之後應該會寫一些分享文出來</description>
+      <description>&lt;p&gt;講講最近flink學習的心得好了&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -60,8 +51,7 @@ This blog will share most about the software engineer things, reading, studying 
       <pubDate>Tue, 21 Jul 2020 00:01:21 +0800</pubDate>
       
       <guid>https://jneo8.github.io/posts/awesome-go/</guid>
-      <description>A curated list of awesome golang articles, frameworks, libraries, software and resources.
-Libraries Misc  gocity  Configuration  viper  Command-line Interface Development  cobra  Dependency Injection  dig fx wire  Logging  logrus logrus-filename  Design Pattern  go-patterns  Databases Drivers  NoSQL Databases  Cassandra  gocqlx       Articles &amp;amp;&amp;amp; Videos Misc   Practical Go - Dave Chency</description>
+      <description>&lt;p&gt;&lt;em&gt;A curated list of awesome golang articles, frameworks, libraries, software and resources.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -70,18 +60,7 @@ Libraries Misc  gocity  Configuration  viper  Command-line Interface Development
       <pubDate>Mon, 29 Jun 2020 10:41:57 +0800</pubDate>
       
       <guid>https://jneo8.github.io/posts/mermaid/</guid>
-      <description>Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.
-Project link: mermaid
-Mermaid 這個專案的誕生, 是因為自己工作上時常需要寫cli tool而誕生的一個golang專案
-介紹Mermaid之前, 可能需要先介紹一些使用場景:
-  希望透過 -h, --username 類似的指令把參數帶給entrypoint
-  有讀取環境參數或者設定檔的需求
-  Logger
-  Dependency Injection
-  Testing(這很重要)
-  如果上述需求你有符合, 那你就可以用Mermaid來開發你的程式 下面來說說這個專案的一些想法以及開發過程 最後再說使用方式
- 首先要達到上述的需求會有一些困難需要克服
-Dependency Injection  DI是可以手動完成的 如果你有很多重複性高的指令, 手動注入依舊可行, 但免不了需要寫大量的code, 以及來回驗證參數沒有打錯來確保正確性跟一致性 生為一個懶惰的工程師, 直接放棄手動注入(是說一開始我也是手動做的, 手真的會酸) 所以 DI 最後選擇透過dig 這個libary來完成 因為使用了DI Libary, 所以如果有參數漏傳或者設定錯誤是會直接噴error的, 間接免去了檢查的時間  Config 談config 之前, 我們可以先想看看有哪些東西是我們需要處理的範圍</description>
+      <description>&lt;p&gt;Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.&lt;/p&gt;</description>
     </item>
     
   </channel>
