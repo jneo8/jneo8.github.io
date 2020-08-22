@@ -6,13 +6,26 @@
     <description>Recent content in Tags on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Aug 2020 14:40:00 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 Aug 2020 15:21:20 +0800</lastBuildDate>
+    
+	<atom:link href="https://jneo8.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>flink</title>
       <link>https://jneo8.github.io/tags/flink/</link>
-      <pubDate>Wed, 19 Aug 2020 14:40:00 +0800</pubDate>
+      <pubDate>Sat, 22 Aug 2020 15:21:20 +0800</pubDate>
       
       <guid>https://jneo8.github.io/tags/flink/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://jneo8.github.io/tags/hugo/</link>
+      <pubDate>Wed, 19 Aug 2020 17:28:22 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     

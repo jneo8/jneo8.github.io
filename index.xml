@@ -6,14 +6,46 @@
     <description>Recent content on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Aug 2020 19:31:42 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Aug 2020 19:31:42 +0800</lastBuildDate>
+    
+	<atom:link href="https://jneo8.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink</title>
+      <link>https://jneo8.github.io/flink/flink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink/</link>
+      <pubDate>Sat, 22 Aug 2020 15:21:20 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/flink/flink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Flink Forward 2018 / Scaling Uber&amp;rsquo;s Real-time Optimization with Flink 心得&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Resource</title>
+      <link>https://jneo8.github.io/flink/resource/</link>
+      <pubDate>Thu, 20 Aug 2020 10:13:02 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/flink/resource/</guid>
+      <description>&lt;p&gt;Resource list for flink&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hugo img centering</title>
+      <link>https://jneo8.github.io/posts/hugo_img_center/</link>
+      <pubDate>Wed, 19 Aug 2020 17:28:22 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/hugo_img_center/</guid>
+      <description>&lt;p&gt;How to make hugo image center in Markdown.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>[Flink] Architecture</title>
       <link>https://jneo8.github.io/wip/architecture/</link>
       <pubDate>Wed, 19 Aug 2020 14:40:00 +0800</pubDate>
       
       <guid>https://jneo8.github.io/wip/architecture/</guid>
-      <description></description>
+      <description>Architecture  Flink Component stack  </description>
     </item>
     
     <item>
