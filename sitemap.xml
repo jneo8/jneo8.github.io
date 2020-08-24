@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jneo8.github.io/flink/checkpoint/</loc>
+    <lastmod>2020-08-23T20:55:16+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jneo8.github.io/flink/flink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink/</loc>
     <lastmod>2020-08-22T15:21:20+08:00</lastmod>
   </url>

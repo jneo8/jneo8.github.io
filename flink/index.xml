@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Checkpoints</title>
+      <link>https://jneo8.github.io/flink/checkpoint/</link>
+      <pubDate>Sun, 23 Aug 2020 20:55:16 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/flink/checkpoint/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Introduce Flink Checkpoints.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink</title>
       <link>https://jneo8.github.io/flink/flink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink/</link>
       <pubDate>Sat, 22 Aug 2020 15:21:20 +0800</pubDate>
