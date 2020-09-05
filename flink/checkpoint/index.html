@@ -12,6 +12,7 @@
 	
 	<meta http-equiv="content-language" content="en">
 	
+	
 	<link rel="stylesheet" href="/css/sk3.css">
 	
 	<style>
@@ -29,6 +30,8 @@
 	
 	
 	
+	
+	<script src="/js/latex.js"></script>
 	
 </head><body><header class="sk3-flex">
 
@@ -116,6 +119,15 @@
 		
 		
 		<li>
+			<a href="/kubernetes/">
+				
+				<span>kubernetes</span>
+			</a>
+		</li>
+		
+		
+		
+		<li>
 			<a href="/posts/">
 				
 				<span>Posts</span>
@@ -125,9 +137,27 @@
 		
 		
 		<li>
+			<a href="/reading/">
+				
+				<span>Reading</span>
+			</a>
+		</li>
+		
+		
+		
+		<li>
 			<a href="/tags">
 				
 				<span>Tags</span>
+			</a>
+		</li>
+		
+		
+		
+		<li>
+			<a href="/wip">
+				
+				<span>WIP</span>
 			</a>
 		</li>
 		
@@ -222,57 +252,149 @@
 	
 	
 	
-	<section class="box sk3-margin-v-10">
-		<div class="collapsible">☰ Table of Content</div>
-		<sk3-toc><nav id="TableOfContents">
-  <ul>
-    <li><a href="#clickpoint">Clickpoint</a>
-      <ul>
-        <li><a href="#enable-checkpoints">Enable Checkpoints</a></li>
-        <li><a href="#retained-checkpoints">Retained Checkpoints</a></li>
-        <li><a href="#directory-structute">Directory Structute</a></li>
-        <li><a href="#difference-to-savepoints">Difference to Savepoints</a></li>
-        <li><a href="#resource">Resource</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></sk3-toc>
-	</section>
-	
 	
 
 	
-	<content class="sk3-margin-v-10"><p><img src="/img/flink/flink-header-logo.svg" alt="flink-logo"></p>
+	<content class="sk3-margin-v-10"><p><figure><img src="/img/flink/flink-header-logo.svg" alt="flink-logo"></figure></p>
+
 <p>Introduce Flink Checkpoints.</p>
+
 <hr>
+
 <h1 id="clickpoint">Clickpoint</h1>
-<p>Flink的容錯機制</p>
-<p>Clickpoint 可以讓state &amp;&amp; corresponding stream position 被恢復</p>
+
+<hr>
+
+<h2 id="checkpointing">Checkpointing</h2>
+
+<ul>
+<li><p>Flink 的容錯機制核心, 是透過繪制一致的Checkpoint和分佈式的數據流來達成</p></li>
+
+<li><p>Clickpoint 可以讓state &amp;&amp; corresponding stream position 被恢復</p></li>
+
+<li><p>故障發生後, Flink 會倒退回這些 checkpoint</p>
+
+<ul>
+<li><p>Flink繪制這些 Data flow 的機制: <a href="https://arxiv.org/abs/1506.08603">Lightweight Asynchronous Snapshots for Distributed Dataflows</a></p>
+
+<ul>
+<li>這項技術從 <a href="https://www.microsoft.com/en-us/research/publication/distributed-snapshots-determining-global-states-distributed-system/?from=http%3A%2F%2Fresearch.microsoft.com%2Fen-us%2Fum%2Fpeople%2Flamport%2Fpubs%2Fchandy.pdf">Candy-Lamport algorithm</a> 得到啟發, 並針對 Flink 模式進行改善</li>
+</ul></li>
+
+<li><p>Checkpoint 的操作是 asynchronously</p></li>
+
+<li><p>從 1.11版本開始, checkpoint 可以是非對齊的</p></li>
+</ul></li>
+</ul>
+
+<h3 id="barries">Barries</h3>
+
+<ul>
+<li><p>Distrubuted Snapshotting 的最小單位是 <em>stream barriers</em></p></li>
+
+<li><p><em>stream barries</em> 是 data stream 中的一部份, 被注入進 data flow</p></li>
+
+<li><p>barries 並不會超越 records, 他們是嚴格依序排列的</p></li>
+
+<li><p>barrier 會把 records 分割成兩個snapshot(就像圖那樣)</p></li>
+
+<li><p>Barries 不會中斷 data flow, 非常輕量</p></li>
+
+<li><p>不同 snapshot 的 多個 barriers 可以同時出現在 data flow 中 -&gt; 多個快照可以同時發生</p></li>
+</ul>
+
+<p><figure><img src="/img/flink/stream_barriers.svg#center" alt="flink-stream_barriers"></figure></p>
+
+<ul>
+<li><p>Stream barriers are injected into parallel data flow at the stream source. The point where the barriers for snapshot n barrier are injected is called <span  class="math">\(S^{n}\)</span></p>
+
+<ul>
+<li><p><span  class="math">\(S^{n}\)</span> :</p>
+
+<ul>
+<li><p><span  class="math">\(S^{n}\)</span> is the position in the source stream up to which the snapshot covers the data.</p></li>
+
+<li><p>In Kafka, this position would be the last record's offset in the partition</p></li>
+
+<li><p>Position <span  class="math">\(S^{n}\)</span> will be report to checkpoint coordinator(Flink's JobManager)</p></li>
+</ul></li>
+</ul></li>
+
+<li><p>當 Operator 接收到 snapshot N 的 barrier, operator 會把 barrier 送出給所有output stream</p></li>
+
+<li><p>一旦 Sink operator (the end of streaming DAG) 收到 barrier N 後, 會把 snapshot N 送給 checkpoint coordinator</p></li>
+
+<li><p>當所有 Sink operator 都確認過 snaphost N 後, snapshot 會被認定為完成</p></li>
+
+<li><p>一旦 snapshot 完成, job 就不會再向 data sourece 要 <span  class="math">\(S^{n}\)</span> 之前的數據</p></li>
+</ul>
+
+<p><figure><img src="/img/flink/stream_aligning.svg" alt="stream_aligning"></figure></p>
+<pre><code>* 這張圖展示對齊式 checkpoint 的運作方式</code></pre>
+<ul>
+<li><p>第一張圖, 收到 barrier N</p>
+
+<ul>
+<li>Operator 無法繼續處理 1, 2, 3 . 否則會混合 n &amp;&amp; n + 1 的資料</li>
+</ul></li>
+
+<li><p>第二張圖, 最後一個 flow 收到 barrier N</p>
+
+<ul>
+<li><p>Operator 發出所有 pending records</p></li>
+
+<li><p>Input buffer 內有 e, f</p></li>
+</ul></li>
+
+<li><p>第三張圖</p>
+
+<ul>
+<li><p>Operator 自己發出 barrier N</p></li>
+
+<li><p>Operator snapshot the state</p></li>
+
+<li><p>處理 buffer 內的 records (e, f)</p></li>
+
+<li><p>恢復處理 flow records</p></li>
+
+<li><p>write the state asynchronously to the state backend</p></li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p><strong>Note that the alignment is needed for all operators with multiple inputs and for operators after a shuffle when they consume output streams of multiple upstream subtasks.</strong></p>
+</blockquote>
+
+<hr>
+
 <h2 id="enable-checkpoints">Enable Checkpoints</h2>
+
 <ul>
 <li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/checkpointing.html">https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/checkpointing.html</a></li>
 </ul>
+
 <h2 id="retained-checkpoints">Retained Checkpoints</h2>
+
 <ul>
-<li>
-<p>透過 <strong>ExternalizedCheckpointCleanup</strong> 參數</p>
-</li>
-<li>
-<p>ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION</p>
+<li><p>透過 <strong>ExternalizedCheckpointCleanup</strong> 參數</p></li>
+
+<li><p>ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION</p>
+
 <ul>
 <li>job 被取消時, 保留 Checkpoints</li>
 <li>需要手動刪除 Checkpoints</li>
-</ul>
-</li>
-<li>
-<p>ExternalizedCheckpointCleanup.DELETE_ON_CANCELLATION</p>
+</ul></li>
+
+<li><p>ExternalizedCheckpointCleanup.DELETE_ON_CANCELLATION</p>
+
 <ul>
 <li>job 被取消時, Checkpoints 會被delete</li>
 <li>job fail -&gt; Checkpoints 被保留</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h2 id="directory-structute">Directory Structute</h2>
+
 <ul>
 <li>Checkpoint 是透過 file 管理的, 其目錄結構可以參照 <a href="https://issues.apache.org/jira/browse/FLINK-8531">FLINK-8531</a></li>
 </ul>
@@ -284,29 +406,32 @@
         + --chk-1/
         + --chk-2/
         + --chk-3/
-        ...
-</code></pre></div><ul>
-<li>
-<p>The SHARED directory is for state that is possibly part of multiple checkpoints</p>
-</li>
-<li>
-<p>TASKOWNED is for state that must never be dropped by the JobManager</p>
-</li>
-<li>
-<p>EXCLUSIVE is for state that belongs to one checkpoint only.</p>
-</li>
-</ul>
-<h2 id="difference-to-savepoints">Difference to Savepoints</h2>
+        ...</code></pre></div>
 <ul>
-<li>
-<p>Use a state backend specific(low-level) data format, may be incremental</p>
-</li>
-<li>
-<p>Do not support Flink specific features like rescaling</p>
-</li>
+<li><p>The SHARED directory is for state that is possibly part of multiple checkpoints</p></li>
+
+<li><p>TASKOWNED is for state that must never be dropped by the JobManager</p></li>
+
+<li><p>EXCLUSIVE is for state that belongs to one checkpoint only.</p></li>
 </ul>
+
+<h2 id="difference-to-savepoints">Difference to Savepoints</h2>
+
+<ul>
+<li><p>Use a state backend specific(low-level) data format, may be incremental</p></li>
+
+<li><p>Do not support Flink specific features like rescaling</p></li>
+</ul>
+
+<hr>
+
 <h2 id="resource">Resource</h2>
-<p><a href="https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/checkpoints.html">https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/checkpoints.html</a></p></content>
+
+<ul>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/checkpoints.html">https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/checkpoints.html</a></li>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html">https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html</a></li>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html">https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html</a></li>
+</ul></content>
 
 	<div></div>
 
@@ -483,6 +608,7 @@ if (!doNotTrack) {
 
 <meta property="og:title" content="Checkpoints" />
 <meta property="og:description" content="
+
 Introduce Flink Checkpoints." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://jneo8.github.io/flink/checkpoint/" />
@@ -492,6 +618,7 @@ Introduce Flink Checkpoints." />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Checkpoints"/>
 <meta name="twitter:description" content="
+
 Introduce Flink Checkpoints."/>
 
 

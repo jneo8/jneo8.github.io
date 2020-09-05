@@ -17,7 +17,8 @@
       <pubDate>Sun, 23 Aug 2020 20:55:16 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/checkpoint/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
 &lt;p&gt;Introduce Flink Checkpoints.&lt;/p&gt;</description>
     </item>
     

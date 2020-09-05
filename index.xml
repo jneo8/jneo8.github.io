@@ -12,12 +12,42 @@
     
     
     <item>
+      <title>Poromodo</title>
+      <link>https://jneo8.github.io/reading/poromodo/</link>
+      <pubDate>Sat, 05 Sep 2020 20:02:06 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/reading/poromodo/</guid>
+      <description>&lt;p&gt;&lt;em&gt;番茄鐘工作法&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes Plugin</title>
+      <link>https://jneo8.github.io/kubernetes/plugin/</link>
+      <pubDate>Fri, 04 Sep 2020 15:32:40 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/kubernetes/plugin/</guid>
+      <description>&lt;p&gt;How to install kubectl plugin?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>State</title>
+      <link>https://jneo8.github.io/wip/state/</link>
+      <pubDate>Wed, 26 Aug 2020 17:18:31 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/wip/state/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;Introduce Flink State.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Checkpoints</title>
       <link>https://jneo8.github.io/flink/checkpoint/</link>
       <pubDate>Sun, 23 Aug 2020 20:55:16 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/checkpoint/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
 &lt;p&gt;Introduce Flink Checkpoints.&lt;/p&gt;</description>
     </item>
     
