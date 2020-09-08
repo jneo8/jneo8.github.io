@@ -11,20 +11,19 @@
 	
 	<meta http-equiv="content-language" content="en">
 	
-	
 	<link rel="stylesheet" href="/css/sk3.css">
 	
 	<style>
 		
-		@media only screen and (min-width: 993px){:root{--card-width: 32%;}}
+		@media only screen and (min-width: 993px){:root{--card-width: 25%;}}
 		
 		
 		@media only screen and (min-width: 993px){:root{--html-width: 1200px;}}
 		
-		:root{--bg-color:white;}
-		:root{--border-color:black;}
-		:root{--link-color:#3d84ff;}
-		:root{--text-color:black;}
+		:root{--bg-color:#FCFCFC;}
+		:root{--border-color:#FF9797;}
+		:root{--link-color:#5B5B5B;}
+		:root{--text-color:#272727;}
 	</style>
 	
 	<link rel="icon" href="/img/pikachu-icon.jpg">
@@ -253,6 +252,26 @@
 	
 	<div class="sk3-flex sk3-flex-center-h">
 		<sk3-pager>
+<ul class="pagination">
+  <li class="page-item">
+    <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+  </li>
+  <li class="page-item disabled">
+    <a  class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+  </li>
+  <li class="page-item active">
+    <a class="page-link" href="/">1</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  <li class="page-item">
+    <a href="/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+  </li>
+</ul>
 
 </sk3-pager>
 	</div>
@@ -261,6 +280,21 @@
 
 	
 	<section class="sk3-flex sk3-flex-center-h">
+		
+		<div class="sk3-card box">
+			<div class="sk3-flex">
+				<a class="sk3-flex-inline" href="/kubernetes/resources/">
+					<h3>[k8s] Kubernetes Resources</h3>
+				</a>
+				
+				
+				<div class="sk3-flex-right sk3-flex-down">2020-09-08</div>
+				
+				
+			</div>
+			<div><p><img src="/img/k8s/Kubernetes-Logo.wine.svg" alt="k8s-logo"></p>
+<p>Resource list for kubernetes.</p></div>
+		</div>
 		
 		<div class="sk3-card box">
 			<div class="sk3-flex">
@@ -273,13 +307,13 @@
 				
 				
 			</div>
-			<div><p><em>番茄鐘工作法</em></p></div>
+			<div><p><em>番茄鐘工作法摘要</em></p></div>
 		</div>
 		
 		<div class="sk3-card box">
 			<div class="sk3-flex">
 				<a class="sk3-flex-inline" href="/kubernetes/plugin/">
-					<h3>Kubernetes Plugin</h3>
+					<h3>[k8s] Kubernetes Plugin</h3>
 				</a>
 				
 				
@@ -287,13 +321,14 @@
 				
 				
 			</div>
-			<div><p>How to install kubectl plugin?</p></div>
+			<div><p><img src="/img/k8s/Kubernetes-Logo.wine.svg" alt="k8s-logo"></p>
+<p>How to install kubectl plugin?</p></div>
 		</div>
 		
 		<div class="sk3-card box">
 			<div class="sk3-flex">
 				<a class="sk3-flex-inline" href="/flink/checkpoint/">
-					<h3>Checkpoints</h3>
+					<h3>[Flink] Checkpoints</h3>
 				</a>
 				
 				
@@ -303,7 +338,7 @@
 			</div>
 			<div><p><figure><img src="/img/flink/flink-header-logo.svg" alt="flink-logo"></figure></p>
 
-<p>Introduce Flink Checkpoints.</p></div>
+<p><em>Introduce Flink Checkpoints</em> .</p></div>
 		</div>
 		
 		<div class="sk3-card box">
@@ -324,7 +359,7 @@
 		<div class="sk3-card box">
 			<div class="sk3-flex">
 				<a class="sk3-flex-inline" href="/flink/resource/">
-					<h3>Resource</h3>
+					<h3>[Flink] Resource</h3>
 				</a>
 				
 				
@@ -332,7 +367,8 @@
 				
 				
 			</div>
-			<div><p>Resource list for flink</p></div>
+			<div><p><img src="/img/flink/flink-header-logo.svg" alt="flink-logo"></p>
+<p>Resource list for flink</p></div>
 		</div>
 		
 		<div class="sk3-card box">
@@ -360,7 +396,8 @@
 				
 				
 			</div>
-			<div><p>flink Unbounded and Bounded</p></div>
+			<div><p><img src="/img/flink/flink-header-logo.svg" alt="flink-logo"></p>
+<p>flink Unbounded and Bounded</p></div>
 		</div>
 		
 		<div class="sk3-card box">
@@ -391,20 +428,6 @@
 			<div><p><em>A curated list of awesome golang articles, frameworks, libraries, software and resources.</em></p></div>
 		</div>
 		
-		<div class="sk3-card box">
-			<div class="sk3-flex">
-				<a class="sk3-flex-inline" href="/posts/mermaid/">
-					<h3>Mermaid - golang tool help user doing dependency more easily</h3>
-				</a>
-				
-				
-				<div class="sk3-flex-right sk3-flex-down">2020-06-29</div>
-				
-				
-			</div>
-			<div><p>Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.</p></div>
-		</div>
-		
 	</section>
 
 	<div></div>
@@ -412,6 +435,26 @@
 	
 	<div class="sk3-flex sk3-flex-center-h">
 		<sk3-pager>
+<ul class="pagination">
+  <li class="page-item">
+    <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+  </li>
+  <li class="page-item disabled">
+    <a  class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+  </li>
+  <li class="page-item active">
+    <a class="page-link" href="/">1</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/page/2/">2</a>
+  </li>
+  <li class="page-item">
+    <a href="/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+  </li>
+</ul>
 
 </sk3-pager>
 	</div>

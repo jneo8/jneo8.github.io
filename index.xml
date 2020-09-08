@@ -12,21 +12,32 @@
     
     
     <item>
+      <title>[k8s] Kubernetes Resources</title>
+      <link>https://jneo8.github.io/kubernetes/resources/</link>
+      <pubDate>Tue, 08 Sep 2020 12:06:23 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/kubernetes/resources/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/k8s/Kubernetes-Logo.wine.svg&#34; alt=&#34;k8s-logo&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Resource list for kubernetes.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Poromodo</title>
       <link>https://jneo8.github.io/reading/poromodo/</link>
       <pubDate>Sat, 05 Sep 2020 20:02:06 +0800</pubDate>
       
       <guid>https://jneo8.github.io/reading/poromodo/</guid>
-      <description>&lt;p&gt;&lt;em&gt;番茄鐘工作法&lt;/em&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;em&gt;番茄鐘工作法摘要&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Kubernetes Plugin</title>
+      <title>[k8s] Kubernetes Plugin</title>
       <link>https://jneo8.github.io/kubernetes/plugin/</link>
       <pubDate>Fri, 04 Sep 2020 15:32:40 +0800</pubDate>
       
       <guid>https://jneo8.github.io/kubernetes/plugin/</guid>
-      <description>&lt;p&gt;How to install kubectl plugin?&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/k8s/Kubernetes-Logo.wine.svg&#34; alt=&#34;k8s-logo&#34;&gt;&lt;/p&gt;
+&lt;p&gt;How to install kubectl plugin?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -41,14 +52,14 @@
     </item>
     
     <item>
-      <title>Checkpoints</title>
+      <title>[Flink] Checkpoints</title>
       <link>https://jneo8.github.io/flink/checkpoint/</link>
       <pubDate>Sun, 23 Aug 2020 20:55:16 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/checkpoint/</guid>
       <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
 
-&lt;p&gt;Introduce Flink Checkpoints.&lt;/p&gt;</description>
+&lt;p&gt;&lt;em&gt;Introduce Flink Checkpoints&lt;/em&gt; .&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62,12 +73,13 @@
     </item>
     
     <item>
-      <title>Resource</title>
+      <title>[Flink] Resource</title>
       <link>https://jneo8.github.io/flink/resource/</link>
       <pubDate>Thu, 20 Aug 2020 10:13:02 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/resource/</guid>
-      <description>&lt;p&gt;Resource list for flink&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Resource list for flink&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -95,7 +107,8 @@
       <pubDate>Tue, 18 Aug 2020 16:25:45 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/boundedandunbounded/</guid>
-      <description>&lt;p&gt;flink Unbounded and Bounded&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/p&gt;
+&lt;p&gt;flink Unbounded and Bounded&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -3,10 +3,10 @@
 	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>jneo8.github.io | [Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink</title>
+	<title>jneo8.github.io | [k8s] Kubernetes Resources</title>
 	<meta name="description" content="
 	
-	jneo8.github.io - [Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink
+	jneo8.github.io - [k8s] Kubernetes Resources
 	
 	">
 	
@@ -47,7 +47,7 @@
 		<b>Share</b> 
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fresources%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -55,7 +55,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink%2f&title=%5bFlink%20Forward%202018%5d%20Scaling%20Uber%27s%20Real-time%20Optimization%20with%20Flink"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fresources%2f&title=%5bk8s%5d%20Kubernetes%20Resources"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -65,7 +65,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink%2f&amp;title=%5bFlink%20Forward%202018%5d%20Scaling%20Uber%27s%20Real-time%20Optimization%20with%20Flink"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fresources%2f&amp;title=%5bk8s%5d%20Kubernetes%20Resources"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -73,7 +73,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink%2f&amp;text=%5bFlink%20Forward%202018%5d%20Scaling%20Uber%27s%20Real-time%20Optimization%20with%20Flink"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fresources%2f&amp;text=%5bk8s%5d%20Kubernetes%20Resources"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -242,7 +242,7 @@
 	
 	
 	<heading>
-		<h1>[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink</h1>
+		<h1>[k8s] Kubernetes Resources</h1>
 	</heading>
 	
 
@@ -255,30 +255,12 @@
 		<div class="collapsible">☰ Table of Content</div>
 		<sk3-toc><nav id="TableOfContents">
   <ul>
-    <li><a href="#marketplace-events---marketplace-dynamics---marketplace-decision-engines"><code>Marketplace Events</code> -&gt; <code>Marketplace Dynamics</code> -&gt; <code>Marketplace Decision Engines</code></a>
+    <li><a href="#monitor">Monitor</a>
       <ul>
-        <li><a href="#解釋uber-marketplace--challenges">解釋Uber Marketplace &amp;&amp; challenges</a>
-          <ul>
-            <li><a href="#real-time-challenges">Real-time challenges</a></li>
-            <li><a href="#aggregate-in-real-time">Aggregate in real-time</a></li>
-            <li><a href="#real-world-challenges">Real-world challenges</a></li>
-          </ul>
-        </li>
+        <li><a href="#prometheus">Prometheus</a></li>
       </ul>
     </li>
-    <li><a href="#events---dynamics"><code>Events</code> -&gt; <code>Dynamics</code></a>
-      <ul>
-        <li><a href="#olap-solution-online-analytical-processing">OLAP solution (Online analytical processing)</a>
-          <ul>
-            <li><a href="#problems">Problems:</a></li>
-          </ul>
-        </li>
-        <li><a href="#event-driven-solution">Event driven solution</a></li>
-      </ul>
-    </li>
-    <li><a href="#dynamics---decision"><code>Dynamics</code> -&gt; <code>Decision</code></a></li>
-    <li><a href="#recap">Recap</a></li>
-    <li><a href="#lesson-learned">Lesson learned</a></li>
+    <li><a href="#plugins">Plugins</a></li>
   </ul>
 </nav></sk3-toc>
 	</section>
@@ -286,148 +268,37 @@
 	
 
 	
-	<content class="sk3-margin-v-10"><p><img src="/img/flink/flink-header-logo.svg" alt="flink-logo"></p>
-<p>Flink Forward 2018 / Scaling Uber&rsquo;s Real-time Optimization with Flink 心得</p>
-<hr>
-<h1 id="scaling-ubers-real-time-optimization-with-flink">Scaling Uber&rsquo;s Real-time Optimization with Flink</h1>
-<p>Youtube: <a href="https://www.youtube.com/watch?v=ydFXKrad6lo"><img src="https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="Youtube link"></a></p>
-<h2 id="marketplace-events---marketplace-dynamics---marketplace-decision-engines"><code>Marketplace Events</code> -&gt; <code>Marketplace Dynamics</code> -&gt; <code>Marketplace Decision Engines</code></h2>
-<p><img src="/img/flink/uber-marketplace.jpg" alt="uber-marketplace"></p>
-<p>整場演講的主軸</p>
-<p>如何從 Macketplace Event 取得 Dynamics 然後作出 Decision</p>
-<h3 id="解釋uber-marketplace--challenges">解釋Uber Marketplace &amp;&amp; challenges</h3>
-<ul>
-<li>real time &amp;&amp; real world</li>
-</ul>
-<h4 id="real-time-challenges">Real-time challenges</h4>
+	<content class="sk3-margin-v-10"><p><img src="/img/k8s/Kubernetes-Logo.wine.svg" alt="k8s-logo"></p>
+<p>Resource list for kubernetes.</p>
+<h2 id="monitor">Monitor</h2>
+<h3 id="prometheus">Prometheus</h3>
 <ul>
 <li>
-<p>Event time ordering</p>
-</li>
-<li>
-<p>Time sensitive</p>
-</li>
-</ul>
-<h4 id="aggregate-in-real-time">Aggregate in real-time</h4>
+<p>stable/prometheus-operator</p>
 <ul>
-<li>aggregation in windows bucket</li>
-<li>result over event time</li>
-<li>As soon as poosible</li>
-<li>As accurate as possible</li>
-</ul>
-<h4 id="real-world-challenges">Real-world challenges</h4>
-<ul>
-<li>
-<p>Problems</p>
-<ul>
-<li>Event spatial mapoing</li>
-<li>Locality sensitive</li>
+<li><a href="https://github.com/helm/charts/tree/master/stable/prometheus-operator">https://github.com/helm/charts/tree/master/stable/prometheus-operator</a></li>
 </ul>
 </li>
 <li>
-<p>Aggregation in real-world</p>
+<p>prometheus-operator/prometheus-operator</p>
 <ul>
-<li>Influences its current and neighbours</li>
-<li>Apply geo func on related events</li>
+<li><a href="https://github.com/prometheus-operator/prometheus-operator">https://github.com/prometheus-operator/prometheus-operator</a></li>
 </ul>
 </li>
 </ul>
-<hr>
-<h2 id="events---dynamics"><code>Events</code> -&gt; <code>Dynamics</code></h2>
-<h3 id="olap-solution-online-analytical-processing">OLAP solution (Online analytical processing)</h3>
-<pre><code>* uber solution before
-
-* 這邊在講之前的作法以及問題
-</code></pre>
-<p><img src="/img/flink/uber-OLAP-soultion.jpg" alt="uber-OLAP-soultion"></p>
-<h4 id="problems">Problems:</h4>
+<h2 id="plugins">Plugins</h2>
 <ul>
 <li>
-<p>Periodical crontab</p>
+<p>kubectl-view-allocations</p>
 <ul>
 <li>
-<p>To Monitor Marketplace -&gt; need to have a scheduler to call OLAP to get a snapshot(maybe once/min) -&gt; bringing a external dependency into system</p>
+<p><a href="https://github.com/davidB/kubectl-view-allocations">https://github.com/davidB/kubectl-view-allocations</a></p>
 </li>
 <li>
-<p>Difficult to write a very stable distributing schedulers in the productions</p>
-</li>
-<li>
-<p>Any fillers that means the entire city are losing an update that&rsquo;s uber trying to avoid</p>
-</li>
-<li>
-<p>Can&rsquo;t get data as soon as possible -&gt; have to wait for the scheduler trigger</p>
+<p>kubectl plugin lists allocations for resources (cpu, memory, gpu,&hellip;) as defined into the manifest of nodes and running pods. It doesn&rsquo;t list usage like kubectl top. It can provide result grouped by namespaces, nodes, pods and filtered by resources&rsquo;name.</p>
 </li>
 </ul>
 </li>
-<li>
-<p>Batch snapshot</p>
-<ul>
-<li>Bottleneck in data pipeline</li>
-</ul>
-</li>
-<li>
-<p>大概就是講說 因為要做snapshot, 所以導致需要有scheduler -&gt; 產生external dependency.</p>
-<ul>
-<li>錯誤容易掉資料</li>
-<li>即時性差, 需要等scheduler trigger</li>
-<li>上圖的step2會變成整個 pipeline 的 buttonneck</li>
-</ul>
-</li>
-</ul>
-<h3 id="event-driven-solution">Event driven solution</h3>
-<p><img src="/img/flink/uber-event-based-soultion.jpg" alt="uber-OLAP-soultion">
-<img src="/img/flink/uber-event-based-soultion-reduce.jpg" alt="uber-OLAP-soultion"></p>
-<ul>
-<li>
-<p>Mapreduce style</p>
-</li>
-<li>
-<p>第一張圖在講說用flatmap把event散出給多個geo_id</p>
-<ul>
-<li>duplicate yourself at differnet locations</li>
-<li>這邊我理解的意思是舊的方法內, 同一個人同一個snapshot只會出現在一個地方, 換成Event based 之後只要有新的event出現在新的location, event就會流向新的location</li>
-</ul>
-</li>
-<li>
-<p>第二張圖是說讓Agg 基於第一張圖的結果再去計算, 讓agg最後再做, 相較於第一張圖, agg的時間被往後延了, 這讓系統更加有彈性跟stable</p>
-</li>
-<li>
-<p>Event driven design concern?</p>
-<ul>
-<li>這邊講一些event base system 的concern以及利用flink的特性所進行的設計</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="dynamics---decision"><code>Dynamics</code> -&gt; <code>Decision</code></h2>
-<ul>
-<li>
-<p>ML 一般是Capture historical patterns</p>
-</li>
-<li>
-<p>這邊主要是說如何在offline/online modelling 中作選擇</p>
-</li>
-</ul>
-<p><img src="/img/flink/uber-online-offline-hybird-solution.jpg" alt="uber-online-offline-hybird-soultion"></p>
-<ul>
-<li>Uber 最後的solution. ofline modelling + stateful online update</li>
-</ul>
-<hr>
-<h2 id="recap">Recap</h2>
-<p><img src="/img/flink/uber-marketplace.jpg" alt="uber-marketplace"></p>
-<ul>
-<li>Single flink app for each part(one for <code>Event to Dynamics</code>, another for <code>Dynamics to Decision</code>)
-<ul>
-<li>主要是想要保持架構分隔跟乾淨</li>
-</ul>
-</li>
-</ul>
-<h2 id="lesson-learned">Lesson learned</h2>
-<ul>
-<li>Strong infra level support</li>
-<li>Real-time ML is hard due to data pre-processing</li>
-<li>Bootstrap the model through offline jobs</li>
-<li>Reduce the parameter dimension</li>
 </ul></content>
 
 	<div></div>
@@ -446,7 +317,7 @@
 			
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fresources%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -454,7 +325,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink%2f&title=%5bFlink%20Forward%202018%5d%20Scaling%20Uber%27s%20Real-time%20Optimization%20with%20Flink"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fresources%2f&title=%5bk8s%5d%20Kubernetes%20Resources"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -464,7 +335,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink%2f&amp;title=%5bFlink%20Forward%202018%5d%20Scaling%20Uber%27s%20Real-time%20Optimization%20with%20Flink"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fresources%2f&amp;title=%5bk8s%5d%20Kubernetes%20Resources"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -472,7 +343,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink%2f&amp;text=%5bFlink%20Forward%202018%5d%20Scaling%20Uber%27s%20Real-time%20Optimization%20with%20Flink"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fresources%2f&amp;text=%5bk8s%5d%20Kubernetes%20Resources"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -499,7 +370,7 @@
 			
 			
 			
-			<div class="sk3-margin-h sk3-margin-down">Update: 2020-08-22</div>
+			<div class="sk3-margin-h sk3-margin-down">Update: 2020-09-08</div>
 		</div>
 	</div>
 	
@@ -515,7 +386,7 @@
 				<div class="sk3-flex sk3-flex-center-v">Tag</div>
 				
 				<div class="sk3-margin-h txt-center-h">
-					[<a class="sk3-margin-h" href="/tags/flink/">flink</a>]
+					[<a class="sk3-margin-h" href="/tags/k8s/">k8s</a>]
 				</div>
 				
 			</div>
@@ -531,14 +402,12 @@
 	<div class="sk3-card sk3-flex sk3-flex-center-h box">
 		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
 			
-			<a class="sk3-margin-h txt-center-h" href="/flink/resource/">
+			<a class="sk3-margin-h txt-center-h" href="/kubernetes/plugin/">
 				<h3>
-					&lt;&lt; [Flink] Resource</h3>
+					&lt;&lt; [k8s] Kubernetes Plugin</h3>
 			</a> 
 			
-			<a class="sk3-margin-h txt-center-h" href="/flink/checkpoint/">
-				<h3>[Flink] Checkpoints >></h3>
-			</a>
+			
 		</div>
 	</div>
 	
@@ -546,28 +415,6 @@
 
 	
 	
-	
-	<div class="sk3-card sk3-flex sk3-flex-center-h box">
-		<div class="sk3-flex sk3-flex-center-v">See Also</div>
-		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
-			
-			
-			
-			<div class="sk3-margin-h txt-center-h">
-				[<a class="sk3-margin-h" href="/wip/architecture/">[Flink] Architecture</a>]
-			</div>
-			
-			<div class="sk3-margin-h txt-center-h">
-				[<a class="sk3-margin-h" href="/flink/boundedandunbounded/">[Flink] Bounded And UnBounded</a>]
-			</div>
-			
-			<div class="sk3-margin-h txt-center-h">
-				[<a class="sk3-margin-h" href="/flink/first_experience/">[Flink] Flink 學習初心者心得</a>]
-			</div>
-			
-			
-		</div>
-	</div>
 	
 
 </section>
@@ -645,18 +492,18 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<meta property="og:title" content="[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink" />
+<meta property="og:title" content="[k8s] Kubernetes Resources" />
 <meta property="og:description" content="
-Flink Forward 2018 / Scaling Uber&rsquo;s Real-time Optimization with Flink 心得" />
+Resource list for kubernetes." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jneo8.github.io/flink/flink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink/" />
-<meta property="article:published_time" content="2020-08-22T15:21:20+08:00" />
-<meta property="article:modified_time" content="2020-08-22T15:21:20+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
+<meta property="og:url" content="https://jneo8.github.io/kubernetes/resources/" />
+<meta property="article:published_time" content="2020-09-08T12:06:23+08:00" />
+<meta property="article:modified_time" content="2020-09-08T12:06:23+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink"/>
+<meta name="twitter:title" content="[k8s] Kubernetes Resources"/>
 <meta name="twitter:description" content="
-Flink Forward 2018 / Scaling Uber&rsquo;s Real-time Optimization with Flink 心得"/>
+Resource list for kubernetes."/>
 
 
 
