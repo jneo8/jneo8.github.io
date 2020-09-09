@@ -6,11 +6,7 @@
     <description>Recent content in kubernetes on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Sep 2020 15:32:40 +0800</lastBuildDate>
-    
-	<atom:link href="https://jneo8.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 04 Sep 2020 15:32:40 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[k8s] Kubernetes Plugin</title>
       <link>https://jneo8.github.io/kubernetes/plugin/</link>

@@ -6,10 +6,16 @@
     <description>Recent content on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Aug 2020 19:31:42 +0800</lastBuildDate>
-    
-	<atom:link href="https://jneo8.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sun, 09 Aug 2020 19:31:42 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ZookeeperInstall</title>
+      <link>https://jneo8.github.io/kubernetes/zookeeperinstall/</link>
+      <pubDate>Wed, 09 Sep 2020 14:37:16 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/kubernetes/zookeeperinstall/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/k8s/Kubernetes-Logo.wine.svg&#34; alt=&#34;k8s-logo&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Install ZooKeeper on k8s cluster&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>[k8s] Kubernetes Resources</title>
