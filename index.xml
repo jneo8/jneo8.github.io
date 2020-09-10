@@ -21,13 +21,12 @@
     </item>
     
     <item>
-      <title>ZookeeperInstall</title>
+      <title>[k8s] ZookeeperInstall</title>
       <link>https://jneo8.github.io/kubernetes/zookeeperinstall/</link>
       <pubDate>Wed, 09 Sep 2020 14:37:16 +0800</pubDate>
       
       <guid>https://jneo8.github.io/kubernetes/zookeeperinstall/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/k8s/Kubernetes-Logo.wine.svg&#34; alt=&#34;k8s-logo&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Install ZooKeeper on k8s cluster&lt;/em&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;em&gt;Install ZooKeeper on k8s cluster&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,8 +35,7 @@
       <pubDate>Tue, 08 Sep 2020 12:06:23 +0800</pubDate>
       
       <guid>https://jneo8.github.io/kubernetes/resources/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/k8s/Kubernetes-Logo.wine.svg&#34; alt=&#34;k8s-logo&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Resource list for kubernetes.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Resource list for kubernetes.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -55,8 +53,7 @@
       <pubDate>Fri, 04 Sep 2020 15:32:40 +0800</pubDate>
       
       <guid>https://jneo8.github.io/kubernetes/plugin/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/k8s/Kubernetes-Logo.wine.svg&#34; alt=&#34;k8s-logo&#34;&gt;&lt;/p&gt;
-&lt;p&gt;How to install kubectl plugin?&lt;/p&gt;</description>
+      <description>&lt;p&gt;How to install kubectl plugin?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -76,9 +73,7 @@
       <pubDate>Sun, 23 Aug 2020 20:55:16 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/checkpoint/</guid>
-      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Introduce Flink Checkpoints&lt;/em&gt; .&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;em&gt;Introduce Flink Checkpoints&lt;/em&gt; .&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -87,8 +82,7 @@
       <pubDate>Sat, 22 Aug 2020 15:21:20 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/flink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Flink Forward 2018 / Scaling Uber&amp;rsquo;s Real-time Optimization with Flink 心得&lt;/p&gt;</description>
+      <description>&lt;p&gt;Flink Forward 2018 / Scaling Uber&amp;rsquo;s Real-time Optimization with Flink 心得&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -97,8 +91,7 @@
       <pubDate>Thu, 20 Aug 2020 10:13:02 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/resource/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Resource list for flink&lt;/p&gt;</description>
+      <description>&lt;p&gt;Resource list for flink&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -126,8 +119,7 @@
       <pubDate>Tue, 18 Aug 2020 16:25:45 +0800</pubDate>
       
       <guid>https://jneo8.github.io/flink/boundedandunbounded/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jneo8.github.io/img/flink/flink-header-logo.svg&#34; alt=&#34;flink-logo&#34;&gt;&lt;/p&gt;
-&lt;p&gt;flink Unbounded and Bounded&lt;/p&gt;</description>
+      <description>&lt;p&gt;flink Unbounded and Bounded&lt;/p&gt;</description>
     </item>
     
     <item>
