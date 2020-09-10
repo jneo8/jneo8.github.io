@@ -3,12 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jneo8.github.io/tags/k8s/</loc>
-    <lastmod>2020-09-09T14:37:16+08:00</lastmod>
+    <loc>https://jneo8.github.io/tags/conference/</loc>
+    <lastmod>2020-09-10T10:01:45+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/posts/datacontw2020/</loc>
+    <lastmod>2020-09-10T10:01:45+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://jneo8.github.io/tags/</loc>
+    <lastmod>2020-09-10T10:01:45+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/tags/k8s/</loc>
     <lastmod>2020-09-09T14:37:16+08:00</lastmod>
   </url>
   

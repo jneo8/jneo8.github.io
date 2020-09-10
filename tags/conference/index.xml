@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Conference on jneo8.github.io</title>
+    <link>https://jneo8.github.io/tags/conference/</link>
+    <description>Recent content in Conference on jneo8.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 10 Sep 2020 10:01:45 +0800</lastBuildDate>
+    
+	<atom:link href="https://jneo8.github.io/tags/conference/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DataConTW2020</title>
+      <link>https://jneo8.github.io/posts/datacontw2020/</link>
+      <pubDate>Thu, 10 Sep 2020 10:01:45 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/datacontw2020/</guid>
+      <description>&lt;p&gt;Summarized DataConTW2020&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
