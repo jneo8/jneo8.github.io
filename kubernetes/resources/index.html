@@ -258,10 +258,15 @@
   <ul>
     <li><a href="#monitor">Monitor</a>
       <ul>
+        <li><a href="#weave">Weave</a></li>
+        <li><a href="#sysdig">sysdig</a></li>
         <li><a href="#prometheus">Prometheus</a></li>
       </ul>
     </li>
+    <li><a href="#cli">CLI</a></li>
     <li><a href="#plugins">Plugins</a></li>
+    <li><a href="#testing">Testing</a></li>
+    <li><a href="#backup">Backup</a></li>
   </ul>
 </nav></sk3-toc>
 	</section>
@@ -271,34 +276,52 @@
 	
 	<content class="sk3-margin-v-10"><p>Resource list for kubernetes.</p>
 <h2 id="monitor">Monitor</h2>
+<h3 id="weave">Weave</h3>
+<ul>
+<li><a href="https://github.com/weaveworks/scope">Weave scope</a></li>
+</ul>
+<h3 id="sysdig">sysdig</h3>
+<ul>
+<li><a href="https://github.com/draios/sysdig">sysdig</a></li>
+<li><a href="https://github.com/draios/sysdig-inspect">sysdig-inspect</a></li>
+<li><a href="https://github.com/falcosecurity/falco">falco</a></li>
+</ul>
 <h3 id="prometheus">Prometheus</h3>
 <ul>
 <li>
-<p>stable/prometheus-operator</p>
+<p><a href="https://github.com/prometheus-operator/prometheus-operator">prometheus-operator/prometheus-operator</a></p>
 <ul>
-<li><a href="https://github.com/helm/charts/tree/master/stable/prometheus-operator">https://github.com/helm/charts/tree/master/stable/prometheus-operator</a></li>
+<li>Helm: <a href="https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack">kube-prometheus-stack</a></li>
 </ul>
 </li>
-<li>
-<p>prometheus-operator/prometheus-operator</p>
-<ul>
-<li><a href="https://github.com/prometheus-operator/prometheus-operator">https://github.com/prometheus-operator/prometheus-operator</a></li>
 </ul>
-</li>
+<h2 id="cli">CLI</h2>
+<ul>
+<li><a href="https://github.com/ahmetb/kubectx">kubectx</a></li>
+<li><a href="https://github.com/cloudnativelabs/kube-shell">kube-shell</a></li>
+<li><a href="https://github.com/c-bata/kube-prompt">kube-prompt</a></li>
+<li><a href="https://github.com/jonmosco/kube-ps1">kube-ps1</a></li>
+<li><a href="https://github.com/boz/kail">kail</a></li>
+<li><a href="https://github.com/wercker/stern">stern</a></li>
+<li><a href="https://www.telepresence.io/">telepresence</a></li>
 </ul>
 <h2 id="plugins">Plugins</h2>
 <ul>
 <li>
-<p>kubectl-view-allocations</p>
+<p><a href="https://github.com/davidB/kubectl-view-allocations">kubectl-view-allocations</a></p>
 <ul>
-<li>
-<p><a href="https://github.com/davidB/kubectl-view-allocations">https://github.com/davidB/kubectl-view-allocations</a></p>
-</li>
-<li>
-<p>kubectl plugin lists allocations for resources (cpu, memory, gpu,&hellip;) as defined into the manifest of nodes and running pods. It doesn&rsquo;t list usage like kubectl top. It can provide result grouped by namespaces, nodes, pods and filtered by resources&rsquo;name.</p>
-</li>
+<li>kubectl plugin lists allocations for resources (cpu, memory, gpu,&hellip;) as defined into the manifest of nodes and running pods. It doesn&rsquo;t list usage like kubectl top. It can provide result grouped by namespaces, nodes, pods and filtered by resources&rsquo;name.</li>
 </ul>
 </li>
+</ul>
+<h2 id="testing">Testing</h2>
+<ul>
+<li><a href="https://github.com/powerfulseal/powerfulseal">powerfulseal</a></li>
+<li><a href="https://github.com/asobti/kube-monkey">kube-monkey</a></li>
+</ul>
+<h2 id="backup">Backup</h2>
+<ul>
+<li><a href="https://github.com/vmware-tanzu/velero">Velero</a></li>
 </ul></content>
 
 	<div></div>
