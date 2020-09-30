@@ -3,10 +3,10 @@
 	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>jneo8.github.io | Posts</title>
+	<title>jneo8.github.io | Kafka_topics_debug</title>
 	<meta name="description" content="
 	
-	jneo8.github.io - Posts
+	jneo8.github.io - Kafka_topics_debug
 	
 	">
 	
@@ -48,7 +48,7 @@
 		<b>Share</b> 
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fposts%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka_topics_debug%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -56,7 +56,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fposts%2f&title=Posts"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka_topics_debug%2f&title=Kafka_topics_debug"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -66,7 +66,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fposts%2f&amp;title=Posts"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka_topics_debug%2f&amp;title=Kafka_topics_debug"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -74,7 +74,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fposts%2f&amp;text=Posts"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka_topics_debug%2f&amp;text=Kafka_topics_debug"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -242,137 +242,57 @@
 
 	
 	
-	
-	<h1>
-		<heading>Posts</heading>
-	</h1>
-	
-	
-	
-
-	
-	
-	
-	
+	<heading>
+		<h1>Kafka_topics_debug</h1>
+	</heading>
 	
 
 	<div></div>
 
 	
-	<div class="sk3-flex sk3-flex-center-h">
-		<sk3-pager>
+	
+	
+	
 
-</sk3-pager>
-	</div>
+	
+	<content class="sk3-margin-v-10"><p>Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is:</p>
+<p>使用: <a href="https://github.com/bitnami/charts/tree/master/bitnami/kafka">https://github.com/bitnami/charts/tree/master/bitnami/kafka</a></p>
+<p>在 kafka pod 內想要執行 <code>kafka-topics.sh</code> 報錯</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is: 
+</code></pre></div><p>查詢一下是 <code>JMX_PORT</code> 被佔走了</p>
+<p>把指令換成下面就可以了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">unset JMX_PORT; kafka-topics.sh ...
+</code></pre></div><p>Source:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/44016688/unable-to-list-kafka-topics-in-openwhisk-setup">https://stackoverflow.com/questions/44016688/unable-to-list-kafka-topics-in-openwhisk-setup</a></li>
+</ul></content>
 
 	<div></div>
 
 	
-	<section class="sk3-flex sk3-flex-center-h">
+	<section class="sk3-margin-v-10">
 		
-		<div class="sk3-card box">
-			<div class="sk3-flex">
-				<a class="sk3-flex-inline" href="/posts/kafka_topics_debug/">
-					<h3>Kafka_topics_debug</h3>
-				</a>
-				
-				
-				<div class="sk3-flex-right sk3-flex-down">2020-09-30</div>
-				
-				
-			</div>
-			<div><p>Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is:</p></div>
-		</div>
 		
-		<div class="sk3-card box">
-			<div class="sk3-flex">
-				<a class="sk3-flex-inline" href="/posts/datacontw2020/">
-					<h3>DataConTW2020</h3>
-				</a>
-				
-				
-				<div class="sk3-flex-right sk3-flex-down">2020-09-10</div>
-				
-				
-			</div>
-			<div><p>Summarized DataConTW2020</p></div>
-		</div>
-		
-		<div class="sk3-card box">
-			<div class="sk3-flex">
-				<a class="sk3-flex-inline" href="/posts/hugo_img_center/">
-					<h3>Hugo img centering</h3>
-				</a>
-				
-				
-				<div class="sk3-flex-right sk3-flex-down">2020-08-19</div>
-				
-				
-			</div>
-			<div><p>How to make hugo image center in Markdown.</p></div>
-		</div>
-		
-		<div class="sk3-card box">
-			<div class="sk3-flex">
-				<a class="sk3-flex-inline" href="/posts/awesome-go/">
-					<h3>Awesome go</h3>
-				</a>
-				
-				
-				<div class="sk3-flex-right sk3-flex-down">2020-07-21</div>
-				
-				
-			</div>
-			<div><p><em>A curated list of awesome golang articles, frameworks, libraries, software and resources.</em></p></div>
-		</div>
-		
-		<div class="sk3-card box">
-			<div class="sk3-flex">
-				<a class="sk3-flex-inline" href="/posts/mermaid/">
-					<h3>Mermaid - golang tool help user doing dependency more easily</h3>
-				</a>
-				
-				
-				<div class="sk3-flex-right sk3-flex-down">2020-06-29</div>
-				
-				
-			</div>
-			<div><p>Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.</p></div>
-		</div>
-		
-	</section>
-
-	<div></div>
-
-	
-	<div class="sk3-flex sk3-flex-center-h">
-		<sk3-pager>
-
-</sk3-pager>
-	</div>
+<section class="sk3-flex sk3-flex-center-h">
 
 	
 	
-	<div class="sk3-flex sk3-flex-center-h">
-		
-
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			
 <sk3-social>
 	
-	
-	
-	
-	
-	
-	<a href="https://github.com/jneo8/"><svg class="sk3-social-fab">
-			<use xlink:href="#github"></use>
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka_topics_debug%2f"
+		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
+			<use xlink:href="#facebook"></use>
 		</svg>
 	</a>
 	
 	
-	
-	
-	
-	<a href="https://www.linkedin.com/in/james-lin-735548115/"><svg class="sk3-social-fab">
+	<a target="_blank" rel="noopener noreferrer"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka_topics_debug%2f&title=Kafka_topics_debug"
+		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
 	</a>
@@ -381,33 +301,121 @@
 	
 	
 	
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka_topics_debug%2f&amp;title=Kafka_topics_debug"
+		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
+			<use xlink:href="#telegram"></use>
+		</svg>
+	</a>
 	
 	
-	
-	
-	
-	
-	
-	
-	<a href="https://twitter.com/lin_jneo8"><svg class="sk3-social-fab">
+	<a target="_blank" rel="noopener noreferrer"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka_topics_debug%2f&amp;text=Kafka_topics_debug"
+		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
 	</a>
 	
 	
+
 	
 	
-	
-	
-	
-	
+
+
+
+
 </sk3-social>
 
-
+		</div>
 	</div>
 	
 
+	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			
+			
+			<div class="sk3-margin-h sk3-margin-down">Update: 2020-09-30</div>
+		</div>
+	</div>
+	
+
+	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+
+			
+			
+			<div class="sk3-flex sk3-margin-h sk3-flex-center-h">
+				<div class="sk3-flex sk3-flex-center-v">Tag</div>
+				
+				<div class="sk3-margin-h txt-center-h">
+					[<a class="sk3-margin-h" href="/tags/kafka/">kafka</a>]
+				</div>
+				
+				<div class="sk3-margin-h txt-center-h">
+					[<a class="sk3-margin-h" href="/tags/helm/">helm</a>]
+				</div>
+				
+			</div>
+			
+
+		</div>
+	</div>
+	
+
+	
+	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			<a class="sk3-margin-h txt-center-h" href="/posts/datacontw2020/">
+				<h3>
+					&lt;&lt; DataConTW2020</h3>
+			</a> 
+			
+			
+		</div>
+	</div>
+	
+	
+
+	
+	
+	
+
+</section>
+		
+	</section>
+
 	<div></div>
+
+	
+	
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jneo8" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 
 </div>
 
@@ -454,15 +462,16 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<meta property="og:title" content="Posts" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://jneo8.github.io/posts/" />
-<meta property="og:updated_time" content="2020-08-09T19:39:43+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
+<meta property="og:title" content="Kafka_topics_debug" />
+<meta property="og:description" content="Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jneo8.github.io/posts/kafka_topics_debug/" />
+<meta property="article:published_time" content="2020-09-30T12:18:38+08:00" />
+<meta property="article:modified_time" content="2020-09-30T12:18:38+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Kafka_topics_debug"/>
+<meta name="twitter:description" content="Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is:"/>
 
 
 

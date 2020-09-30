@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>helm on jneo8.github.io</title>
+    <link>https://jneo8.github.io/tags/helm/</link>
+    <description>Recent content in helm on jneo8.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 30 Sep 2020 12:18:38 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/helm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka_topics_debug</title>
+      <link>https://jneo8.github.io/posts/kafka_topics_debug/</link>
+      <pubDate>Wed, 30 Sep 2020 12:18:38 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/kafka_topics_debug/</guid>
+      <description>&lt;p&gt;Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is:&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
