@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RSS on jneo8.github.io</title>
+    <link>https://jneo8.github.io/tags/rss/</link>
+    <description>Recent content in RSS on jneo8.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 13 Oct 2020 22:25:01 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/rss/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HowAboutRSS</title>
+      <link>https://jneo8.github.io/posts/howaboutrss/</link>
+      <pubDate>Tue, 13 Oct 2020 22:25:01 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/howaboutrss/</guid>
+      <description>&lt;p&gt;How RSS has changed the way I get information?&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

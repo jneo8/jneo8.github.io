@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jneo8.github.io/posts/howaboutrss/</loc>
+    <lastmod>2020-10-13T22:25:01+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/tags/rss/</loc>
+    <lastmod>2020-10-13T22:25:01+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/tags/</loc>
+    <lastmod>2020-10-13T22:25:01+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jneo8.github.io/tags/helm/</loc>
     <lastmod>2020-09-30T12:18:38+08:00</lastmod>
   </url>
@@ -14,11 +29,6 @@
   
   <url>
     <loc>https://jneo8.github.io/posts/kafka_topics_debug/</loc>
-    <lastmod>2020-09-30T12:18:38+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/tags/</loc>
     <lastmod>2020-09-30T12:18:38+08:00</lastmod>
   </url>
   
