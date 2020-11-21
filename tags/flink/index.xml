@@ -6,7 +6,16 @@
     <description>Recent content in flink on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Nov 2020 16:18:10 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/flink/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 Nov 2020 14:13:41 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/flink/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flink Asyncio</title>
+      <link>https://jneo8.github.io/flink/flink-asyncio/</link>
+      <pubDate>Sat, 21 Nov 2020 14:13:41 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/flink/flink-asyncio/</guid>
+      <description>&lt;p&gt;Flink Asynchronuos I/O&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Flink Trigger</title>
       <link>https://jneo8.github.io/flink/flink-trigger/</link>
