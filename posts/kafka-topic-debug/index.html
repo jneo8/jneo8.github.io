@@ -3,10 +3,10 @@
 	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>jneo8.github.io | State</title>
+	<title>jneo8.github.io | Kafka_topics_debug</title>
 	<meta name="description" content="
 	
-	jneo8.github.io - State
+	jneo8.github.io - Kafka_topics_debug
 	
 	">
 	
@@ -48,7 +48,7 @@
 		<b>Share</b> 
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka-topic-debug%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -56,7 +56,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&title=State"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka-topic-debug%2f&title=Kafka_topics_debug"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -66,7 +66,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;title=State"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka-topic-debug%2f&amp;title=Kafka_topics_debug"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -74,7 +74,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;text=State"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka-topic-debug%2f&amp;text=Kafka_topics_debug"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -243,7 +243,7 @@
 	
 	
 	<heading>
-		<h1>State</h1>
+		<h1>Kafka_topics_debug</h1>
 	</heading>
 	
 
@@ -255,81 +255,16 @@
 	
 
 	
-	<content class="sk3-margin-v-10"><p><figure><img src="/img/flink/flink-header-logo.svg" alt="flink-logo"></figure></p>
-
-<p>Introduce Flink State.</p>
-
-<hr>
-
-<h1 id="state">State</h1>
-
-<h2 id="stateful-有狀態">Stateful 有狀態</h2>
-
+	<content class="sk3-margin-v-10"><p>Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is:</p>
+<p>使用: <a href="https://github.com/bitnami/charts/tree/master/bitnami/kafka">https://github.com/bitnami/charts/tree/master/bitnami/kafka</a></p>
+<p>在 kafka pod 內想要執行 <code>kafka-topics.sh</code> 報錯</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is: 
+</code></pre></div><p>查詢一下是 <code>JMX_PORT</code> 被佔走了</p>
+<p>把指令換成下面就可以了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">unset JMX_PORT; kafka-topics.sh ...
+</code></pre></div><p>Source:</p>
 <ul>
-<li><p>大多數人提到streaming, 會認為說event是逐筆進來的, 處理完就結束了, 但如果 Operation 操作需要記住多筆的時候, 比如說 <code>window</code>, 那這些Operator就是 <strong>stateful</strong></p></li>
-
-<li><p>Flink 需要 State 來執行 checkpoint &amp;&amp; savepoint, 讓flink實現容錯機制</p></li>
-
-<li><p>Flink 也需redistributing state 來 Rescaling flink application</p></li>
-
-<li><p><strong>Queryable state</strong> allow user access state during runtime</p></li>
-
-<li><p>了解 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/zh/ops/state/state_backends.html">state backend</a></p></li>
-</ul>
-
-<h2 id="state-type">State type</h2>
-
-<h3 id="keyed-state">Keyed State</h3>
-
-<p><figure><img src="/img/flink/state_partitioning.svg#center" alt="flink-logo"></figure></p>
-
-<ul>
-<li><p>Only on Keyed streams</p></li>
-
-<li><p>Partitioned and Distributed stricyly together with the stream that are read by stateful operators</p></li>
-
-<li><p>All state updates are local operations, guaranteeing consistency without transaction overhead</p></li>
-
-<li><p>Keyed State is further organized into so-called Key Groups.</p>
-
-<ul>
-<li>Key Groups are the atomic unit by which Flink can redistribute Keyed State; there are exactly as many Key Groups as the defined maximum parallelism. During execution each parallel instance of a keyed operator works with the keys for one or more Key Groups.</li>
-</ul></li>
-</ul>
-
-<h3 id="operator-state">Operator State</h3>
-
-<h3 id="broadcase-state">Broadcase State</h3>
-
-<hr>
-
-<h2 id="state-persistence">State Persistence</h2>
-
-<h3 id="stream-replay-and-checkpointing">stream replay and checkpointing</h3>
-
-<ul>
-<li>Checkpointing 會紀錄 stream 中各個 Operator</li>
-</ul>
-
-<blockquote>
-<p><strong>Note</strong></p>
-
-<ul>
-<li>By default, Checkpointing disabled.</li>
-<li>For this mechanism to realize its full guarantees, the data stream source needs to be able to rewind the stream to a defined recent point.</li>
-<li>為了實現Checkpoint, data stream source 需要能夠讓資料回朔到最靠近checkpoint的點
-&gt; * Kafka 有這項功能, Flink Kafka connector 有使用
-&gt; * 由於Flink checkpoints 是透過 distributed snanpshot 實現的, flink 中會混合使用這兩個詞</li>
-</ul>
-</blockquote>
-
-<h3 id="snapshotting-operator-state">Snapshotting Operator State</h3>
-
-<h2 id="resource">Resource</h2>
-
-<ul>
-<li><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html">https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html</a></li>
-<li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html">https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html</a></li>
+<li><a href="https://stackoverflow.com/questions/44016688/unable-to-list-kafka-topics-in-openwhisk-setup">https://stackoverflow.com/questions/44016688/unable-to-list-kafka-topics-in-openwhisk-setup</a></li>
 </ul></content>
 
 	<div></div>
@@ -348,7 +283,7 @@
 			
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka-topic-debug%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -356,7 +291,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&title=State"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka-topic-debug%2f&title=Kafka_topics_debug"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -366,7 +301,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;title=State"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka-topic-debug%2f&amp;title=Kafka_topics_debug"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -374,7 +309,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;text=State"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fposts%2fkafka-topic-debug%2f&amp;text=Kafka_topics_debug"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -401,16 +336,52 @@
 			
 			
 			
-			<div class="sk3-margin-h sk3-margin-down">Update: 2020-08-26</div>
+			<div class="sk3-margin-h sk3-margin-down">Update: 2020-09-30</div>
 		</div>
 	</div>
 	
 
 	
 	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+
+			
+			
+			<div class="sk3-flex sk3-margin-h sk3-flex-center-h">
+				<div class="sk3-flex sk3-flex-center-v">Tag</div>
+				
+				<div class="sk3-margin-h txt-center-h">
+					[<a class="sk3-margin-h" href="/tags/kafka/">kafka</a>]
+				</div>
+				
+				<div class="sk3-margin-h txt-center-h">
+					[<a class="sk3-margin-h" href="/tags/helm/">helm</a>]
+				</div>
+				
+			</div>
+			
+
+		</div>
+	</div>
+	
 
 	
 	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			<a class="sk3-margin-h txt-center-h" href="/posts/datacon-tw-2020/">
+				<h3>
+					&lt;&lt; DataConTW2020</h3>
+			</a> 
+			
+			<a class="sk3-margin-h txt-center-h" href="/posts/how-about-rss/">
+				<h3>HowAboutRSS >></h3>
+			</a>
+		</div>
+	</div>
 	
 	
 
@@ -493,20 +464,16 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<meta property="og:title" content="State" />
-<meta property="og:description" content="
-
-Introduce Flink State." />
+<meta property="og:title" content="Kafka_topics_debug" />
+<meta property="og:description" content="Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jneo8.github.io/wip/state/" />
-<meta property="article:published_time" content="2020-08-26T17:18:31+08:00" />
-<meta property="article:modified_time" content="2020-08-26T17:18:31+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
+<meta property="og:url" content="https://jneo8.github.io/posts/kafka-topic-debug/" />
+<meta property="article:published_time" content="2020-09-30T12:18:38+08:00" />
+<meta property="article:modified_time" content="2020-09-30T12:18:38+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="State"/>
-<meta name="twitter:description" content="
-
-Introduce Flink State."/>
+<meta name="twitter:title" content="Kafka_topics_debug"/>
+<meta name="twitter:description" content="Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is:"/>
 
 
 

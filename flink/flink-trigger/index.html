@@ -3,10 +3,10 @@
 	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>jneo8.github.io | State</title>
+	<title>jneo8.github.io | Flink Trigger</title>
 	<meta name="description" content="
 	
-	jneo8.github.io - State
+	jneo8.github.io - Flink Trigger
 	
 	">
 	
@@ -48,7 +48,7 @@
 		<b>Share</b> 
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-trigger%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -56,7 +56,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&title=State"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-trigger%2f&title=Flink%20Trigger"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -66,7 +66,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;title=State"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-trigger%2f&amp;title=Flink%20Trigger"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -74,7 +74,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;text=State"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-trigger%2f&amp;text=Flink%20Trigger"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -243,7 +243,7 @@
 	
 	
 	<heading>
-		<h1>State</h1>
+		<h1>Flink Trigger</h1>
 	</heading>
 	
 
@@ -252,84 +252,88 @@
 	
 	
 	
+	<section class="box sk3-margin-v-10">
+		<div class="collapsible">☰ Table of Content</div>
+		<sk3-toc><nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-flink-trigger">What is Flink Trigger?</a></li>
+    <li><a href="#如何觸發計算-">如何觸發計算 ?</a>
+      <ul>
+        <li><a href="#watermarkhttpsciapacheorgprojectsflinkflink-docs-stabledevevent_timestamps_watermarkshtmlintroduction-to-watermark-strategies"><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/event_timestamps_watermarks.html#introduction-to-watermark-strategies">Watermark</a></a></li>
+        <li><a href="#window-lifecyclehttpsciapacheorgprojectsflinkflink-docs-stabledevstreamoperatorswindowshtmlwindow-lifecycle"><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/operators/windows.html#window-lifecycle">Window LifeCycle</a></a></li>
+        <li><a href="#triggerresulthttpsciapacheorgprojectsflinkflink-docs-masterapijavaorgapacheflinkstreamingapiwindowingtriggerstriggerresulthtml"><a href="https://ci.apache.org/projects/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/TriggerResult.html">TriggerResult</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav></sk3-toc>
+	</section>
+	
 	
 
 	
-	<content class="sk3-margin-v-10"><p><figure><img src="/img/flink/flink-header-logo.svg" alt="flink-logo"></figure></p>
-
-<p>Introduce Flink State.</p>
-
-<hr>
-
-<h1 id="state">State</h1>
-
-<h2 id="stateful-有狀態">Stateful 有狀態</h2>
-
+	<content class="sk3-margin-v-10"><p>Flink Trigger</p>
+<h2 id="what-is-flink-trigger">What is Flink Trigger?</h2>
+<p>Flink Trigger 是決定 Stream Window 何時會觸發計算的 Function</p>
+<p>透過 Flink Trigger 可以做到類似的行為</p>
 <ul>
-<li><p>大多數人提到streaming, 會認為說event是逐筆進來的, 處理完就結束了, 但如果 Operation 操作需要記住多筆的時候, 比如說 <code>window</code>, 那這些Operator就是 <strong>stateful</strong></p></li>
-
-<li><p>Flink 需要 State 來執行 checkpoint &amp;&amp; savepoint, 讓flink實現容錯機制</p></li>
-
-<li><p>Flink 也需redistributing state 來 Rescaling flink application</p></li>
-
-<li><p><strong>Queryable state</strong> allow user access state during runtime</p></li>
-
-<li><p>了解 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/zh/ops/state/state_backends.html">state backend</a></p></li>
+<li>每 10 筆 觸發一次, 計算完丟棄 window 內資料</li>
+<li>每 10 秒 processing time 觸發一次, 計算完不丟棄 window 內資料</li>
+<li>Window 結束時觸發</li>
 </ul>
-
-<h2 id="state-type">State type</h2>
-
-<h3 id="keyed-state">Keyed State</h3>
-
-<p><figure><img src="/img/flink/state_partitioning.svg#center" alt="flink-logo"></figure></p>
-
+<p>類似的情境可以透過<a href="https://ci.apache.org/projects/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/Trigger.html">既有的 function</a>解決, 但如果需要複合式的條件就需要自己客制, 例如 <strong>每十筆觸發一次計算, window 結束時再觸發一次</strong></p>
+<p>就要透過實做 <a href="https://ci.apache.org/projects/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/Trigger.html">Trigger</a>來達成自己的邏輯</p>
+<h2 id="如何觸發計算-">如何觸發計算 ?</h2>
+<p>要讓資料順利流進 Window 然後觸發計算, 有些地方需要一步步注意</p>
+<h3 id="watermarkhttpsciapacheorgprojectsflinkflink-docs-stabledevevent_timestamps_watermarkshtmlintroduction-to-watermark-strategies"><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/event_timestamps_watermarks.html#introduction-to-watermark-strategies">Watermark</a></h3>
 <ul>
-<li><p>Only on Keyed streams</p></li>
-
-<li><p>Partitioned and Distributed stricyly together with the stream that are read by stateful operators</p></li>
-
-<li><p>All state updates are local operations, guaranteeing consistency without transaction overhead</p></li>
-
-<li><p>Keyed State is further organized into so-called Key Groups.</p>
-
-<ul>
-<li>Key Groups are the atomic unit by which Flink can redistribute Keyed State; there are exactly as many Key Groups as the defined maximum parallelism. During execution each parallel instance of a keyed operator works with the keys for one or more Key Groups.</li>
-</ul></li>
+<li>需要注意是 Processing time 還是 Event Time</li>
 </ul>
-
-<h3 id="operator-state">Operator State</h3>
-
-<h3 id="broadcase-state">Broadcase State</h3>
-
-<hr>
-
-<h2 id="state-persistence">State Persistence</h2>
-
-<h3 id="stream-replay-and-checkpointing">stream replay and checkpointing</h3>
-
+<h3 id="window-lifecyclehttpsciapacheorgprojectsflinkflink-docs-stabledevstreamoperatorswindowshtmlwindow-lifecycle"><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/operators/windows.html#window-lifecycle">Window LifeCycle</a></h3>
 <ul>
-<li>Checkpointing 會紀錄 stream 中各個 Operator</li>
+<li>
+<p>Window 會在第一筆 element 到達時被創造, 在 watermark 越過 <strong>window 結束時間 + allowed lateness</strong> 被移除</p>
+</li>
+<li>
+<p>舉例來說</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> exampleStream<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">DataStrema</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> stream
+  <span style="color:#f92672">.</span>keyBy<span style="color:#f92672">(&lt;</span>key selector<span style="color:#f92672">&gt;)</span>
+  <span style="color:#f92672">.</span>window<span style="color:#f92672">(</span><span style="color:#a6e22e">TumblingEventTimeWindows</span><span style="color:#f92672">.</span>of<span style="color:#f92672">(</span><span style="color:#a6e22e">Time</span><span style="color:#f92672">.</span>minutes<span style="color:#f92672">(</span><span style="color:#ae81ff">5</span><span style="color:#f92672">))</span>
+  <span style="color:#f92672">.</span>trigger<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">CountTrigger</span><span style="color:#f92672">(</span><span style="color:#ae81ff">10</span><span style="color:#f92672">))</span>
+  <span style="color:#f92672">.</span>allowedLateness<span style="color:#f92672">(</span><span style="color:#a6e22e">Time</span><span style="color:#f92672">.</span>minutes<span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">))</span>
+</code></pre></div></li>
+<li>
+<p>這段程式碼表示</p>
+<ul>
+<li>12:01 分的資料會進入 12:00 ~12:05 這個 window</li>
+<li>window 每收到 十筆資料 觸發一次計算
+<ul>
+<li>這邊要注意 CountTrigger 觸發完不丟棄資料, 資料會被重復計算, 需要丟棄的話要搭配 <a href="https://ci.apache.org/projects/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/PurgingTrigger.html">PurginTrigger</a></li>
 </ul>
-
-<blockquote>
-<p><strong>Note</strong></p>
-
-<ul>
-<li>By default, Checkpointing disabled.</li>
-<li>For this mechanism to realize its full guarantees, the data stream source needs to be able to rewind the stream to a defined recent point.</li>
-<li>為了實現Checkpoint, data stream source 需要能夠讓資料回朔到最靠近checkpoint的點
-&gt; * Kafka 有這項功能, Flink Kafka connector 有使用
-&gt; * 由於Flink checkpoints 是透過 distributed snanpshot 實現的, flink 中會混合使用這兩個詞</li>
+</li>
+<li>12:00-12:05 的 window 會持續接收資料到 12:06, 然後關閉</li>
+<li>如果 12:07 接收到一筆 12:05 分的資料, 該筆資料不會進入 window</li>
+<li>如果 12:06 時 window 內還剩下 8 筆資料, 這些資料不會被計算</li>
 </ul>
-</blockquote>
-
-<h3 id="snapshotting-operator-state">Snapshotting Operator State</h3>
-
-<h2 id="resource">Resource</h2>
-
+</li>
+<li>
+<p><strong>資料進入 window 的邏輯 跟 觸發計算的邏輯是分開的</strong></p>
+</li>
+</ul>
+<h3 id="triggerresulthttpsciapacheorgprojectsflinkflink-docs-masterapijavaorgapacheflinkstreamingapiwindowingtriggerstriggerresulthtml"><a href="https://ci.apache.org/projects/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/TriggerResult.html">TriggerResult</a></h3>
+<p>TriggerResult 有四種控制邏輯</p>
 <ul>
-<li><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html">https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html</a></li>
-<li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html">https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html</a></li>
+<li>FIRE: 觸發計算</li>
+<li>PURGE: 丟棄資料</li>
+<li>FIRE_AND_PURGE: 觸發且丟棄</li>
+<li>CONTINUE: 沒有動作</li>
+</ul>
+<p>使用內建的 Trigger 需要注意觸發的邏輯, 大部份都只有 FIRE 而已</p>
+<h2 id="summary">Summary</h2>
+<p>其實大概談了一些基本概念而已, 想要實做or了解其規則, 個人最推薦的方式還是直接閱讀 sourecode 比較快
+Flink Github 上面有多種 Trigger 實做, 推薦有需要的稍為讀過再下手</p>
+<ul>
+<li><a href="https://github.com/apache/flink/tree/master/flink-streaming-java/src/main/java/org/apache/flink/streaming/api/windowing/triggers">https://github.com/apache/flink/tree/master/flink-streaming-java/src/main/java/org/apache/flink/streaming/api/windowing/triggers</a></li>
 </ul></content>
 
 	<div></div>
@@ -348,7 +352,7 @@
 			
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-trigger%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -356,7 +360,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&title=State"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-trigger%2f&title=Flink%20Trigger"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -366,7 +370,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;title=State"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-trigger%2f&amp;title=Flink%20Trigger"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -374,7 +378,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;text=State"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fflink%2fflink-trigger%2f&amp;text=Flink%20Trigger"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -401,21 +405,77 @@
 			
 			
 			
-			<div class="sk3-margin-h sk3-margin-down">Update: 2020-08-26</div>
+			<div class="sk3-margin-h sk3-margin-down">Update: 2020-11-20</div>
 		</div>
 	</div>
 	
 
 	
 	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+
+			
+			
+			<div class="sk3-flex sk3-margin-h sk3-flex-center-h">
+				<div class="sk3-flex sk3-flex-center-v">Tag</div>
+				
+				<div class="sk3-margin-h txt-center-h">
+					[<a class="sk3-margin-h" href="/tags/flink/">flink</a>]
+				</div>
+				
+			</div>
+			
+
+		</div>
+	</div>
+	
 
 	
 	
 	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			<a class="sk3-margin-h txt-center-h" href="/flink/checkpoint/">
+				<h3>
+					&lt;&lt; [Flink] Checkpoints</h3>
+			</a> 
+			
+			
+		</div>
+	</div>
+	
 	
 
 	
 	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v">See Also</div>
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			
+			
+			<div class="sk3-margin-h txt-center-h">
+				[<a class="sk3-margin-h" href="/flink/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/">[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink</a>]
+			</div>
+			
+			<div class="sk3-margin-h txt-center-h">
+				[<a class="sk3-margin-h" href="/flink/architecture/">[Flink] Architecture</a>]
+			</div>
+			
+			<div class="sk3-margin-h txt-center-h">
+				[<a class="sk3-margin-h" href="/flink/bound-and-unbounded/">[Flink] Bounded And UnBounded</a>]
+			</div>
+			
+			<div class="sk3-margin-h txt-center-h">
+				[<a class="sk3-margin-h" href="/flink/first-experience/">[Flink] Flink 學習初心者心得</a>]
+			</div>
+			
+			
+		</div>
+	</div>
 	
 
 </section>
@@ -493,20 +553,16 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<meta property="og:title" content="State" />
-<meta property="og:description" content="
-
-Introduce Flink State." />
+<meta property="og:title" content="Flink Trigger" />
+<meta property="og:description" content="Flink Trigger" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jneo8.github.io/wip/state/" />
-<meta property="article:published_time" content="2020-08-26T17:18:31+08:00" />
-<meta property="article:modified_time" content="2020-08-26T17:18:31+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
+<meta property="og:url" content="https://jneo8.github.io/flink/flink-trigger/" />
+<meta property="article:published_time" content="2020-11-20T16:18:10+08:00" />
+<meta property="article:modified_time" content="2020-11-20T16:18:10+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="State"/>
-<meta name="twitter:description" content="
-
-Introduce Flink State."/>
+<meta name="twitter:title" content="Flink Trigger"/>
+<meta name="twitter:description" content="Flink Trigger"/>
 
 
 

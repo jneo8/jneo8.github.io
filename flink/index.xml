@@ -8,6 +8,15 @@
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Aug 2020 22:11:55 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/flink/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Flink Trigger</title>
+      <link>https://jneo8.github.io/flink/flink-trigger/</link>
+      <pubDate>Fri, 20 Nov 2020 16:18:10 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/flink/flink-trigger/</guid>
+      <description>&lt;p&gt;Flink Trigger&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>[Flink] Checkpoints</title>
       <link>https://jneo8.github.io/flink/checkpoint/</link>
       <pubDate>Sun, 23 Aug 2020 20:55:16 +0800</pubDate>
@@ -18,10 +27,10 @@
     
     <item>
       <title>[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink</title>
-      <link>https://jneo8.github.io/flink/flink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink/</link>
+      <link>https://jneo8.github.io/flink/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/</link>
       <pubDate>Sat, 22 Aug 2020 15:21:20 +0800</pubDate>
       
-      <guid>https://jneo8.github.io/flink/flink-forward-2018-scaling_ubers_realtime_optimization_with_apache_flink/</guid>
+      <guid>https://jneo8.github.io/flink/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/</guid>
       <description>&lt;p&gt;Flink Forward 2018 / Scaling Uber&amp;rsquo;s Real-time Optimization with Flink 心得&lt;/p&gt;</description>
     </item>
     
@@ -45,19 +54,19 @@
     
     <item>
       <title>[Flink] Bounded And UnBounded</title>
-      <link>https://jneo8.github.io/flink/boundedandunbounded/</link>
+      <link>https://jneo8.github.io/flink/bound-and-unbounded/</link>
       <pubDate>Tue, 18 Aug 2020 16:25:45 +0800</pubDate>
       
-      <guid>https://jneo8.github.io/flink/boundedandunbounded/</guid>
+      <guid>https://jneo8.github.io/flink/bound-and-unbounded/</guid>
       <description>&lt;p&gt;flink Unbounded and Bounded&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>[Flink] Flink 學習初心者心得</title>
-      <link>https://jneo8.github.io/flink/first_experience/</link>
+      <link>https://jneo8.github.io/flink/first-experience/</link>
       <pubDate>Tue, 11 Aug 2020 22:11:12 +0800</pubDate>
       
-      <guid>https://jneo8.github.io/flink/first_experience/</guid>
+      <guid>https://jneo8.github.io/flink/first-experience/</guid>
       <description>&lt;p&gt;講講最近flink學習的心得好了&lt;/p&gt;</description>
     </item>
     

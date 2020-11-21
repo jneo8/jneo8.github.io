@@ -3,10 +3,10 @@
 	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>jneo8.github.io | State</title>
+	<title>jneo8.github.io | [k8s] ZookeeperInstall</title>
 	<meta name="description" content="
 	
-	jneo8.github.io - State
+	jneo8.github.io - [k8s] ZookeeperInstall
 	
 	">
 	
@@ -48,7 +48,7 @@
 		<b>Share</b> 
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fzookeeper-install%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -56,7 +56,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&title=State"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fzookeeper-install%2f&title=%5bk8s%5d%20ZookeeperInstall"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -66,7 +66,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;title=State"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fzookeeper-install%2f&amp;title=%5bk8s%5d%20ZookeeperInstall"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -74,7 +74,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;text=State"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fzookeeper-install%2f&amp;text=%5bk8s%5d%20ZookeeperInstall"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -243,7 +243,7 @@
 	
 	
 	<heading>
-		<h1>State</h1>
+		<h1>[k8s] ZookeeperInstall</h1>
 	</heading>
 	
 
@@ -252,85 +252,259 @@
 	
 	
 	
+	<section class="box sk3-margin-v-10">
+		<div class="collapsible">☰ Table of Content</div>
+		<sk3-toc><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#名詞解析">名詞解析</a></li>
+        <li><a href="#prerequire">Prerequire</a></li>
+        <li><a href="#objectives">Objectives</a></li>
+        <li><a href="#creating-a-zookeeper-ensemble">Creating a ZooKeeper Ensemble</a>
+          <ul>
+            <li><a href="#觀察-domain-name--dns-如何被設定">觀察 domain name &amp;&amp; dns 如何被設定</a></li>
+            <li><a href="#sanity-testing-the-ensemble">Sanity Testing the Ensemble</a></li>
+          </ul>
+        </li>
+        <li><a href="#providing-durable-storage">Providing Durable Storage</a></li>
+        <li><a href="#ensuring-consistent-configuration">Ensuring Consistent Configuration</a></li>
+        <li><a href="#configuring-logging">Configuring Logging</a></li>
+        <li><a href="#managing-the-zookeeper-process">Managing the ZooKeeper Process</a></li>
+        <li><a href="#handing-process-failure">Handing Process Failure</a></li>
+        <li><a href="#tolerating-node-failure">Tolerating Node Failure</a></li>
+        <li><a href="#surviving-maintenance">Surviving Maintenance</a></li>
+        <li><a href="#summary">Summary</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></sk3-toc>
+	</section>
+	
 	
 
 	
-	<content class="sk3-margin-v-10"><p><figure><img src="/img/flink/flink-header-logo.svg" alt="flink-logo"></figure></p>
-
-<p>Introduce Flink State.</p>
-
-<hr>
-
-<h1 id="state">State</h1>
-
-<h2 id="stateful-有狀態">Stateful 有狀態</h2>
-
-<ul>
-<li><p>大多數人提到streaming, 會認為說event是逐筆進來的, 處理完就結束了, 但如果 Operation 操作需要記住多筆的時候, 比如說 <code>window</code>, 那這些Operator就是 <strong>stateful</strong></p></li>
-
-<li><p>Flink 需要 State 來執行 checkpoint &amp;&amp; savepoint, 讓flink實現容錯機制</p></li>
-
-<li><p>Flink 也需redistributing state 來 Rescaling flink application</p></li>
-
-<li><p><strong>Queryable state</strong> allow user access state during runtime</p></li>
-
-<li><p>了解 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/zh/ops/state/state_backends.html">state backend</a></p></li>
-</ul>
-
-<h2 id="state-type">State type</h2>
-
-<h3 id="keyed-state">Keyed State</h3>
-
-<p><figure><img src="/img/flink/state_partitioning.svg#center" alt="flink-logo"></figure></p>
-
-<ul>
-<li><p>Only on Keyed streams</p></li>
-
-<li><p>Partitioned and Distributed stricyly together with the stream that are read by stateful operators</p></li>
-
-<li><p>All state updates are local operations, guaranteeing consistency without transaction overhead</p></li>
-
-<li><p>Keyed State is further organized into so-called Key Groups.</p>
-
-<ul>
-<li>Key Groups are the atomic unit by which Flink can redistribute Keyed State; there are exactly as many Key Groups as the defined maximum parallelism. During execution each parallel instance of a keyed operator works with the keys for one or more Key Groups.</li>
-</ul></li>
-</ul>
-
-<h3 id="operator-state">Operator State</h3>
-
-<h3 id="broadcase-state">Broadcase State</h3>
-
-<hr>
-
-<h2 id="state-persistence">State Persistence</h2>
-
-<h3 id="stream-replay-and-checkpointing">stream replay and checkpointing</h3>
-
-<ul>
-<li>Checkpointing 會紀錄 stream 中各個 Operator</li>
-</ul>
-
+	<content class="sk3-margin-v-10"><p><em>Install ZooKeeper on k8s cluster</em></p>
+<p>實做 <a href="https://kubernetes.io/docs/tutorials/stateful-application/zookeeper/">https://kubernetes.io/docs/tutorials/stateful-application/zookeeper/</a> 全紀錄</p>
+<h3 id="名詞解析">名詞解析</h3>
 <blockquote>
-<p><strong>Note</strong></p>
-
-<ul>
-<li>By default, Checkpointing disabled.</li>
-<li>For this mechanism to realize its full guarantees, the data stream source needs to be able to rewind the stream to a defined recent point.</li>
-<li>為了實現Checkpoint, data stream source 需要能夠讓資料回朔到最靠近checkpoint的點
-&gt; * Kafka 有這項功能, Flink Kafka connector 有使用
-&gt; * 由於Flink checkpoints 是透過 distributed snanpshot 實現的, flink 中會混合使用這兩個詞</li>
-</ul>
+<p><em>比較基礎的跳過 ( pods, Cluster DNS &hellip; )</em></p>
 </blockquote>
-
-<h3 id="snapshotting-operator-state">Snapshotting Operator State</h3>
-
-<h2 id="resource">Resource</h2>
-
 <ul>
-<li><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html">https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html</a></li>
-<li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html">https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html</a></li>
-</ul></content>
+<li>
+<p><a href="https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets">PodDisruptionBudgets</a></p>
+</li>
+<li>
+<p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity">PodAntiAffinity</a></p>
+</li>
+</ul>
+<h3 id="prerequire">Prerequire</h3>
+<ul>
+<li>
+<p>K8s cluster (at least 4 nodes * 2 CPU * 4 Gib Memory)</p>
+<ul>
+<li><strong>A Dedicated cluster</strong></li>
+</ul>
+</li>
+<li>
+<p>Dynamically provision PersistentVolumes</p>
+</li>
+</ul>
+<h3 id="objectives">Objectives</h3>
+<blockquote>
+<p>因為很重要我還是寫下來</p>
+</blockquote>
+<ul>
+<li>
+<p>How to deploy a ZooKeeper ensemable using StatefulSet</p>
+</li>
+<li>
+<p>How to consistently configure the ensemble using ConfigMaps</p>
+</li>
+<li>
+<p>How to spread the deployment of ZooKeeper servers in the ensemble.</p>
+</li>
+<li>
+<p>How to use PodDisruptionBudgets to ensure service availability during planned maintenance.</p>
+</li>
+</ul>
+<hr>
+<p>開始實做吧</p>
+<h3 id="creating-a-zookeeper-ensemble">Creating a ZooKeeper Ensemble</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://k8s.io/examples/application/zookeeper/zookeeper.yaml
+
+kubectl apply -f ./zookeeper.yaml
+</code></pre></div><p>這邊會看到</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">service/zk-hs created
+service/zk-cs created
+poddisruptionbudget.policy/zk-pdb created
+statefulset.apps/zk created
+</code></pre></div><p>表示成功</p>
+<p>然後下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods -w -l app<span style="color:#f92672">=</span>zk
+</code></pre></div><p>會看到 pod 被成功創建</p>
+<h4 id="觀察-domain-name--dns-如何被設定">觀察 domain name &amp;&amp; dns 如何被設定</h4>
+<ul>
+<li>StatefulSet controller 會給每個 pod 一個 unique hostname</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">for</span> i in <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> 2; <span style="color:#66d9ef">do</span> kubectl exec zk-$i -- hostname; <span style="color:#66d9ef">done</span>
+
+<span style="color:#75715e"># zk-0</span>
+<span style="color:#75715e"># zk-1</span>
+<span style="color:#75715e"># zk-2</span>
+</code></pre></div><ul>
+<li>
+<p>Unique identifier file <code>myid</code> store in zk server&rsquo;s data directory</p>
+<ul>
+<li>在 zk 內, 每台 server 都會有 unique identifier</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">for</span> i in <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> 2; <span style="color:#66d9ef">do</span> echo <span style="color:#e6db74">&#34;myid zk-</span>$i<span style="color:#e6db74">&#34;</span>;kubectl exec zk-$i -- cat /var/lib/zookeeper/data/myid; <span style="color:#66d9ef">done</span>
+
+<span style="color:#75715e"># myid zk-0</span>
+<span style="color:#75715e"># 1</span>
+<span style="color:#75715e"># myid zk-1</span>
+<span style="color:#75715e"># 2</span>
+<span style="color:#75715e"># myid zk-2</span>
+<span style="color:#75715e"># 3</span>
+</code></pre></div><ul>
+<li>FQDN for each pod</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">for</span> i in <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> 2; <span style="color:#66d9ef">do</span> kubectl exec zk-$i -- hostname -f; <span style="color:#66d9ef">done</span>
+
+<span style="color:#75715e"># zk-0.zk-hs.default.svc.cluster.local</span>
+<span style="color:#75715e"># zk-1.zk-hs.default.svc.cluster.local</span>
+<span style="color:#75715e"># zk-2.zk-hs.default.svc.cluster.local</span>
+</code></pre></div><ul>
+<li>
+<p>zoo.cfg</p>
+<blockquote>
+<p>這邊可以看見前面的 FQDN 被寫在設定檔中</p>
+</blockquote>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec zk-0 -- cat /opt/zookeeper/conf/zoo.cfg
+
+<span style="color:#75715e"># clientPort=2181</span>
+<span style="color:#75715e"># dataDir=/var/lib/zookeeper/data</span>
+<span style="color:#75715e"># dataLogDir=/var/lib/zookeeper/data/log</span>
+<span style="color:#75715e"># tickTime=2000</span>
+<span style="color:#75715e"># initLimit=10</span>
+<span style="color:#75715e"># syncLimit=5</span>
+<span style="color:#75715e"># maxClientCnxns=60</span>
+<span style="color:#75715e"># minSessionTimeout=4000</span>
+<span style="color:#75715e"># maxSessionTimeout=40000</span>
+<span style="color:#75715e"># autopurge.snapRetainCount=3</span>
+<span style="color:#75715e"># autopurge.purgeInteval=12</span>
+<span style="color:#75715e"># server.1=zk-0.zk-hs.default.svc.cluster.local:2888:3888</span>
+<span style="color:#75715e"># server.2=zk-1.zk-hs.default.svc.cluster.local:2888:3888</span>
+<span style="color:#75715e"># server.3=zk-2.zk-hs.default.svc.cluster.local:2888:3888</span>
+</code></pre></div><p>上面幾個步驟可以一起講</p>
+<ul>
+<li>Pod Ready -&gt; 產生 A record</li>
+<li>FQDNs 解析 A record 導向 zk server</li>
+<li>這台 zk server 上會有 <code>myid</code> 表示 identity configured</li>
+<li>這樣可以確保 <code>zoo.cfg</code> 上的 <code>servers</code> 設定導向正確</li>
+</ul>
+<h4 id="sanity-testing-the-ensemble">Sanity Testing the Ensemble</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec zk-0 zkCli.sh create /hello world
+kubectl exec zk-1 zkCli.sh get /hello
+</code></pre></div><hr>
+<h3 id="providing-durable-storage">Providing Durable Storage</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete statefulset zk
+
+<span style="color:#75715e"># 等全部刪除後再往下</span>
+
+kubectl apply -f https://k8s.io/examples/application/zookeeper/zookeeper.yaml
+
+kubectl exec zk-2 zkCli.sh get /hello
+</code></pre></div><p>這邊會發現就算刪除又重新創建, 資料仍然存在</p>
+<p>是因為在 <code>volumeClaimTemplates</code> 中有做設定</p>
+<p><code>StatefulSet</code> controller 會產生 <code>PersistentVolumeClaim</code> 給 <code>StatefulSet</code> 中的所有 Pod</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pvc -l app<span style="color:#f92672">=</span>zk
+
+<span style="color:#75715e"># NAME           STATUS    VOLUME                                     CAPACITY   ACCESSMODES   AGE</span>
+<span style="color:#75715e"># datadir-zk-0   Bound     pvc-bed742cd-bcb1-11e6-994f-42010a800002   20Gi       RWO           1h</span>
+<span style="color:#75715e"># datadir-zk-1   Bound     pvc-bedd27d2-bcb1-11e6-994f-42010a800002   20Gi       RWO           1h</span>
+<span style="color:#75715e"># datadir-zk-2   Bound     pvc-bee0817e-bcb1-11e6-994f-42010a800002   20Gi       RWO           1h</span>
+</code></pre></div><p>透過 <code>volumeMounts</code> 把 pvc mount 到 ZooKeeper 的資料存放資料夾內</p>
+<hr>
+<h3 id="ensuring-consistent-configuration">Ensuring Consistent Configuration</h3>
+<p>為了讓 ZooKeeper 正確被設定, 設定被直接寫在啟動的 command 中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">command</span>:
+      - <span style="color:#ae81ff">sh</span>
+      - -<span style="color:#ae81ff">c</span>
+      - <span style="color:#e6db74">&#34;start-zookeeper \
+</span><span style="color:#e6db74">        --servers=3 \
+</span><span style="color:#e6db74">        --data_dir=/var/lib/zookeeper/data \
+</span><span style="color:#e6db74">        --data_log_dir=/var/lib/zookeeper/data/log \
+</span><span style="color:#e6db74">        --conf_dir=/opt/zookeeper/conf \
+</span><span style="color:#e6db74">        --client_port=2181 \
+</span><span style="color:#e6db74">        --election_port=3888 \
+</span><span style="color:#e6db74">        --server_port=2888 \
+</span><span style="color:#e6db74">        --tick_time=2000 \
+</span><span style="color:#e6db74">        --init_limit=10 \
+</span><span style="color:#e6db74">        --sync_limit=5 \
+</span><span style="color:#e6db74">        --heap=512M \
+</span><span style="color:#e6db74">        --max_client_cnxns=60 \
+</span><span style="color:#e6db74">        --snap_retain_count=3 \
+</span><span style="color:#e6db74">        --purge_interval=12 \
+</span><span style="color:#e6db74">        --max_session_timeout=40000 \
+</span><span style="color:#e6db74">        --min_session_timeout=4000 \
+</span><span style="color:#e6db74">        --log_level=INFO&#34;</span>
+</code></pre></div><hr>
+<h3 id="configuring-logging">Configuring Logging</h3>
+<p>ZooKeeper use Log4j, 把 log 寫到 standard out 中
+透過 <code>kubectl logs</code> 便可以看到</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec zk-0 cat /usr/etc/zookeeper/log4j.properties
+
+kubectl logs zk-0 --tail <span style="color:#ae81ff">20</span>
+</code></pre></div><hr>
+<h3 id="managing-the-zookeeper-process">Managing the ZooKeeper Process</h3>
+<p>使用 K8s 管理 ZooKeeper Process</p>
+<p>用 <code>patch</code> 更新 <code>cpus</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl patch sts zk --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;json&#39;</span> -p<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;[{&#34;op&#34;: &#34;replace&#34;, &#34;path&#34;: &#34;/spec/template/spec/containers/0/resources/requests/cpu&#34;, &#34;value&#34;:&#34;0.3&#34;}]&#39;</span>
+</code></pre></div><p>觀察 RollingUpdate 狀態</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl rollout status sts/zk
+
+kubectl rollout history sts/zk
+</code></pre></div><p>Roll back</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl rollout undo sts/zk
+</code></pre></div><hr>
+<h3 id="handing-process-failure">Handing Process Failure</h3>
+<p>Restart Policies 控制 Pod entry point failures.</p>
+<p>但在 <code>StatefulSet</code> 中唯一的 policy 是 <code>Always</code> ( 也是 default )</p>
+<p>透過 kill 掉 entry point 觀察 Pod restart 狀況</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec zk-0 -- ps -ef
+
+kubectl get pod -w -l app<span style="color:#f92672">=</span>zk
+
+kubectl exec zk-0 -- pkill java
+</code></pre></div><hr>
+<h3 id="tolerating-node-failure">Tolerating Node Failure</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">for</span> i in <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> 2; <span style="color:#66d9ef">do</span> kubectl get pod zk-$i --template <span style="color:#f92672">{{</span>.spec.nodeName<span style="color:#f92672">}}</span>; echo <span style="color:#e6db74">&#34;&#34;</span>; <span style="color:#66d9ef">done</span>
+</code></pre></div><p>透過設定 <code>podAntiAffinity</code> 讓 ZooKeeper 跑在不同台 server 上</p>
+<p><code>requiredDuringSchedulingIgnoredDuringExecution</code> 告訴 k8s 永遠不將 <code>label/app:zk</code> 放在 相同的 <code>topologyKey</code> 上</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">      <span style="color:#f92672">affinity</span>:
+        <span style="color:#f92672">podAntiAffinity</span>:
+          <span style="color:#f92672">requiredDuringSchedulingIgnoredDuringExecution</span>:
+            - <span style="color:#f92672">labelSelector</span>:
+                <span style="color:#f92672">matchExpressions</span>:
+                  - <span style="color:#f92672">key</span>: <span style="color:#e6db74">&#34;app&#34;</span>
+                    <span style="color:#f92672">operator</span>: <span style="color:#ae81ff">In</span>
+                    <span style="color:#f92672">values</span>:
+                    - <span style="color:#ae81ff">zk</span>
+              <span style="color:#f92672">topologyKey</span>: <span style="color:#e6db74">&#34;kubernetes.io/hostname&#34;</span>
+</code></pre></div><h3 id="surviving-maintenance">Surviving Maintenance</h3>
+<p>這部份實做滿有趣的</p>
+<p>有興趣可以參考 <a href="https://kubernetes.io/docs/tutorials/stateful-application/zookeeper/#surviving-maintenance">https://kubernetes.io/docs/tutorials/stateful-application/zookeeper/#surviving-maintenance</a></p>
+<hr>
+<h3 id="summary">Summary</h3>
+<p>這一篇其實並沒有講到太多 ZooKeeper 的部份, 有可能是因為本身對 ZooKeeper 有一定熟悉度</p>
+<p>通篇比較多是在說 k8s 的機制去把網路跟設定接起來
+然後有比較多 failure 的控制
+如果對 k8s 機制或者功能不熟的話應該會有滿多收獲</p></content>
 
 	<div></div>
 
@@ -348,7 +522,7 @@
 			
 <sk3-social>
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f"
+	<a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fzookeeper-install%2f"
 		onclick="window.open(this.href, 'Facebook', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#facebook"></use>
 		</svg>
@@ -356,7 +530,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&title=State"
+		href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fzookeeper-install%2f&title=%5bk8s%5d%20ZookeeperInstall"
 		onclick="window.open(this.href, 'LinkedIn', 'width=640,height=480,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#linkedin"></use>
 		</svg>
@@ -366,7 +540,7 @@
 	
 	
 	
-	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;title=State"
+	<a target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fzookeeper-install%2f&amp;title=%5bk8s%5d%20ZookeeperInstall"
 		onclick="window.open(this.href, 'Telegram', 'width=800,height=600,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#telegram"></use>
 		</svg>
@@ -374,7 +548,7 @@
 	
 	
 	<a target="_blank" rel="noopener noreferrer"
-		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fwip%2fstate%2f&amp;text=State"
+		href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fjneo8.github.io%2fkubernetes%2fzookeeper-install%2f&amp;text=%5bk8s%5d%20ZookeeperInstall"
 		onclick="window.open(this.href, 'Twitter', 'width=800,height=450,resizable=yes,toolbar=0,status=0'); return false"><svg class="sk3-social-fab">
 			<use xlink:href="#twitter"></use>
 		</svg>
@@ -401,21 +575,65 @@
 			
 			
 			
-			<div class="sk3-margin-h sk3-margin-down">Update: 2020-08-26</div>
+			<div class="sk3-margin-h sk3-margin-down">Update: 2020-09-09</div>
 		</div>
 	</div>
 	
 
 	
 	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+
+			
+			
+			<div class="sk3-flex sk3-margin-h sk3-flex-center-h">
+				<div class="sk3-flex sk3-flex-center-v">Tag</div>
+				
+				<div class="sk3-margin-h txt-center-h">
+					[<a class="sk3-margin-h" href="/tags/k8s/">k8s</a>]
+				</div>
+				
+			</div>
+			
+
+		</div>
+	</div>
+	
 
 	
 	
 	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			<a class="sk3-margin-h txt-center-h" href="/kubernetes/resources/">
+				<h3>
+					&lt;&lt; [k8s] Kubernetes Resources</h3>
+			</a> 
+			
+			
+		</div>
+	</div>
+	
 	
 
 	
 	
+	
+	<div class="sk3-card sk3-flex sk3-flex-center-h box">
+		<div class="sk3-flex sk3-flex-center-v">See Also</div>
+		<div class="sk3-flex sk3-flex-center-v sk3-flex-center-h">
+			
+			
+			
+			<div class="sk3-margin-h txt-center-h">
+				[<a class="sk3-margin-h" href="/kubernetes/resources/">[k8s] Kubernetes Resources</a>]
+			</div>
+			
+			
+		</div>
+	</div>
 	
 
 </section>
@@ -493,20 +711,16 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<meta property="og:title" content="State" />
-<meta property="og:description" content="
-
-Introduce Flink State." />
+<meta property="og:title" content="[k8s] ZookeeperInstall" />
+<meta property="og:description" content="Install ZooKeeper on k8s cluster" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jneo8.github.io/wip/state/" />
-<meta property="article:published_time" content="2020-08-26T17:18:31+08:00" />
-<meta property="article:modified_time" content="2020-08-26T17:18:31+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
+<meta property="og:url" content="https://jneo8.github.io/kubernetes/zookeeper-install/" />
+<meta property="article:published_time" content="2020-09-09T14:37:16+08:00" />
+<meta property="article:modified_time" content="2020-09-09T14:37:16+08:00" /><meta property="og:site_name" content="jneo8.github.io" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="State"/>
-<meta name="twitter:description" content="
-
-Introduce Flink State."/>
+<meta name="twitter:title" content="[k8s] ZookeeperInstall"/>
+<meta name="twitter:description" content="Install ZooKeeper on k8s cluster"/>
 
 
 

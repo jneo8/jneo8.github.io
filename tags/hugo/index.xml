@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 19 Aug 2020 17:28:22 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hugo img centering</title>
-      <link>https://jneo8.github.io/posts/hugo_img_center/</link>
+      <link>https://jneo8.github.io/posts/hugo-img-center/</link>
       <pubDate>Wed, 19 Aug 2020 17:28:22 +0800</pubDate>
       
-      <guid>https://jneo8.github.io/posts/hugo_img_center/</guid>
+      <guid>https://jneo8.github.io/posts/hugo-img-center/</guid>
       <description>&lt;p&gt;How to make hugo image center in Markdown.&lt;/p&gt;</description>
     </item>
     
