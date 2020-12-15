@@ -3,17 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jneo8.github.io/wip/clickhouse-intro/</loc>
+    <lastmod>2020-12-15T15:22:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/wip/</loc>
+    <lastmod>2020-12-15T15:22:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/tags/clickhouse/</loc>
+    <lastmod>2020-12-15T15:04:20+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/wip/clickhouse-index/</loc>
+    <lastmod>2020-12-15T15:04:20+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/tags/</loc>
+    <lastmod>2020-12-15T15:04:20+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jneo8.github.io/tags/golang/</loc>
     <lastmod>2020-12-10T10:48:13+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://jneo8.github.io/posts/golang_project_architecture/</loc>
-    <lastmod>2020-12-10T10:48:13+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/tags/</loc>
     <lastmod>2020-12-10T10:48:13+08:00</lastmod>
   </url>
   
@@ -119,11 +139,6 @@
   
   <url>
     <loc>https://jneo8.github.io/wip/state/</loc>
-    <lastmod>2020-08-26T17:18:31+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/wip/</loc>
     <lastmod>2020-08-26T17:18:31+08:00</lastmod>
   </url>
   
