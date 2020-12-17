@@ -6,14 +6,14 @@
     <description>Recent content in clickhouse on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Dec 2020 15:04:20 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/clickhouse/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Dec 2020 11:17:20 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/clickhouse/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Clickhouse Index</title>
-      <link>https://jneo8.github.io/wip/clickhouse-index/</link>
-      <pubDate>Tue, 15 Dec 2020 15:04:20 +0800</pubDate>
+      <link>https://jneo8.github.io/posts/clickhouse-index/</link>
+      <pubDate>Thu, 17 Dec 2020 11:17:20 +0800</pubDate>
       
-      <guid>https://jneo8.github.io/wip/clickhouse-index/</guid>
-      <description>&lt;p&gt;How clickhouse index work ?&lt;/p&gt;</description>
+      <guid>https://jneo8.github.io/posts/clickhouse-index/</guid>
+      <description>&lt;p&gt;How Clickhouse index work?&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>clickhouse on jneo8.github.io</title>
+    <link>https://jneo8.github.io/series/clickhouse/</link>
+    <description>Recent content in clickhouse on jneo8.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 17 Dec 2020 11:17:20 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/series/clickhouse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Clickhouse Index</title>
+      <link>https://jneo8.github.io/posts/clickhouse-index/</link>
+      <pubDate>Thu, 17 Dec 2020 11:17:20 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/clickhouse-index/</guid>
+      <description>&lt;p&gt;How Clickhouse index work?&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

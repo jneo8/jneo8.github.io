@@ -8,6 +8,15 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 09 Aug 2020 19:39:43 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Clickhouse Index</title>
+      <link>https://jneo8.github.io/posts/clickhouse-index/</link>
+      <pubDate>Thu, 17 Dec 2020 11:17:20 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/clickhouse-index/</guid>
+      <description>&lt;p&gt;How Clickhouse index work?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Golang_project_architecture</title>
       <link>https://jneo8.github.io/posts/golang_project_architecture/</link>
       <pubDate>Thu, 10 Dec 2020 10:48:13 +0800</pubDate>

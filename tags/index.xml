@@ -6,7 +6,25 @@
     <description>Recent content in Tags on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Dec 2020 10:48:13 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Dec 2020 11:17:20 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>clickhouse</title>
+      <link>https://jneo8.github.io/tags/clickhouse/</link>
+      <pubDate>Thu, 17 Dec 2020 11:17:20 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/tags/clickhouse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>clean architecture</title>
+      <link>https://jneo8.github.io/tags/clean-architecture/</link>
+      <pubDate>Thu, 10 Dec 2020 10:48:13 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/tags/clean-architecture/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>golang</title>
       <link>https://jneo8.github.io/tags/golang/</link>
