@@ -7,27 +7,27 @@
     <meta http-equiv="Content-Language" content="en">
 
     <meta name="author" content="jneo8">
-    <meta name="description" content="How RSS has changed the way I get information?">
+    <meta name="description" content="Flink Architecture basic introduce">
     <meta name="keywords" content="blog,backend,developer,flink,kubernetes">
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="HowAboutRSS"/>
-<meta name="twitter:description" content="How RSS has changed the way I get information?"/>
+<meta name="twitter:title" content="[Flink] Architecture"/>
+<meta name="twitter:description" content="Flink Architecture basic introduce"/>
 
-    <meta property="og:title" content="HowAboutRSS" />
-<meta property="og:description" content="How RSS has changed the way I get information?" />
+    <meta property="og:title" content="[Flink] Architecture" />
+<meta property="og:description" content="Flink Architecture basic introduce" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jneo8.github.io/posts/how-about-rss/" />
-<meta property="article:published_time" content="2020-10-13T22:25:01+08:00" />
-<meta property="article:modified_time" content="2020-10-13T22:25:01+08:00" />
+<meta property="og:url" content="https://jneo8.github.io/posts/flink-architecture/" />
+<meta property="article:published_time" content="2020-08-19T14:40:00+08:00" />
+<meta property="article:modified_time" content="2020-08-19T14:40:00+08:00" />
 
 
     <title>
-  HowAboutRSS · jneo8.github.io
+  [Flink] Architecture · jneo8.github.io
 </title>
 
     
-      <link rel="canonical" href="https://jneo8.github.io/posts/how-about-rss/">
+      <link rel="canonical" href="https://jneo8.github.io/posts/flink-architecture/">
     
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -127,14 +127,14 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">HowAboutRSS</h1>
+          <h1 class="title">[Flink] Architecture</h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
               <i class="fa fa-calendar" aria-hidden="true"></i>
-              <time datetime='2020-10-13T22:25:01&#43;08:00'>
-                October 13, 2020
+              <time datetime='2020-08-19T14:40:00&#43;08:00'>
+                August 19, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -146,87 +146,93 @@
           
           <div class="tags">
   <i class="fa fa-tag" aria-hidden="true"></i>
-    <a href="/tags/rss/">RSS</a></div>
+    <a href="/tags/flink/">flink</a></div>
 
         </div>
       </header>
 
       <div>
         
-        <p>How RSS has changed the way I get information?</p>
-<h3 id="rss">RSS</h3>
-<p><a href="https://en.wikipedia.org/wiki/RSS">https://en.wikipedia.org/wiki/RSS</a></p>
-<p>Really Simple Syndication</p>
-<p>是種利用 XML 特性的資料來源格式</p>
-<p>主要興起的時間是 blog 盛行的年代</p>
-<p>以 2020 來說, 身邊年紀相當或者比較年輕的朋友使用的人是微乎其微</p>
-<p>主因大概就是社群媒體的風行</p>
-<p><strong>那我為何選擇 RSS ?</strong></p>
-<hr>
-<h2 id="從被餵養資訊到主動選擇資訊">從被餵養資訊到主動選擇資訊</h2>
-<p>今日幾個主要的社群軟體 FB, IG, Twitter</p>
-<p>貼文的雜訊很多</p>
-<p>內部還混雜著各種從小到大的同學, 朋友, 長輩, 同事</p>
-<p>它們並不是一個適合資訊閱讀的平台</p>
-<p>你會被各種新聞, 貼文, 動態, 廣告轟炸</p>
-<p>演算法給你的資訊大部份跟你的人生無關</p>
-<p>社群媒體的設計就是要讓你花大把時間在上面</p>
-<p>像是被圈養的羊, 羊吃草你吃垃圾資訊</p>
-<p>你並不能選擇對你真正有意義的資訊</p>
-<p><strong>我們要社交, 但不是過度社交資訊轟炸</strong></p>
-<p>RSS 是種資訊獲得的手段</p>
-<p>滑 RSS 跟 滑塗鴉牆是相同的動作</p>
-<p>你一樣滑手機, 一樣獲得資訊</p>
-<p>不同的是</p>
+        <p>Flink Architecture basic introduce</p>
+<h1 id="architecture">Architecture</h1>
+<p><img src="/img/flink/flink-runtime.png#center" alt="flink-runtime"></p>
+<p>這張圖有幾個訊息</p>
+<h2 id="flink-可以有多種佈署方式">Flink 可以有多種佈署方式</h2>
+<pre><code>* Local
+* Cluster
+    * 這張圖有缺漏, 現在還有k8s
+* Cloud
+</code></pre>
+<h3 id="cluster-模式又有分">Cluster 模式又有分</h3>
 <ul>
 <li>
-<p>一個給你大量的演算法訊息</p>
+<p>Session mode</p>
+<ul>
+<li>使用既有cluster resource, 透過summit去執行application</li>
+<li>所有job使用相同資源, 不需要去調配</li>
+<li>如果Task Manager 被操作不當關掉了, 所有job都會被影響, 會需要大規模recover</li>
+<li>job manager 會比較忙因為需要紀錄所有job</li>
+</ul>
 </li>
 <li>
-<p>一個是你要自己經營, 過濾, 識別內容的塗鴉牆</p>
+<p>Per-Job mode</p>
+<ul>
+<li>透過YARN, k8s之類的resource控制去控制資源</li>
+<li>cluster運行時被啟動, 結束後被關閉 -&gt; 良好的資源控制</li>
+<li>Production 建議使用</li>
+</ul>
+</li>
+<li>
+<p>Application mode</p>
+<ul>
+<li>簡單來說把jar檔的生成交給了Flink Master, 這可以省下jar檔傳輸的網路消耗</li>
+<li>詳細可看 <a href="https://cwiki.apache.org/confluence/display/FLINK/FLIP-85+Flink+Application+Mode">FLIP-85</a></li>
+</ul>
 </li>
 </ul>
-<p>就像看報紙一樣, 但你要自己決定誰可以進入你的版位</p>
-<h2 id="選擇適合自己的資訊來源">選擇適合自己的資訊來源</h2>
-<p>每個人喜歡或偏好的東西都不相同</p>
-<p>但好消息是主流的媒體大部份都是有RSS的</p>
-<p>Google 是很方便的工具, 你不會找不到適合你的</p>
-<p>但個人經驗是大約一兩個月還是要整理一次</p>
-<p>畢竟總要磨合才知道喜不喜歡</p>
-<h2 id="我是一個-engineer">我是一個 Engineer</h2>
-<p>因為是 Engineer</p>
-<p>個人習慣追蹤大量的 Engineer Blog, Developer Blog, Weekly News, Release notes</p>
-<p>為此 RSS 其實是一個滿方便的工具</p>
-<p>方便追蹤一些 blog release, Weekly News</p>
-<p>我還滿篤信盡量追蹤第一手資訊(不會出現在社群網站) 會讓自己更可以貼近某一個開發社群</p>
-<p>就像如果你今天上班通勤30分鐘</p>
-<p>可能就已經看了一到兩篇文章</p>
-<p>而不是20篇網紅動態</p>
-<p>但相同類別看多也會膩</p>
-<p>好處是你可以幫它們分類</p>
-<p>想看就看, 不想看可以換成比較輕鬆的類別(電影, 新聞, 音樂類)</p>
-<p>長期就比較不會有被轟炸的感覺</p>
-<h2 id="讓自己成為雜食性閱讀者">讓自己成為雜食性閱讀者</h2>
-<p>個人是滿相信點線面的概念的</p>
-<p>一個貼文或者觀念是一個點</p>
-<p>相同領域的知識是一個面</p>
-<p>不同面向的知識匯集時它才會成為一個觀點</p>
-<p>當一個人多面向的知識被串起來時</p>
-<p>才可以從比較成熟的角度去看待某些事情</p>
-<h2 id="選擇工具">選擇工具</h2>
-<p>RSS Reader 的選擇真的很多</p>
-<p>目前是用 <a href="https://feedly.com">feedly</a></p>
-<p>簡單, 整潔, 有手機版本</p>
-<p>但工具不是重點就是了, 你也可以挑自己喜歡的</p>
 <hr>
-<h2 id="summary">Summary</h2>
-<p>並不是說社群軟體一定很差</p>
-<p>自己忍不住也是會滑個兩下</p>
-<p>RSS 是古時代的產物了</p>
-<p>但就像有些人偏好實體書, 有些人不愛網路購物一樣</p>
-<p>社群軟體的進步換來的可能是一群長期被特定資訊餵養的群眾</p>
-<p>就像你看書會挑書的內容, 但你每天花大把時間的社群媒體內容(還是演算法給你的)卻全盤接受</p>
-<p>選擇優良的資訊來源也很重要喔!!</p>
+<h2 id="flink-component-stack">Flink Component stack</h2>
+<pre><code>* 這張圖解釋了Flink 的架構系統架構
+</code></pre>
+<p><img src="/img/flink/processes.svg" alt="flink-component-stack"></p>
+<ul>
+<li>
+<p>當Flink 被啟動時會運行兩個主要的component</p>
+<ul>
+<li>TaskManager</li>
+<li>JobManager</li>
+</ul>
+</li>
+</ul>
+<h3 id="jobmanager">JobManager</h3>
+<p>下面主要分三塊</p>
+<ul>
+<li>
+<p>ResourceManager</p>
+<ul>
+<li>負責資源控制</li>
+</ul>
+</li>
+<li>
+<p>Dispatcher</p>
+<ul>
+<li>Provide REST interface for flink summit, open a new jobMaster for each summited job.</li>
+</ul>
+</li>
+<li>
+<p>JobMaster</p>
+<ul>
+<li>管理單一JobGraph, Flink 可以同時運行多個job, 每個都有自己的job master</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="flink-api">Flink API</h2>
+<p><img src="/img/flink/levels_of_abstraction.svg" alt="flink-"></p>
+<p>這張圖則是解釋 flink 各階層的 API 所支援的概念</p>
+<p>像最高階層如果想要寫類似 SQL 的語法去產生 flink job 就是 Flink SQL
+想要自己控制 state, eventTime 就可能要用 Low-level builging block
+實務上應該是需要瞭解最下層</p>
       </div>
 
 

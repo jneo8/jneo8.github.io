@@ -17,6 +17,34 @@
     </item>
     
     <item>
+      <title>[Flink] Async I/O</title>
+      <link>https://jneo8.github.io/posts/flink-asyncio/</link>
+      <pubDate>Sat, 21 Nov 2020 14:13:41 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/flink-asyncio/</guid>
+      <description>&lt;p&gt;Flink Asynchronuos I/O&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[Flink] Trigger</title>
+      <link>https://jneo8.github.io/posts/flink-trigger/</link>
+      <pubDate>Fri, 20 Nov 2020 16:18:10 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/flink-trigger/</guid>
+      <description>&lt;p&gt;Flink Trigger&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>World of the Five Gods The Curse of Chalion</title>
+      <link>https://jneo8.github.io/posts/world-of-the-five-gods-the-curse-of-chalion/</link>
+      <pubDate>Fri, 16 Oct 2020 00:30:07 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/world-of-the-five-gods-the-curse-of-chalion/</guid>
+      <description>&lt;p&gt;&lt;em&gt;五神傳說:王城闇影 心得&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;雷&amp;gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>HowAboutRSS</title>
       <link>https://jneo8.github.io/posts/how-about-rss/</link>
       <pubDate>Tue, 13 Oct 2020 22:25:01 +0800</pubDate>
@@ -44,12 +72,102 @@
     </item>
     
     <item>
+      <title>[k8s] ZookeeperInstall</title>
+      <link>https://jneo8.github.io/posts/k8s-zookeeper-install/</link>
+      <pubDate>Wed, 09 Sep 2020 14:37:16 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/k8s-zookeeper-install/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Install ZooKeeper on k8s cluster&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[k8s] Kubernetes Resources</title>
+      <link>https://jneo8.github.io/posts/k8s-resources/</link>
+      <pubDate>Tue, 08 Sep 2020 12:06:23 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/k8s-resources/</guid>
+      <description>&lt;p&gt;Resource list for kubernetes.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Poromodo</title>
+      <link>https://jneo8.github.io/posts/poromodo/</link>
+      <pubDate>Sat, 05 Sep 2020 20:02:06 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/poromodo/</guid>
+      <description>&lt;p&gt;&lt;em&gt;番茄鐘工作法摘要&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[k8s] Kubernetes Plugin</title>
+      <link>https://jneo8.github.io/posts/k8s-plugin/</link>
+      <pubDate>Fri, 04 Sep 2020 15:32:40 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/k8s-plugin/</guid>
+      <description>&lt;p&gt;How to install kubectl plugin?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[Flink] Checkpoints</title>
+      <link>https://jneo8.github.io/posts/flink-checkpoint/</link>
+      <pubDate>Sun, 23 Aug 2020 20:55:16 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/flink-checkpoint/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Introduce Flink Checkpoints&lt;/em&gt; .&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink</title>
+      <link>https://jneo8.github.io/posts/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/</link>
+      <pubDate>Sat, 22 Aug 2020 15:21:20 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/</guid>
+      <description>&lt;p&gt;Flink Forward 2018 / Scaling Uber&amp;rsquo;s Real-time Optimization with Flink 心得&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[Flink] Resource</title>
+      <link>https://jneo8.github.io/posts/flink-resource/</link>
+      <pubDate>Thu, 20 Aug 2020 10:13:02 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/flink-resource/</guid>
+      <description>&lt;p&gt;Resource list for flink&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Hugo img centering</title>
       <link>https://jneo8.github.io/posts/hugo-img-center/</link>
       <pubDate>Wed, 19 Aug 2020 17:28:22 +0800</pubDate>
       
       <guid>https://jneo8.github.io/posts/hugo-img-center/</guid>
       <description>&lt;p&gt;How to make hugo image center in Markdown.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[Flink] Architecture</title>
+      <link>https://jneo8.github.io/posts/flink-architecture/</link>
+      <pubDate>Wed, 19 Aug 2020 14:40:00 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/flink-architecture/</guid>
+      <description>&lt;p&gt;Flink Architecture basic introduce&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[Flink] Bounded And UnBounded</title>
+      <link>https://jneo8.github.io/posts/flink-bound-and-unbounded/</link>
+      <pubDate>Tue, 18 Aug 2020 16:25:45 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/flink-bound-and-unbounded/</guid>
+      <description>&lt;p&gt;flink Unbounded and Bounded&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[Flink] Flink 學習初心者心得</title>
+      <link>https://jneo8.github.io/posts/flink-first-experience/</link>
+      <pubDate>Tue, 11 Aug 2020 22:11:12 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/flink-first-experience/</guid>
+      <description>&lt;p&gt;講講最近flink學習的心得好了&lt;/p&gt;</description>
     </item>
     
     <item>

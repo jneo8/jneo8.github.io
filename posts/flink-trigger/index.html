@@ -7,27 +7,27 @@
     <meta http-equiv="Content-Language" content="en">
 
     <meta name="author" content="jneo8">
-    <meta name="description" content="How RSS has changed the way I get information?">
+    <meta name="description" content="Flink Trigger">
     <meta name="keywords" content="blog,backend,developer,flink,kubernetes">
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="HowAboutRSS"/>
-<meta name="twitter:description" content="How RSS has changed the way I get information?"/>
+<meta name="twitter:title" content="[Flink] Trigger"/>
+<meta name="twitter:description" content="Flink Trigger"/>
 
-    <meta property="og:title" content="HowAboutRSS" />
-<meta property="og:description" content="How RSS has changed the way I get information?" />
+    <meta property="og:title" content="[Flink] Trigger" />
+<meta property="og:description" content="Flink Trigger" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jneo8.github.io/posts/how-about-rss/" />
-<meta property="article:published_time" content="2020-10-13T22:25:01+08:00" />
-<meta property="article:modified_time" content="2020-10-13T22:25:01+08:00" />
+<meta property="og:url" content="https://jneo8.github.io/posts/flink-trigger/" />
+<meta property="article:published_time" content="2020-11-20T16:18:10+08:00" />
+<meta property="article:modified_time" content="2020-11-20T16:18:10+08:00" />
 
 
     <title>
-  HowAboutRSS · jneo8.github.io
+  [Flink] Trigger · jneo8.github.io
 </title>
 
     
-      <link rel="canonical" href="https://jneo8.github.io/posts/how-about-rss/">
+      <link rel="canonical" href="https://jneo8.github.io/posts/flink-trigger/">
     
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -127,14 +127,14 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">HowAboutRSS</h1>
+          <h1 class="title">[Flink] Trigger</h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
               <i class="fa fa-calendar" aria-hidden="true"></i>
-              <time datetime='2020-10-13T22:25:01&#43;08:00'>
-                October 13, 2020
+              <time datetime='2020-11-20T16:18:10&#43;08:00'>
+                November 20, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -146,87 +146,76 @@
           
           <div class="tags">
   <i class="fa fa-tag" aria-hidden="true"></i>
-    <a href="/tags/rss/">RSS</a></div>
+    <a href="/tags/flink/">flink</a></div>
 
         </div>
       </header>
 
       <div>
         
-        <p>How RSS has changed the way I get information?</p>
-<h3 id="rss">RSS</h3>
-<p><a href="https://en.wikipedia.org/wiki/RSS">https://en.wikipedia.org/wiki/RSS</a></p>
-<p>Really Simple Syndication</p>
-<p>是種利用 XML 特性的資料來源格式</p>
-<p>主要興起的時間是 blog 盛行的年代</p>
-<p>以 2020 來說, 身邊年紀相當或者比較年輕的朋友使用的人是微乎其微</p>
-<p>主因大概就是社群媒體的風行</p>
-<p><strong>那我為何選擇 RSS ?</strong></p>
-<hr>
-<h2 id="從被餵養資訊到主動選擇資訊">從被餵養資訊到主動選擇資訊</h2>
-<p>今日幾個主要的社群軟體 FB, IG, Twitter</p>
-<p>貼文的雜訊很多</p>
-<p>內部還混雜著各種從小到大的同學, 朋友, 長輩, 同事</p>
-<p>它們並不是一個適合資訊閱讀的平台</p>
-<p>你會被各種新聞, 貼文, 動態, 廣告轟炸</p>
-<p>演算法給你的資訊大部份跟你的人生無關</p>
-<p>社群媒體的設計就是要讓你花大把時間在上面</p>
-<p>像是被圈養的羊, 羊吃草你吃垃圾資訊</p>
-<p>你並不能選擇對你真正有意義的資訊</p>
-<p><strong>我們要社交, 但不是過度社交資訊轟炸</strong></p>
-<p>RSS 是種資訊獲得的手段</p>
-<p>滑 RSS 跟 滑塗鴉牆是相同的動作</p>
-<p>你一樣滑手機, 一樣獲得資訊</p>
-<p>不同的是</p>
+        <p>Flink Trigger</p>
+<h2 id="what-is-flink-trigger">What is Flink Trigger?</h2>
+<p>Flink Trigger 是決定 Stream Window 何時會觸發計算的 Function</p>
+<p>透過 Flink Trigger 可以做到類似的行為</p>
+<ul>
+<li>每 10 筆 觸發一次, 計算完丟棄 window 內資料</li>
+<li>每 10 秒 processing time 觸發一次, 計算完不丟棄 window 內資料</li>
+<li>Window 結束時觸發</li>
+</ul>
+<p>類似的情境可以透過<a href="https://ci.apache.org/projects/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/Trigger.html">既有的 function</a>解決, 但如果需要複合式的條件就需要自己客制, 例如 <strong>每十筆觸發一次計算, window 結束時再觸發一次</strong></p>
+<p>就要透過實做 <a href="https://ci.apache.org/projects/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/Trigger.html">Trigger</a>來達成自己的邏輯</p>
+<h2 id="如何觸發計算-">如何觸發計算 ?</h2>
+<p>要讓資料順利流進 Window 然後觸發計算, 有些地方需要一步步注意</p>
+<h3 id="watermarkhttpsciapacheorgprojectsflinkflink-docs-stabledevevent_timestamps_watermarkshtmlintroduction-to-watermark-strategies"><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/event_timestamps_watermarks.html#introduction-to-watermark-strategies">Watermark</a></h3>
+<ul>
+<li>需要注意是 Processing time 還是 Event Time</li>
+</ul>
+<h3 id="window-lifecyclehttpsciapacheorgprojectsflinkflink-docs-stabledevstreamoperatorswindowshtmlwindow-lifecycle"><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/operators/windows.html#window-lifecycle">Window LifeCycle</a></h3>
 <ul>
 <li>
-<p>一個給你大量的演算法訊息</p>
+<p>Window 會在第一筆 element 到達時被創造, 在 watermark 越過 <strong>window 結束時間 + allowed lateness</strong> 被移除</p>
 </li>
 <li>
-<p>一個是你要自己經營, 過濾, 識別內容的塗鴉牆</p>
+<p>舉例來說</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> exampleStream<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">DataStrema</span><span style="color:#f92672">[</span><span style="color:#66d9ef">T</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> stream
+  <span style="color:#f92672">.</span>keyBy<span style="color:#f92672">(&lt;</span>key selector<span style="color:#f92672">&gt;)</span>
+  <span style="color:#f92672">.</span>window<span style="color:#f92672">(</span><span style="color:#a6e22e">TumblingEventTimeWindows</span><span style="color:#f92672">.</span>of<span style="color:#f92672">(</span><span style="color:#a6e22e">Time</span><span style="color:#f92672">.</span>minutes<span style="color:#f92672">(</span><span style="color:#ae81ff">5</span><span style="color:#f92672">))</span>
+  <span style="color:#f92672">.</span>trigger<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">CountTrigger</span><span style="color:#f92672">(</span><span style="color:#ae81ff">10</span><span style="color:#f92672">))</span>
+  <span style="color:#f92672">.</span>allowedLateness<span style="color:#f92672">(</span><span style="color:#a6e22e">Time</span><span style="color:#f92672">.</span>minutes<span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">))</span>
+</code></pre></div></li>
+<li>
+<p>這段程式碼表示</p>
+<ul>
+<li>12:01 分的資料會進入 12:00 ~12:05 這個 window</li>
+<li>window 每收到 十筆資料 觸發一次計算
+<ul>
+<li>這邊要注意 CountTrigger 觸發完不丟棄資料, 資料會被重復計算, 需要丟棄的話要搭配 <a href="https://ci.apache.org/projects/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/PurgingTrigger.html">PurginTrigger</a></li>
+</ul>
+</li>
+<li>12:00-12:05 的 window 會持續接收資料到 12:06, 然後關閉</li>
+<li>如果 12:07 接收到一筆 12:05 分的資料, 該筆資料不會進入 window</li>
+<li>如果 12:06 時 window 內還剩下 8 筆資料, 這些資料不會被計算</li>
+</ul>
+</li>
+<li>
+<p><strong>資料進入 window 的邏輯 跟 觸發計算的邏輯是分開的</strong></p>
 </li>
 </ul>
-<p>就像看報紙一樣, 但你要自己決定誰可以進入你的版位</p>
-<h2 id="選擇適合自己的資訊來源">選擇適合自己的資訊來源</h2>
-<p>每個人喜歡或偏好的東西都不相同</p>
-<p>但好消息是主流的媒體大部份都是有RSS的</p>
-<p>Google 是很方便的工具, 你不會找不到適合你的</p>
-<p>但個人經驗是大約一兩個月還是要整理一次</p>
-<p>畢竟總要磨合才知道喜不喜歡</p>
-<h2 id="我是一個-engineer">我是一個 Engineer</h2>
-<p>因為是 Engineer</p>
-<p>個人習慣追蹤大量的 Engineer Blog, Developer Blog, Weekly News, Release notes</p>
-<p>為此 RSS 其實是一個滿方便的工具</p>
-<p>方便追蹤一些 blog release, Weekly News</p>
-<p>我還滿篤信盡量追蹤第一手資訊(不會出現在社群網站) 會讓自己更可以貼近某一個開發社群</p>
-<p>就像如果你今天上班通勤30分鐘</p>
-<p>可能就已經看了一到兩篇文章</p>
-<p>而不是20篇網紅動態</p>
-<p>但相同類別看多也會膩</p>
-<p>好處是你可以幫它們分類</p>
-<p>想看就看, 不想看可以換成比較輕鬆的類別(電影, 新聞, 音樂類)</p>
-<p>長期就比較不會有被轟炸的感覺</p>
-<h2 id="讓自己成為雜食性閱讀者">讓自己成為雜食性閱讀者</h2>
-<p>個人是滿相信點線面的概念的</p>
-<p>一個貼文或者觀念是一個點</p>
-<p>相同領域的知識是一個面</p>
-<p>不同面向的知識匯集時它才會成為一個觀點</p>
-<p>當一個人多面向的知識被串起來時</p>
-<p>才可以從比較成熟的角度去看待某些事情</p>
-<h2 id="選擇工具">選擇工具</h2>
-<p>RSS Reader 的選擇真的很多</p>
-<p>目前是用 <a href="https://feedly.com">feedly</a></p>
-<p>簡單, 整潔, 有手機版本</p>
-<p>但工具不是重點就是了, 你也可以挑自己喜歡的</p>
-<hr>
+<h3 id="triggerresulthttpsciapacheorgprojectsflinkflink-docs-masterapijavaorgapacheflinkstreamingapiwindowingtriggerstriggerresulthtml"><a href="https://ci.apache.org/projects/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/windowing/triggers/TriggerResult.html">TriggerResult</a></h3>
+<p>TriggerResult 有四種控制邏輯</p>
+<ul>
+<li>FIRE: 觸發計算</li>
+<li>PURGE: 丟棄資料</li>
+<li>FIRE_AND_PURGE: 觸發且丟棄</li>
+<li>CONTINUE: 沒有動作</li>
+</ul>
+<p>使用內建的 Trigger 需要注意觸發的邏輯, 大部份都只有 FIRE 而已</p>
 <h2 id="summary">Summary</h2>
-<p>並不是說社群軟體一定很差</p>
-<p>自己忍不住也是會滑個兩下</p>
-<p>RSS 是古時代的產物了</p>
-<p>但就像有些人偏好實體書, 有些人不愛網路購物一樣</p>
-<p>社群軟體的進步換來的可能是一群長期被特定資訊餵養的群眾</p>
-<p>就像你看書會挑書的內容, 但你每天花大把時間的社群媒體內容(還是演算法給你的)卻全盤接受</p>
-<p>選擇優良的資訊來源也很重要喔!!</p>
+<p>其實大概談了一些基本概念而已, 想要實做or了解其規則, 個人最推薦的方式還是直接閱讀 sourecode 比較快
+Flink Github 上面有多種 Trigger 實做, 推薦有需要的稍為讀過再下手</p>
+<ul>
+<li><a href="https://github.com/apache/flink/tree/master/flink-streaming-java/src/main/java/org/apache/flink/streaming/api/windowing/triggers">https://github.com/apache/flink/tree/master/flink-streaming-java/src/main/java/org/apache/flink/streaming/api/windowing/triggers</a></li>
+</ul>
       </div>
 
 

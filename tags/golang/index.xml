@@ -16,5 +16,23 @@
       <description>&lt;p&gt;結構化的 Golang project 設計&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Awesome go</title>
+      <link>https://jneo8.github.io/posts/awesome-go/</link>
+      <pubDate>Tue, 21 Jul 2020 00:01:21 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/awesome-go/</guid>
+      <description>&lt;p&gt;&lt;em&gt;A curated list of awesome golang articles, frameworks, libraries, software and resources.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mermaid - golang tool help user doing dependency more easily</title>
+      <link>https://jneo8.github.io/posts/mermaid/</link>
+      <pubDate>Mon, 29 Jun 2020 10:41:57 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/mermaid/</guid>
+      <description>&lt;p&gt;Mermaid is a tool helping user to use dependency injection more easily. By using dig, cobra and viper together.&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>

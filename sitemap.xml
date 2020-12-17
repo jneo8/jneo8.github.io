@@ -3,31 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jneo8.github.io/wip/clickhouse-intro/</loc>
-    <lastmod>2020-12-15T15:22:04+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/wip/</loc>
-    <lastmod>2020-12-15T15:22:04+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/tags/clickhouse/</loc>
-    <lastmod>2020-12-15T15:04:20+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/wip/clickhouse-index/</loc>
-    <lastmod>2020-12-15T15:04:20+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/tags/</loc>
-    <lastmod>2020-12-15T15:04:20+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jneo8.github.io/tags/golang/</loc>
     <lastmod>2020-12-10T10:48:13+08:00</lastmod>
   </url>
@@ -38,22 +13,32 @@
   </url>
   
   <url>
+    <loc>https://jneo8.github.io/tags/</loc>
+    <lastmod>2020-12-10T10:48:13+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/posts/flink-asyncio/</loc>
+    <lastmod>2020-11-21T14:13:41+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jneo8.github.io/tags/flink/</loc>
     <lastmod>2020-11-21T14:13:41+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/flink/flink-asyncio/</loc>
-    <lastmod>2020-11-21T14:13:41+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/flink/flink-trigger/</loc>
+    <loc>https://jneo8.github.io/posts/flink-trigger/</loc>
     <lastmod>2020-11-20T16:18:10+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/reading/world-of-the-five-gods-the-curse-of-chalion/</loc>
+    <loc>https://jneo8.github.io/tags/reading/</loc>
+    <lastmod>2020-10-16T00:30:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/posts/world-of-the-five-gods-the-curse-of-chalion/</loc>
     <lastmod>2020-10-16T00:30:07+08:00</lastmod>
   </url>
   
@@ -93,7 +78,7 @@
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/kubernetes/zookeeper-install/</loc>
+    <loc>https://jneo8.github.io/posts/k8s-zookeeper-install/</loc>
     <lastmod>2020-09-09T14:37:16+08:00</lastmod>
   </url>
   
@@ -103,27 +88,17 @@
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/kubernetes/resources/</loc>
+    <loc>https://jneo8.github.io/posts/k8s-resources/</loc>
     <lastmod>2020-09-08T12:06:23+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/reading/</loc>
-    <lastmod>2020-09-05T20:02:25+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/reading/poromodo/</loc>
+    <loc>https://jneo8.github.io/posts/poromodo/</loc>
     <lastmod>2020-09-05T20:02:06+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/tags/reading/</loc>
-    <lastmod>2020-09-05T20:02:06+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/kubernetes/plugin/</loc>
+    <loc>https://jneo8.github.io/posts/k8s-plugin/</loc>
     <lastmod>2020-09-04T15:32:40+08:00</lastmod>
   </url>
   
@@ -133,27 +108,27 @@
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/kubernetes/</loc>
-    <lastmod>2020-09-03T22:11:55+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jneo8.github.io/wip/state/</loc>
     <lastmod>2020-08-26T17:18:31+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/flink/checkpoint/</loc>
+    <loc>https://jneo8.github.io/wip/</loc>
+    <lastmod>2020-08-26T17:18:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/posts/flink-checkpoint/</loc>
     <lastmod>2020-08-23T20:55:16+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/flink/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/</loc>
+    <loc>https://jneo8.github.io/posts/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/</loc>
     <lastmod>2020-08-22T15:21:20+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/flink/resource/</loc>
+    <loc>https://jneo8.github.io/posts/flink-resource/</loc>
     <lastmod>2020-08-20T10:13:02+08:00</lastmod>
   </url>
   
@@ -168,22 +143,17 @@
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/flink/architecture/</loc>
+    <loc>https://jneo8.github.io/posts/flink-architecture/</loc>
     <lastmod>2020-08-19T14:40:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/flink/bound-and-unbounded/</loc>
+    <loc>https://jneo8.github.io/posts/flink-bound-and-unbounded/</loc>
     <lastmod>2020-08-18T16:25:45+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jneo8.github.io/flink/</loc>
-    <lastmod>2020-08-11T22:11:55+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/flink/first-experience/</loc>
+    <loc>https://jneo8.github.io/posts/flink-first-experience/</loc>
     <lastmod>2020-08-11T22:11:12+08:00</lastmod>
   </url>
   

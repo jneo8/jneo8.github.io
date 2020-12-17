@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="jneo8">
+    <meta name="description" content="Introduce Flink Checkpoints .">
+    <meta name="keywords" content="blog,backend,developer,flink,kubernetes">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Flink] Checkpoints"/>
+<meta name="twitter:description" content="Introduce Flink Checkpoints ."/>
+
+    <meta property="og:title" content="[Flink] Checkpoints" />
+<meta property="og:description" content="Introduce Flink Checkpoints ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jneo8.github.io/posts/flink-checkpoint/" />
+<meta property="article:published_time" content="2020-08-23T20:55:16+08:00" />
+<meta property="article:modified_time" content="2020-08-23T20:55:16+08:00" />
+
+
+    <title>
+  [Flink] Checkpoints · jneo8.github.io
+</title>
+
+    
+      <link rel="canonical" href="https://jneo8.github.io/posts/flink-checkpoint/">
+    
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css"
+      integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8/normalize.min.css">
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.f01c647a0d25b40da992a37c3376291185eed8a50ced8c26cc2c0bcfe38c97df.css" integrity="sha256-8Bxkeg0ltA2pkqN8M3YpEYXu2KUM7YwmzCwLz&#43;OMl98=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.126ad3988d46bdae6217a11105b53c9662bca05f39d42d3c0fb366919d334620.css" integrity="sha256-EmrTmI1Gva5iF6ERBbU8lmK8oF851C08D7NmkZ0zRiA=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+      <link rel="stylesheet" href="/css/img.css" />
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/img/pikachu-icon.jpg" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+
+    <meta name="generator" content="Hugo 0.79.0-DEV" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto"
+        onload=""
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      jneo8.github.io
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags">Tags</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/wip">WIP</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Posts</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">[Flink] Checkpoints</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime='2020-08-23T20:55:16&#43;08:00'>
+                August 23, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <a href="/tags/flink/">flink</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <p><em>Introduce Flink Checkpoints</em> .</p>
+<hr>
+<h2 id="checkpointing">Checkpointing</h2>
+<ul>
+<li>
+<p>Flink 的容錯機制核心, 是透過繪制一致的Checkpoint和分佈式的數據流來達成</p>
+</li>
+<li>
+<p>Clickpoint 可以讓 state &amp;&amp; corresponding stream position 被恢復</p>
+</li>
+<li>
+<p>故障發生後, Flink 會倒退回這些 checkpoint</p>
+<ul>
+<li>
+<p>Flink 繪制 Data flow 的機制: <a href="https://arxiv.org/abs/1506.08603">Lightweight Asynchronous Snapshots for Distributed Dataflows</a></p>
+<ul>
+<li>這項技術從 <a href="https://www.microsoft.com/en-us/research/publication/distributed-snapshots-determining-global-states-distributed-system/?from=http%3A%2F%2Fresearch.microsoft.com%2Fen-us%2Fum%2Fpeople%2Flamport%2Fpubs%2Fchandy.pdf">Candy-Lamport algorithm</a> 得到啟發並針對 Flink 模式進行改善</li>
+</ul>
+</li>
+<li>
+<p>Checkpoint 的操作是 asynchronously</p>
+</li>
+<li>
+<p>從 1.11版本開始, checkpoint 可以是非對齊的</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="barries">Barries</h3>
+<ul>
+<li>
+<p>Distrubuted Snapshotting 的最小單位是 <em>stream barriers</em></p>
+</li>
+<li>
+<p><em>stream barries</em> 是 data stream 中的一部份, 被注入進 data flow</p>
+</li>
+<li>
+<p>barries 並不會超越 records, 他們是嚴格依序排列的</p>
+</li>
+<li>
+<p>barrier 會把 records 分割成兩個snapshot(就像圖那樣)</p>
+</li>
+<li>
+<p>Barries 不會中斷 data flow, 非常輕量</p>
+</li>
+<li>
+<p>不同 snapshot 的 多個 barriers 可以同時出現在 data flow 中 -&gt; 多個快照可以同時發生</p>
+</li>
+</ul>
+<p><img src="/img/flink/stream_barriers.svg#center" alt="flink-stream_barriers"></p>
+<ul>
+<li>
+<p>Stream barriers are injected into parallel data flow at the stream source. The point where the barriers for snapshot n barrier are injected is called $$S^{n}$$</p>
+<ul>
+<li>
+<p>$$S^{n}$$ :</p>
+<ul>
+<li>
+<p>$$S^{n}$$ is the position in the source stream up to which the snapshot covers the data.</p>
+</li>
+<li>
+<p>In Kafka, this position would be the last record&rsquo;s offset in the partition</p>
+</li>
+<li>
+<p>Position $$S^{n}$$ will be report to checkpoint coordinator(Flink&rsquo;s JobManager)</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>當 Operator 接收到 snapshot N 的 barrier, operator 會把 barrier 送出給所有output stream</p>
+</li>
+<li>
+<p>一旦 Sink operator (the end of streaming DAG) 收到 barrier N 後, 會把 snapshot N 送給 checkpoint coordinator</p>
+</li>
+<li>
+<p>當所有 Sink operator 都確認過 snaphost N 後, snapshot 會被認定為完成</p>
+</li>
+<li>
+<p>一旦 snapshot 完成, job 就不會再向 data sourece 要 $$S^{n}$$ 之前的數據</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<p><img src="/img/flink/stream_aligning.svg" alt="stream_aligning"></p>
+<pre><code>* 這張圖展示對齊式 checkpoint 的運作方式
+</code></pre>
+<ul>
+<li>
+<p>第一張圖, 收到 barrier N</p>
+<ul>
+<li>Operator 無法繼續處理 1, 2, 3 . 否則會混合 n &amp;&amp; n + 1 的資料</li>
+</ul>
+</li>
+<li>
+<p>第二張圖, 最後一個 flow 收到 barrier N</p>
+<ul>
+<li>
+<p>Operator 發出所有 pending records</p>
+</li>
+<li>
+<p>Input buffer 內有 e, f</p>
+</li>
+</ul>
+</li>
+<li>
+<p>第三張圖</p>
+<ul>
+<li>
+<p>Operator 自己發出 barrier N</p>
+</li>
+<li>
+<p>Operator snapshot the state</p>
+</li>
+<li>
+<p>處理 buffer 內的 records (e, f)</p>
+</li>
+<li>
+<p>恢復處理 flow records</p>
+</li>
+<li>
+<p>write the state asynchronously to the state backend</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note that the alignment is needed for all operators with multiple inputs and for operators after a shuffle when they consume output streams of multiple upstream subtasks.</strong></p>
+</blockquote>
+<h3 id="snapshotting-operator-state">Snapshotting Operator State</h3>
+<p><em>When operators contain any form of state, this state must be part of the snapshots as well</em></p>
+<ul>
+<li>
+<p>Operators snapshot their state at the point in time when they have received all snapshot barriers form their input streams, and before emitting the barries to their output streams.</p>
+</li>
+<li>
+<p>Default 會存在 JobManager memory 中</p>
+<ul>
+<li>Production 應該要使用 distributed reliable storage (such as HDFS)</li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/flink/checkpointing.svg#center" alt="flink-stream_barriers"></p>
+<h3 id="recovery">Recovery</h3>
+<ul>
+<li>
+<p>失敗時會選擇最新完成的 checkpoint <code>k</code>, 然後會重新 deploy 整個 distrubuted dataflow.</p>
+</li>
+<li>
+<p>給每個 operator checkpoint <code>k</code> 的 state</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<hr>
+<!-- raw HTML omitted -->
+<h2 id="enable-checkpoints">Enable Checkpoints</h2>
+<ul>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/checkpointing.html">https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/checkpointing.html</a></li>
+</ul>
+<h2 id="retained-checkpoints">Retained Checkpoints</h2>
+<ul>
+<li>
+<p>透過 <strong>ExternalizedCheckpointCleanup</strong> 參數</p>
+</li>
+<li>
+<p>ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION</p>
+<ul>
+<li>job 被取消時, 保留 Checkpoints</li>
+<li>需要手動刪除 Checkpoints</li>
+</ul>
+</li>
+<li>
+<p>ExternalizedCheckpointCleanup.DELETE_ON_CANCELLATION</p>
+<ul>
+<li>job 被取消時, Checkpoints 會被delete</li>
+<li>job fail -&gt; Checkpoints 被保留</li>
+</ul>
+</li>
+</ul>
+<h2 id="directory-structute">Directory Structute</h2>
+<ul>
+<li>Checkpoint 是透過 file 管理的, 其目錄結構可以參照 <a href="https://issues.apache.org/jira/browse/FLINK-8531">FLINK-8531</a></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/user-defined-checkpoint-dir
+    /<span style="color:#f92672">{</span>job-id<span style="color:#f92672">}</span>
+        |
+        + --shared/
+        + --taskowned/
+        + --chk-1/
+        + --chk-2/
+        + --chk-3/
+        ...
+</code></pre></div><ul>
+<li>
+<p>The SHARED directory is for state that is possibly part of multiple checkpoints</p>
+</li>
+<li>
+<p>TASKOWNED is for state that must never be dropped by the JobManager</p>
+</li>
+<li>
+<p>EXCLUSIVE is for state that belongs to one checkpoint only.</p>
+</li>
+</ul>
+<h2 id="difference-to-savepoints">Difference to Savepoints</h2>
+<ul>
+<li>
+<p>Use a state backend specific(low-level) data format, may be incremental</p>
+</li>
+<li>
+<p>Do not support Flink specific features like rescaling</p>
+</li>
+</ul>
+<hr>
+<h2 id="resource">Resource</h2>
+<ul>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/checkpoints.html">https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/checkpoints.html</a></li>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html">https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/state/state.html</a></li>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html">https://ci.apache.org/projects/flink/flink-docs-release-1.11/concepts/stateful-stream-processing.html</a></li>
+</ul>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jneo8" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,
+      {
+        delimiters: [
+          {left: '$$', right: '$$', display:true},
+          {left: '$', right: '$', display:false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ]
+      }
+    );"></script>
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         jneo8 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+        
+        <script src="/js/dark-mode.min.0213e1773e6d1c5a644f847c67a6f8abac49a3776e2976f6008038af8c5b76a1.js"></script>
+      
+    
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-171057898-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+    
+
+    
+  </body>
+
+</html>
