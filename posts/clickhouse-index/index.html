@@ -140,7 +140,7 @@
             </span>
             <span class="reading-time">
               <i class="fa fa-clock-o" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -155,11 +155,175 @@
       <div>
         
         <p>How Clickhouse index work?</p>
-<p>See the <a href="https://clickhouse.tech/docs/en/engines/table-engines/mergetree-family/mergetree/#mergetree-data-storage">document</a> first:</p>
+<p>介紹 Index 前, 先介紹一下 Clickhouse MergeTree 的儲存結構</p>
+<h2 id="partition">Partition</h2>
+<p>一個 Partition 可以有多個 parts. Clickhouse 每次 bulk insert 都會產生新的 part file, 相同 Partition 的 part 會在 insert 完後 10-15分鐘 merge, 合併一個 part file</p>
+<p>Partition Format 有兩種: <code>Wide</code>, <code>Compact</code></p>
+<ul>
+<li><code>Wide</code>: Column 分開儲存, default.</li>
+<li><code>Compact</code>: 所有 Column 一起儲存, 適合頻率大, 小量的 insert.</li>
+</ul>
+<p>文件中有一段話講 partition key 的設計</p>
 <blockquote>
-<p>A table consists of data parts sorted by primary key.</p>
-<p>When data is inserted in a table, separate data parts are created and each of them is lexicographically sorted by primary key. For example, if the primary key is (CounterID, Date), the data in the part is sorted by CounterID, and within each CounterID, it is ordered by Date.</p>
+<p>A merge only works for data parts that have the same value for the partitioning expression.</p>
+<p>This means you shouldn’t make overly granular partitions (more than about a thousand partitions). Otherwise, the SELECT query performs poorly because of an unreasonably large number of files in the file system and open file descriptors.</p>
 </blockquote>
+<p>白話就是 partition 在 table 內不應該過多, 會降低 select 效能. 自己的心得就是針對不同的 data source 選擇適合的 partition key 可以有效改善效能瓶頸</p>
+<h2 id="primary-key">Primary Key</h2>
+<p>跟一般 RMDB 不同的是, Clickhouse Primary Key 並沒有表示重複數據的意思.
+而是依照 Primary Key 排序. 由於 Clickhouse 內可以設定多個 Primary Key, 比如說 <strong>(Area, UserID)</strong>, 表示說 Part 內數據先依照 <strong>Area</strong> 排序, <strong>Area</strong> 內再依照 <strong>UserID</strong> 排序.</p>
+<h3 id="granules">Granules</h3>
+<p>Granules 是 Clickhouse data 的最小單位, granules 包含一個數量的 rows. Clickhouse 會拿 granules 第一筆資料的 Primary Key 當 mark.</p>
+<ul>
+<li>
+<p>針對每個 Part, 會有個 index file <code>.idx</code> 儲存這些 mark value.</p>
+</li>
+<li>
+<p>針對每個 Columns, 就算不是 Primary Key, 也會儲存這些 mark. <code>.mrk</code> (透過 mark 在 column file 找資料)</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><code>.idx</code> 存這些 mark value, <code>.mrk</code> 則是存兩個偏移值 <code>.bin 的偏移值定位到 compressed block</code> &amp; <code>compressed block 解壓後的文件偏移量</code></li>
+</ul>
+</blockquote>
+<h3 id="block">Block</h3>
+<p>Block 是 Clickhouse Column 的壓縮單位, 包含多個 Granules, 至於是多少要看 <a href="https://clickhouse.tech/docs/en/operations/settings/settings/#min-compress-block-size">min_compress_block_size</a> &amp; <a href="https://clickhouse.tech/docs/en/operations/settings/settings/#max-compress-block-size">max_compress_block_size</a>決定.</p>
+<ul>
+<li>每次寫入一個 Granules (default <code>index_granularity</code> 8192 rows), Clickhouse 會檢查 data size
+<ul>
+<li>如果 &lt; <code>min_compress_block_size</code> 會繼續拿取 data</li>
+<li>如果 &gt; <code>min_compress_block_size</code> &amp; &lt; <code>max_compress_block_size</code> 會壓縮並寫入磁碟</li>
+<li>如果 &gt; <code>max_compress_block_size</code>, 會依照 <code>compress_block_size</code> 截斷並生成 block</li>
+</ul>
+</li>
+</ul>
+<p>一個 <code>.bin (Date file)</code> 內包含多個 compress block</p>
+<p>結構圖如下:</p>
+<p><img src="/img/clickhouse/clickhouse-mergetree-layout-within-a-single-part.jpg" alt=""></p>
+<hr>
+<h2 id="index">Index</h2>
+<p>所以 Select Index 如何發揮作用呢 ？</p>
+<ul>
+<li>Create Table T ORDER BY A
+<ul>
+<li>A 有 Primary Index, B 沒有</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> T(A Int, B Int) MergeTree <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> A
+</code></pre></div><ul>
+<li>這邊 insert 三次, 所以會有三個 part 產生</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> T <span style="color:#66d9ef">values</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> T <span style="color:#66d9ef">values</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> T <span style="color:#66d9ef">values</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+
+<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">database</span>, <span style="color:#66d9ef">table</span>, name, primary_key_bytes_in_memory, marks_bytes, <span style="color:#66d9ef">rows</span>  <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">system</span>.parts <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">table</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;T&#39;</span>
+
+</code></pre></div><pre><code>┌─database─┬─table─┬─name──────┬─primary_key_bytes_in_memory─┬─marks_bytes─┬─rows─┐
+│ default  │ T     │ all_1_1_0 │                           8 │          80 │    1 │
+│ default  │ T     │ all_2_2_0 │                           8 │          80 │    1 │
+│ default  │ T     │ all_3_3_0 │                           8 │          80 │    1 │
+└──────────┴───────┴───────────┴─────────────────────────────┴─────────────┴──────┘
+</code></pre><ul>
+<li>開啟 Tracing</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">set</span> send_logs_level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;trace&#39;</span>
+</code></pre></div><ul>
+<li>針對 B 做 Query</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> T <span style="color:#66d9ef">where</span> B <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><pre><code>... &lt;Debug&gt; executeQuery: (from 127.0.0.1:53134) select * from T where B &gt; 1
+... &lt;Trace&gt; ContextAccess (default): Access granted: SELECT(A, B) ON default.T
+
+// primary index 沒作用
+
+... &lt;Debug&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Key condition: unknown
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Not using primary index on part all_1_1_0
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Not using primary index on part all_2_2_0
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Not using primary index on part all_3_3_0
+
+// Clickhouse 掃過全部三個 Partition
+
+... &lt;Debug&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Selected 3 parts by partition key, 3 parts by primary key, 3 marks by primary key, 3 marks to read from 3 ranges
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Reading approx. 3 rows with 3 streams
+... &lt;Trace&gt; InterpreterSelectQuery: FetchColumns -&gt; Complete
+┌─A─┬─B─┐
+│ 1 │ 2 │
+└───┴───┘
+... &lt;Information&gt; executeQuery: Read 3 rows, 24.00 B in 0.004743004 sec., 632 rows/sec., 4.94 KiB/sec.
+... &lt;Debug&gt; MemoryTracker: Peak memory usage (for query): 0.00 B.
+
+1 rows in set. Elapsed: 0.007 sec. 
+
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> T <span style="color:#66d9ef">where</span> A <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><pre><code>... &lt;Debug&gt; executeQuery: (from 127.0.0.1:53134) SELECT * from T where A &gt; 1
+... &lt;Trace&gt; ContextAccess (default): Access granted: SELECT(A, B) ON default.T
+
+// 找到 Primary key, 透過找 LEFT/RIGHT boundary 選擇 partition
+
+... &lt;Debug&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Key condition: (column 0 in [2, +inf))
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Running binary search on index range for part all_2_2_0 (2 marks)
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Running binary search on index range for part all_1_1_0 (2 marks)
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (LEFT) boundary mark: 1
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (RIGHT) boundary mark: 2
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (LEFT) boundary mark: 1
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found empty range in 1 steps
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (RIGHT) boundary mark: 2
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found empty range in 1 steps
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Running binary search on index range for part all_3_3_0 (2 marks)
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (LEFT) boundary mark: 0
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (RIGHT) boundary mark: 2
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found continuous range in 2 steps
+
+// 這邊顯示只選到 1 個 partition
+
+... &lt;Debug&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Selected 3 parts by partition key, 1 parts by primary key, 1 marks by primary key, 1 marks to read from 1 ranges
+... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Reading approx. 1 rows with 1 streams
+... &lt;Trace&gt; InterpreterSelectQuery: FetchColumns -&gt; Complete
+┌─A─┬─B─┐
+│ 2 │ 1 │
+└───┴───┘
+... &lt;Information&gt; executeQuery: Read 1 rows, 8.00 B in 0.005239063 sec., 190 rows/sec., 1.49 KiB/sec.
+... &lt;Debug&gt; MemoryTracker: Peak memory usage (for query): 0.00 B.
+</code></pre><h3 id="所以整個過程是什麼-">所以整個過程是什麼 ?</h3>
+<ol>
+<li>Partition Key -&gt; Partition</li>
+<li>Mark LEFT/RIGHT -&gt; 選 Partition</li>
+<li>Primary key 找符合條件的 marks</li>
+<li>mark -&gt; 要讀取的範圍</li>
+</ol>
+<p>Clickhouse Primary Index 是 Sparse Index, 針對特定 row 的 query 基本上很慢 (看整段過程就知道了), 但對條件過濾就友善很多了.</p>
+<p>所以 Clickhouse Index 的概念是什麼？</p>
+<p><em>如何跳過更多的資料, 找到需要掃過的範圍</em></p>
+<p>跳過的 Block 多了, 解壓縮的 Block 就少了. 可以很大程度的減少 I/O.</p>
+<p>就像切蛋糕, 看能夠切幾刀找到需要的資料</p>
+<h2 id="tips">Tips</h2>
+<ul>
+<li>
+<p>Unique: 避免太獨特的 primary key, 效果會很差</p>
+</li>
+<li>
+<p>Long data range: 反之太常見的 Primary key 就會失去效果, 需要掃過的 range 過長</p>
+</li>
+<li>
+<p>Primary Key 順序: Order by (A, B, C) or (B, A, C). 因為是 Sparse Index, 如果順序錯了有機會多讀取很多資料. 慎重考慮 query 條件 &amp;&amp; Primary Key 的設定</p>
+</li>
+<li>
+<p>事後加入 Data Skipping Index, 對已經存在的資料並不會馬上發生作用. 而是需要 Part merge process 跑完後才會生效</p>
+</li>
+<li>
+<p>預設的 <code>min_compress_block_size</code> &amp; <code>max_compress_block_size</code> 已經優化過了, 沒事別動.</p>
+</li>
+</ul>
+<hr>
+<h2 id="source">Source</h2>
+<p><a href="https://www.slideshare.net/Altinity/webinar-secrets-of-clickhouse-query-performance-by-robert-hodges-173379008">https://www.slideshare.net/Altinity/webinar-secrets-of-clickhouse-query-performance-by-robert-hodges-173379008</a>
+<a href="https://stackoverflow.com/questions/60255863/how-understand-the-granularity-and-block-in-clickhouse">https://stackoverflow.com/questions/60255863/how-understand-the-granularity-and-block-in-clickhouse</a>
+<a href="https://github.com/ClickHouse/ClickHouse/issues/7473">https://github.com/ClickHouse/ClickHouse/issues/7473</a>
+<a href="https://stackoverflow.com/questions/60142967/how-to-understand-part-and-partition-of-clickhouse">https://stackoverflow.com/questions/60142967/how-to-understand-part-and-partition-of-clickhouse</a>
+<a href="https://www.wangfenjin.com/posts/clickhouse-od/">https://www.wangfenjin.com/posts/clickhouse-od/</a></p>
       </div>
 
 
