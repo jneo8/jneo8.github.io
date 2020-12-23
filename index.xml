@@ -8,6 +8,18 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 09 Aug 2020 19:31:42 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>[k8s]K8S Rancher Install Flink Operator CSR Certificate Missing</title>
+      <link>https://jneo8.github.io/posts/k8s-rancher-flink-operator-install-csr-certificate-missing/</link>
+      <pubDate>Wed, 23 Dec 2020 16:50:26 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/k8s-rancher-flink-operator-install-csr-certificate-missing/</guid>
+      <description>K8S Rancher Install Flink Operator CSR Certificate Missing 今天在 Rancher2 install Flink-On-k8s-Operator 出現錯誤. 紀錄一下
+Error Message 看是沒有 certificate,
++ echo &#39;ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts.&#39; + ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts. 查看 CSR status
+kubectl get csr flink-operator-webhook-service.flink-operator-system -o &amp;#39;jsonpath={.status}&amp;#39; &amp;quot;status&amp;quot;: { &amp;quot;conditions&amp;quot;: [ { &amp;quot;lastUpdateTime&amp;quot;: &amp;quot;.</description>
+    </item>
+    
+    <item>
       <title>Clickhouse Index</title>
       <link>https://jneo8.github.io/posts/clickhouse-index/</link>
       <pubDate>Thu, 17 Dec 2020 11:17:20 +0800</pubDate>
