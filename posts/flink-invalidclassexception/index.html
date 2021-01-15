@@ -7,28 +7,46 @@
     <meta http-equiv="Content-Language" content="en">
 
     <meta name="author" content="jneo8">
-    <meta name="description" content="Flink Forward 2018 / Scaling Uber&rsquo;s Real-time Optimization with Flink 心得">
+    <meta name="description" content="Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo 最近在一個小問題卡了一會, 紀錄一下
+Flink run 出現, 就算跑 example word-count 也會
+java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo 環境配置 Flink k8s Operator &#43; scala sbt &#43; local flink 官網載來的
+有找到一篇 http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Error-quot-Could-not-load-deserializer-from-the-configuration-quot-td377.html 說應該是 flink version conflict
+檢查了一會 sbt &amp; flink cluster version 是對的起來的
+但是官網載來的 flink 是有 flink &amp; scala 版本差別的, 只是載來解壓縮之後沒注意到
+Summary version conflict: 確保 local flink &amp; cluster flink &amp; sbt 三者的 flink &amp; scala 的版本都要正確">
     <meta name="keywords" content="blog,backend,developer,flink,kubernetes">
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink"/>
-<meta name="twitter:description" content="Flink Forward 2018 / Scaling Uber&rsquo;s Real-time Optimization with Flink 心得"/>
+<meta name="twitter:title" content="Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo"/>
+<meta name="twitter:description" content="Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo 最近在一個小問題卡了一會, 紀錄一下
+Flink run 出現, 就算跑 example word-count 也會
+java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo 環境配置 Flink k8s Operator &#43; scala sbt &#43; local flink 官網載來的
+有找到一篇 http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Error-quot-Could-not-load-deserializer-from-the-configuration-quot-td377.html 說應該是 flink version conflict
+檢查了一會 sbt &amp; flink cluster version 是對的起來的
+但是官網載來的 flink 是有 flink &amp; scala 版本差別的, 只是載來解壓縮之後沒注意到
+Summary version conflict: 確保 local flink &amp; cluster flink &amp; sbt 三者的 flink &amp; scala 的版本都要正確"/>
 
-    <meta property="og:title" content="[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink" />
-<meta property="og:description" content="Flink Forward 2018 / Scaling Uber&rsquo;s Real-time Optimization with Flink 心得" />
+    <meta property="og:title" content="Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo" />
+<meta property="og:description" content="Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo 最近在一個小問題卡了一會, 紀錄一下
+Flink run 出現, 就算跑 example word-count 也會
+java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo 環境配置 Flink k8s Operator &#43; scala sbt &#43; local flink 官網載來的
+有找到一篇 http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Error-quot-Could-not-load-deserializer-from-the-configuration-quot-td377.html 說應該是 flink version conflict
+檢查了一會 sbt &amp; flink cluster version 是對的起來的
+但是官網載來的 flink 是有 flink &amp; scala 版本差別的, 只是載來解壓縮之後沒注意到
+Summary version conflict: 確保 local flink &amp; cluster flink &amp; sbt 三者的 flink &amp; scala 的版本都要正確" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jneo8.github.io/posts/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/" />
-<meta property="article:published_time" content="2020-08-22T15:21:20+08:00" />
-<meta property="article:modified_time" content="2020-08-22T15:21:20+08:00" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-invalidclassexception/" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-asyncio/" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-trigger/" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-checkpoint/" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-resource/" />
+<meta property="og:url" content="https://jneo8.github.io/posts/flink-invalidclassexception/" />
+<meta property="article:published_time" content="2021-01-15T10:23:13+08:00" />
+<meta property="article:modified_time" content="2021-01-15T10:23:13+08:00" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-asyncio/" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-trigger/" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-checkpoint/" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/" /><meta property="og:see_also" content="https://jneo8.github.io/posts/flink-resource/" />
 
 
 
     <title>
-  [Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink · jneo8.github.io
+  Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo · jneo8.github.io
 </title>
 
     
-      <link rel="canonical" href="https://jneo8.github.io/posts/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/">
+      <link rel="canonical" href="https://jneo8.github.io/posts/flink-invalidclassexception/">
     
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -128,174 +146,49 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink</h1>
+          <h1 class="title">Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo</h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
               <i class="fa fa-calendar" aria-hidden="true"></i>
-              <time datetime='2020-08-22T15:21:20&#43;08:00'>
-                August 22, 2020
+              <time datetime='2021-01-15T10:23:13&#43;08:00'>
+                January 15, 2021
               </time>
             </span>
             <span class="reading-time">
               <i class="fa fa-clock-o" aria-hidden="true"></i>
-              2-minute read
+              One-minute read
             </span>
           </div>
           
-          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/flink/">flink</a></div>
+
           <div class="tags">
   <i class="fa fa-tag" aria-hidden="true"></i>
-    <a href="/tags/flink/">flink</a></div>
+    <a href="/tags/flink/">flink</a>
+      <span class="separator">•</span>
+    <a href="/tags/debug/">debug</a></div>
 
         </div>
       </header>
 
       <div>
         
-        <p>Flink Forward 2018 / Scaling Uber&rsquo;s Real-time Optimization with Flink 心得</p>
-<hr>
-<h1 id="scaling-ubers-real-time-optimization-with-flink">Scaling Uber&rsquo;s Real-time Optimization with Flink</h1>
-<p>Youtube: <a href="https://www.youtube.com/watch?v=ydFXKrad6lo"><img src="https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="Youtube link"></a></p>
-<h2 id="marketplace-events---marketplace-dynamics---marketplace-decision-engines"><code>Marketplace Events</code> -&gt; <code>Marketplace Dynamics</code> -&gt; <code>Marketplace Decision Engines</code></h2>
-<p><img src="/img/flink/uber-marketplace.jpg" alt="uber-marketplace"></p>
-<p>整場演講的主軸</p>
-<p>如何從 Macketplace Event 取得 Dynamics 然後作出 Decision</p>
-<h3 id="解釋uber-marketplace--challenges">解釋Uber Marketplace &amp;&amp; challenges</h3>
-<ul>
-<li>real time &amp;&amp; real world</li>
-</ul>
-<h4 id="real-time-challenges">Real-time challenges</h4>
-<ul>
-<li>
-<p>Event time ordering</p>
-</li>
-<li>
-<p>Time sensitive</p>
-</li>
-</ul>
-<h4 id="aggregate-in-real-time">Aggregate in real-time</h4>
-<ul>
-<li>aggregation in windows bucket</li>
-<li>result over event time</li>
-<li>As soon as poosible</li>
-<li>As accurate as possible</li>
-</ul>
-<h4 id="real-world-challenges">Real-world challenges</h4>
-<ul>
-<li>
-<p>Problems</p>
-<ul>
-<li>Event spatial mapoing</li>
-<li>Locality sensitive</li>
-</ul>
-</li>
-<li>
-<p>Aggregation in real-world</p>
-<ul>
-<li>Influences its current and neighbours</li>
-<li>Apply geo func on related events</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="events---dynamics"><code>Events</code> -&gt; <code>Dynamics</code></h2>
-<h3 id="olap-solution-online-analytical-processing">OLAP solution (Online analytical processing)</h3>
-<pre><code>* uber solution before
+        <h1 id="flink--javaioinvalidclassexception-orgapacheflinkapiscalatypeutilscaseclasstypeinfo">Flink  java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo</h1>
+<p>最近在一個小問題卡了一會, 紀錄一下</p>
+<p>Flink run 出現, 就算跑 example word-count 也會</p>
+<pre><code>java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo
+</code></pre><h2 id="環境配置">環境配置</h2>
+<p><a href="https://github.com/GoogleCloudPlatform/flink-on-k8s-operator">Flink k8s Operator</a> + scala sbt + <a href="https://flink.apache.org/downloads.html">local flink 官網載來的</a></p>
+<p>有找到一篇 <a href="http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Error-quot-Could-not-load-deserializer-from-the-configuration-quot-td377.html">http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Error-quot-Could-not-load-deserializer-from-the-configuration-quot-td377.html</a> 說應該是 flink version conflict</p>
+<p>檢查了一會 sbt &amp; flink cluster version 是對的起來的</p>
+<p>但是官網載來的 flink 是有 flink &amp; scala 版本差別的, 只是載來解壓縮之後沒注意到</p>
+<h2 id="summary">Summary</h2>
+<p><code>version conflict</code>: 確保 <code>local flink</code> &amp; <code>cluster flink</code> &amp; <code>sbt</code> 三者的 flink &amp; scala 的版本都要正確</p>
 
-* 這邊在講之前的作法以及問題
-</code></pre>
-<p><img src="/img/flink/uber-OLAP-soultion.jpg" alt="uber-OLAP-soultion"></p>
-<h4 id="problems">Problems:</h4>
-<ul>
-<li>
-<p>Periodical crontab</p>
-<ul>
-<li>
-<p>To Monitor Marketplace -&gt; need to have a scheduler to call OLAP to get a snapshot(maybe once/min) -&gt; bringing a external dependency into system</p>
-</li>
-<li>
-<p>Difficult to write a very stable distributing schedulers in the productions</p>
-</li>
-<li>
-<p>Any fillers that means the entire city are losing an update that&rsquo;s uber trying to avoid</p>
-</li>
-<li>
-<p>Can&rsquo;t get data as soon as possible -&gt; have to wait for the scheduler trigger</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Batch snapshot</p>
-<ul>
-<li>Bottleneck in data pipeline</li>
-</ul>
-</li>
-<li>
-<p>大概就是講說 因為要做snapshot, 所以導致需要有scheduler -&gt; 產生external dependency.</p>
-<ul>
-<li>錯誤容易掉資料</li>
-<li>即時性差, 需要等scheduler trigger</li>
-<li>上圖的step2會變成整個 pipeline 的 buttonneck</li>
-</ul>
-</li>
-</ul>
-<h3 id="event-driven-solution">Event driven solution</h3>
-<p><img src="/img/flink/uber-event-based-soultion.jpg" alt="uber-OLAP-soultion">
-<img src="/img/flink/uber-event-based-soultion-reduce.jpg" alt="uber-OLAP-soultion"></p>
-<ul>
-<li>
-<p>Mapreduce style</p>
-</li>
-<li>
-<p>第一張圖在講說用flatmap把event散出給多個geo_id</p>
-<ul>
-<li>duplicate yourself at differnet locations</li>
-<li>這邊我理解的意思是舊的方法內, 同一個人同一個snapshot只會出現在一個地方, 換成Event based 之後只要有新的event出現在新的location, event就會流向新的location</li>
-</ul>
-</li>
-<li>
-<p>第二張圖是說讓Agg 基於第一張圖的結果再去計算, 讓agg最後再做, 相較於第一張圖, agg的時間被往後延了, 這讓系統更加有彈性跟stable</p>
-</li>
-<li>
-<p>Event driven design concern?</p>
-<ul>
-<li>這邊講一些event base system 的concern以及利用flink的特性所進行的設計</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="dynamics---decision"><code>Dynamics</code> -&gt; <code>Decision</code></h2>
-<ul>
-<li>
-<p>ML 一般是Capture historical patterns</p>
-</li>
-<li>
-<p>這邊主要是說如何在offline/online modelling 中作選擇</p>
-</li>
-</ul>
-<p><img src="/img/flink/uber-online-offline-hybird-solution.jpg" alt="uber-online-offline-hybird-soultion"></p>
-<ul>
-<li>Uber 最後的solution. ofline modelling + stateful online update</li>
-</ul>
-<hr>
-<h2 id="recap">Recap</h2>
-<p><img src="/img/flink/uber-marketplace.jpg" alt="uber-marketplace"></p>
-<ul>
-<li>Single flink app for each part(one for <code>Event to Dynamics</code>, another for <code>Dynamics to Decision</code>)
-<ul>
-<li>主要是想要保持架構分隔跟乾淨</li>
-</ul>
-</li>
-</ul>
-<h2 id="lesson-learned">Lesson learned</h2>
-<ul>
-<li>Strong infra level support</li>
-<li>Real-time ML is hard due to data pre-processing</li>
-<li>Bootstrap the model through offline jobs</li>
-<li>Reduce the parameter dimension</li>
-</ul>
       </div>
 
 
@@ -312,10 +205,6 @@
         <ul>
         
         
-          
-            <li>
-              <a href="/posts/flink-invalidclassexception/">Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo</a>
-            </li>
           
         
           
@@ -336,6 +225,10 @@
             </li>
           
         
+          
+            <li>
+              <a href="/posts/flink-forward-2018-scaling-ubers-realtime-optimization-with-apache-flink/">[Flink Forward 2018] Scaling Uber&#39;s Real-time Optimization with Flink</a>
+            </li>
           
         
           

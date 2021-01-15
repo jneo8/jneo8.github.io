@@ -6,7 +6,16 @@
     <description>Recent content in Categories on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Jan 2021 18:14:52 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Jan 2021 10:23:13 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>flink</title>
+      <link>https://jneo8.github.io/categories/flink/</link>
+      <pubDate>Fri, 15 Jan 2021 10:23:13 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/categories/flink/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>kafka</title>
       <link>https://jneo8.github.io/categories/kafka/</link>

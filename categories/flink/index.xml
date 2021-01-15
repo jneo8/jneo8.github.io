@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>flink on jneo8.github.io</title>
+    <link>https://jneo8.github.io/categories/flink/</link>
+    <description>Recent content in flink on jneo8.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Jan 2021 10:23:13 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/categories/flink/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo</title>
+      <link>https://jneo8.github.io/posts/flink-invalidclassexception/</link>
+      <pubDate>Fri, 15 Jan 2021 10:23:13 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/flink-invalidclassexception/</guid>
+      <description>Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo 最近在一個小問題卡了一會, 紀錄一下
+Flink run 出現, 就算跑 example word-count 也會
+java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo 環境配置 Flink k8s Operator + scala sbt + local flink 官網載來的
+有找到一篇 http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Error-quot-Could-not-load-deserializer-from-the-configuration-quot-td377.html 說應該是 flink version conflict
+檢查了一會 sbt &amp;amp; flink cluster version 是對的起來的
+但是官網載來的 flink 是有 flink &amp;amp; scala 版本差別的, 只是載來解壓縮之後沒注意到
+Summary version conflict: 確保 local flink &amp;amp; cluster flink &amp;amp; sbt 三者的 flink &amp;amp; scala 的版本都要正確</description>
+    </item>
+    
+  </channel>
+</rss>
