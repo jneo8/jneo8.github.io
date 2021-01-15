@@ -8,6 +8,24 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 09 Aug 2020 19:39:43 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Intro kafkacat</title>
+      <link>https://jneo8.github.io/posts/intro-kafkacat/</link>
+      <pubDate>Thu, 14 Jan 2021 18:14:52 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/intro-kafkacat/</guid>
+      <description>最近在試 kafka 的效能, 找到了一個好用的 tool
+kafkacat github
+可以當 Producer &amp;amp; Consumer, 支援的用法也很多
+介紹就不寫了, 看 Document 比較快
+Configurations Config 可以跟 librdkafka 互通, 可以參考 Introduction to librdkafka
+效能調校的話有幾個重要的設定, (document 可以用的設定真的多, 看有夠久):
+  batch.num.messages: 發送前 local queue 內的最小 message number. 可以理解為最小 batch size. 越大 round trip time(rtt) 越小, 可以加大 throughput.:
+  queue.buffering.max.ms: 最長等待時間, 理解上是到了就發送. 如果需要 low latency 可以設定越小越好.
+  compression.codec: 啟用 batch 壓縮, batch size 越大壓縮率越好的可能性越大
+  </description>
+    </item>
+    
+    <item>
       <title>[k8s]K8S Rancher Install Flink Operator CSR Certificate Missing</title>
       <link>https://jneo8.github.io/posts/k8s-rancher-flink-operator-install-csr-certificate-missing/</link>
       <pubDate>Wed, 23 Dec 2020 16:50:26 +0800</pubDate>

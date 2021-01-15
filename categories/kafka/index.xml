@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>kafka on jneo8.github.io</title>
-    <link>https://jneo8.github.io/tags/kafka/</link>
+    <link>https://jneo8.github.io/categories/kafka/</link>
     <description>Recent content in kafka on jneo8.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Jan 2021 18:14:52 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Jan 2021 18:14:52 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/categories/kafka/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Intro kafkacat</title>
       <link>https://jneo8.github.io/posts/intro-kafkacat/</link>
@@ -23,15 +23,6 @@ Configurations Config 可以跟 librdkafka 互通, 可以參考 Introduction to 
   queue.buffering.max.ms: 最長等待時間, 理解上是到了就發送. 如果需要 low latency 可以設定越小越好.
   compression.codec: 啟用 batch 壓縮, batch size 越大壓縮率越好的可能性越大
   </description>
-    </item>
-    
-    <item>
-      <title>Kafka_topics_debug</title>
-      <link>https://jneo8.github.io/posts/kafka-topic-debug/</link>
-      <pubDate>Wed, 30 Sep 2020 12:18:38 +0800</pubDate>
-      
-      <guid>https://jneo8.github.io/posts/kafka-topic-debug/</guid>
-      <description>&lt;p&gt;Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 5555; nested exception is:&lt;/p&gt;</description>
     </item>
     
   </channel>

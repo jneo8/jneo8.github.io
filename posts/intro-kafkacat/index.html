@@ -7,36 +7,27 @@
     <meta http-equiv="Content-Language" content="en">
 
     <meta name="author" content="jneo8">
-    <meta name="description" content="K8S Rancher Install Flink Operator CSR Certificate Missing 今天在 Rancher2 install Flink-On-k8s-Operator 出現錯誤. 紀錄一下
-Error Message 看是沒有 certificate,
-&#43; echo &#39;ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts.&#39; &#43; ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts. 查看 CSR status
-kubectl get csr flink-operator-webhook-service.flink-operator-system -o &#39;jsonpath={.status}&#39; &quot;status&quot;: { &quot;conditions&quot;: [ { &quot;lastUpdateTime&quot;: &quot;.">
+    <meta name="description" content="Generic command line non-JVM Apache Kafka producer and consumer">
     <meta name="keywords" content="blog,backend,developer,flink,kubernetes">
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[k8s]K8S Rancher Install Flink Operator CSR Certificate Missing"/>
-<meta name="twitter:description" content="K8S Rancher Install Flink Operator CSR Certificate Missing 今天在 Rancher2 install Flink-On-k8s-Operator 出現錯誤. 紀錄一下
-Error Message 看是沒有 certificate,
-&#43; echo &#39;ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts.&#39; &#43; ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts. 查看 CSR status
-kubectl get csr flink-operator-webhook-service.flink-operator-system -o &#39;jsonpath={.status}&#39; &quot;status&quot;: { &quot;conditions&quot;: [ { &quot;lastUpdateTime&quot;: &quot;."/>
+<meta name="twitter:title" content="Intro kafkacat"/>
+<meta name="twitter:description" content="Generic command line non-JVM Apache Kafka producer and consumer"/>
 
-    <meta property="og:title" content="[k8s]K8S Rancher Install Flink Operator CSR Certificate Missing" />
-<meta property="og:description" content="K8S Rancher Install Flink Operator CSR Certificate Missing 今天在 Rancher2 install Flink-On-k8s-Operator 出現錯誤. 紀錄一下
-Error Message 看是沒有 certificate,
-&#43; echo &#39;ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts.&#39; &#43; ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts. 查看 CSR status
-kubectl get csr flink-operator-webhook-service.flink-operator-system -o &#39;jsonpath={.status}&#39; &quot;status&quot;: { &quot;conditions&quot;: [ { &quot;lastUpdateTime&quot;: &quot;." />
+    <meta property="og:title" content="Intro kafkacat" />
+<meta property="og:description" content="Generic command line non-JVM Apache Kafka producer and consumer" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://jneo8.github.io/posts/k8s-rancher-flink-operator-install-csr-certificate-missing/" />
-<meta property="article:published_time" content="2020-12-23T16:50:26+08:00" />
-<meta property="article:modified_time" content="2020-12-23T16:50:26+08:00" />
+<meta property="og:url" content="https://jneo8.github.io/posts/intro-kafkacat/" />
+<meta property="article:published_time" content="2021-01-14T18:14:52+08:00" />
+<meta property="article:modified_time" content="2021-01-14T18:14:52+08:00" />
 
 
     <title>
-  [k8s]K8S Rancher Install Flink Operator CSR Certificate Missing · jneo8.github.io
+  Intro kafkacat · jneo8.github.io
 </title>
 
     
-      <link rel="canonical" href="https://jneo8.github.io/posts/k8s-rancher-flink-operator-install-csr-certificate-missing/">
+      <link rel="canonical" href="https://jneo8.github.io/posts/intro-kafkacat/">
     
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -136,14 +127,14 @@ kubectl get csr flink-operator-webhook-service.flink-operator-system -o &#39;jso
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">[k8s]K8S Rancher Install Flink Operator CSR Certificate Missing</h1>
+          <h1 class="title">Intro kafkacat</h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
               <i class="fa fa-calendar" aria-hidden="true"></i>
-              <time datetime='2020-12-23T16:50:26&#43;08:00'>
-                December 23, 2020
+              <time datetime='2021-01-14T18:14:52&#43;08:00'>
+                January 14, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -152,46 +143,37 @@ kubectl get csr flink-operator-webhook-service.flink-operator-system -o &#39;jso
             </span>
           </div>
           
-          
+          <div class="categories">
+  <i class="fa fa-folder" aria-hidden="true"></i>
+    <a href="/categories/kafka/">kafka</a></div>
+
           <div class="tags">
   <i class="fa fa-tag" aria-hidden="true"></i>
-    <a href="/tags/rancher/">rancher</a></div>
+    <a href="/tags/kafka/">kafka</a></div>
 
         </div>
       </header>
 
       <div>
         
-        <h1 id="k8s-rancher-install-flink-operator-csr-certificate-missing">K8S Rancher Install Flink Operator CSR Certificate Missing</h1>
-<p>今天在 Rancher2 install <a href="https://github.com/GoogleCloudPlatform/flink-on-k8s-operator">Flink-On-k8s-Operator</a> 出現錯誤. 紀錄一下</p>
-<p>Error Message 看是沒有 certificate,</p>
-<pre><code>+ echo 'ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts.'         
-+ ERROR: After approving csr flink-operator-webhook-service.flink-operator-system, the signed certificate did not appear on the resource. Giving up after 10 attempts.                  
-</code></pre><p>查看 CSR status</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get csr flink-operator-webhook-service.flink-operator-system -o <span style="color:#e6db74">&#39;jsonpath={.status}&#39;</span>
-</code></pre></div><pre><code>&quot;status&quot;: {
-    &quot;conditions&quot;: [
-        {
-            &quot;lastUpdateTime&quot;: &quot;...&quot;,
-            &quot;message&quot;: &quot;This CSR was approved by kubectl certificate approve.&quot;,
-            &quot;reason&quot;: &quot;KubectlApprove&quot;,
-            &quot;type&quot;: &quot;Approved&quot;
-        }                                                    
-    ]
-}
-</code></pre><p>分析一下問題:</p>
+        <p>最近在試 kafka 的效能, 找到了一個好用的 tool</p>
+<p><a href="https://github.com/edenhill/kafkacat">kafkacat github</a></p>
+<p>可以當 Producer &amp; Consumer, 支援的用法也很多</p>
+<p>介紹就不寫了, 看 Document 比較快</p>
+<h2 id="configurationshttpsgithubcomedenhillkafkacatconfiguration"><a href="https://github.com/edenhill/kafkacat#configuration">Configurations</a></h2>
+<p>Config 可以跟 <code>librdkafka</code> 互通, 可以參考 <a href="https://docs.confluent.io/2.0.0/clients/librdkafka/INTRODUCTION_8md.html">Introduction to librdkafka</a></p>
+<p>效能調校的話有幾個重要的設定, (document 可以用的設定真的多, 看有夠久):</p>
 <ul>
-<li>有CSR</li>
-<li>已經 Approved</li>
-<li>但沒有 certificate</li>
+<li>
+<p><code>batch.num.messages</code>: 發送前 local queue 內的最小 message number. 可以理解為最小 batch size. 越大 round trip time(rtt) 越小, 可以加大 throughput.:</p>
+</li>
+<li>
+<p><code>queue.buffering.max.ms</code>: 最長等待時間, 理解上是到了就發送. 如果需要 low latency 可以設定越小越好.</p>
+</li>
+<li>
+<p><code>compression.codec</code>: 啟用 batch 壓縮, batch size 越大壓縮率越好的可能性越大</p>
+</li>
 </ul>
-<p>查找一下文件發現 k8s 在使用 CSR 時有兩階段, <code>Request signing process</code> &amp; <code>Signers</code>. 應該是 Signers 那邊出現問題</p>
-<p><a href="https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/#a-note-to-cluster-administrators">後來查找一下 Kubernetes controller manager 有提供 signer, 但 default 沒有啟動</a></p>
-<p>在 Rancher 內則是要設定 <code>cluster-signing-cert-file</code> &amp; <code>cluster-signing-key-file</code></p>
-<p>改完 Rancher cluster YAML 重新部署就好了</p>
-<h2 id="source">Source</h2>
-<p><a href="https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/">https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/</a>
-<a href="https://github.com/cockroachdb/cockroach/issues/28075#issuecomment-420497277">https://github.com/cockroachdb/cockroach/issues/28075#issuecomment-420497277</a></p>
 
       </div>
 
