@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>notes on jneo8.github.io</title>
+    <link>https://jneo8.github.io/categories/notes/</link>
+    <description>Recent content in notes on jneo8.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Mar 2021 22:11:18 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/categories/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Summary of The Functional Programmer&#39;s Toolkit</title>
+      <link>https://jneo8.github.io/posts/thefunctionalprogrammerstoolkit/</link>
+      <pubDate>Tue, 30 Mar 2021 22:11:18 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/thefunctionalprogrammerstoolkit/</guid>
+      <description>Summary for https://www.youtube.com/watch?v=Nrp_LZ-XGsY&amp;amp;ab_channel=NDCConferences
+The Functional Toolbox The functional toolbox is for solved problems
+Functional Toolbox FP jargon version  Composition/Aggregation: Monoid Working with effects  Mixing effects and non-effects: Functor Chaining effects in series: Monad Working with effects in parallel: Applicative     Most of the tools in the functional toolbox are function transformers that convert functions to functions
+ Core principles of (statically-typed) FP Functions are things  A functional is a standalone thing, not attached to a class  Composition everywhere (就像樂高)   All pieces are designed to connect</description>
+    </item>
+    
+  </channel>
+</rss>
