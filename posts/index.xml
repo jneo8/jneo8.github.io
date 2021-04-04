@@ -20,6 +20,22 @@ Functional Toolbox FP jargon version  Composition/Aggregation: Monoid Working wi
     </item>
     
     <item>
+      <title>Most adequate guide to functional programming</title>
+      <link>https://jneo8.github.io/posts/mostly-adequate-guide-to-functional-programming/</link>
+      <pubDate>Wed, 24 Feb 2021 15:30:12 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/mostly-adequate-guide-to-functional-programming/</guid>
+      <description>Summary for mostly adequate guide to functional programming mostly adequate guide to functional programming Github
+這篇文章是閱讀完 Professor Frisby&amp;rsquo;s Mostly Adequate Guide to Functional Programming 這篇文章的心得重點整理
+這篇文章主要是紀錄一些名詞以及基本定義.
+所以內容並不會完全跟著原文的順序
+內容大略分為 Concept / Toolkits / Theory
+實際內容跟範例還是看原文比較好喔
+ Concept 觀念跟專有名詞解析
+ First class  當在該程式語言中 function 可以被視為變數 -&amp;gt; First-class Example: 在 javascript 中 function 可以當 input 傳遞給 function 或者作為回傳值傳遞回來   immutable &amp;amp; mutable  Function programming 的核心概念之一: 變數一定是 immutable No side-effects 更好追蹤變數 所有操作都是回傳新的 immutable data   Pure function  A pure function is a function that, given the same input, will always return the same output and does not have any observable side effect.</description>
+    </item>
+    
+    <item>
       <title>Flink java.io.InvalidClassException: org.apache.flink.api.scala.typeutils.CaseClassTypeInfo</title>
       <link>https://jneo8.github.io/posts/flink-invalidclassexception/</link>
       <pubDate>Fri, 15 Jan 2021 10:23:13 +0800</pubDate>

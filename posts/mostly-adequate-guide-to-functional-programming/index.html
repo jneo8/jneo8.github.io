@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="jneo8">
+    <meta name="description" content="Summary to mostly adequate guide to functional programming">
+    <meta name="keywords" content="blog,backend,developer,flink,kubernetes">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Most adequate guide to functional programming"/>
+<meta name="twitter:description" content="Summary to mostly adequate guide to functional programming"/>
+
+    <meta property="og:title" content="Most adequate guide to functional programming" />
+<meta property="og:description" content="Summary to mostly adequate guide to functional programming" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jneo8.github.io/posts/mostly-adequate-guide-to-functional-programming/" />
+<meta property="article:published_time" content="2021-02-24T15:30:12+08:00" />
+<meta property="article:modified_time" content="2021-02-24T15:30:12+08:00" />
+
+
+    <title>
+  Most adequate guide to functional programming · jneo8.github.io
+</title>
+
+    
+      <link rel="canonical" href="https://jneo8.github.io/posts/mostly-adequate-guide-to-functional-programming/">
+    
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css"
+      integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8/normalize.min.css">
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.f01c647a0d25b40da992a37c3376291185eed8a50ced8c26cc2c0bcfe38c97df.css" integrity="sha256-8Bxkeg0ltA2pkqN8M3YpEYXu2KUM7YwmzCwLz&#43;OMl98=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.126ad3988d46bdae6217a11105b53c9662bca05f39d42d3c0fb366919d334620.css" integrity="sha256-EmrTmI1Gva5iF6ERBbU8lmK8oF851C08D7NmkZ0zRiA=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+      <link rel="stylesheet" href="/css/img.css" />
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/img/pikachu-icon.jpg" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+
+    <meta name="generator" content="Hugo 0.79.0-DEV" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto"
+        onload=""
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      jneo8.github.io
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/series">Series</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags">Tags</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Posts</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Most adequate guide to functional programming</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime='2021-02-24T15:30:12&#43;08:00'>
+                February 24, 2021
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              14-minute read
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <a href="/tags/functional-programming/">functional programming</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h1 id="summary-for-mostly-adequate-guide-to-functional-programming">Summary for mostly adequate guide to functional programming</h1>
+<p><a href="https://github.com/MostlyAdequate/mostly-adequate-guide">mostly adequate guide to functional programming Github</a></p>
+<p>這篇文章是閱讀完 Professor Frisby&rsquo;s Mostly Adequate Guide to Functional Programming 這篇文章的心得重點整理</p>
+<p>這篇文章主要是紀錄一些名詞以及基本定義.</p>
+<p>所以內容並不會完全跟著原文的順序</p>
+<p>內容大略分為 <code>Concept</code> / <code>Toolkits</code> / <code>Theory</code></p>
+<p>實際內容跟範例還是看原文比較好喔</p>
+<hr>
+<h2 id="concept">Concept</h2>
+<p>觀念跟專有名詞解析</p>
+<hr>
+<h3 id="first-class">First class</h3>
+<ul>
+<li>當在該程式語言中 function 可以被視為變數 -&gt; <code>First-class</code></li>
+<li>Example: 在 javascript 中 function 可以當 input 傳遞給 function 或者作為回傳值傳遞回來</li>
+</ul>
+<hr>
+<h3 id="immutable--mutable">immutable &amp; mutable</h3>
+<ul>
+<li>Function programming 的核心概念之一: 變數一定是 immutable</li>
+<li>No side-effects</li>
+<li>更好追蹤變數</li>
+<li>所有操作都是回傳新的 immutable data</li>
+</ul>
+<hr>
+<h3 id="pure-function">Pure function</h3>
+<blockquote>
+<p>A pure function is a function that, given the same input, will always return the same output and does not have any observable side effect.</p>
+</blockquote>
+<h3 id="why-pure-function-">Why Pure function ?</h3>
+<ul>
+<li>
+<p>Memoize function</p>
+<ul>
+<li>可以根據 input 快取</li>
+</ul>
+</li>
+<li>
+<p>Portable / Self Documenting</p>
+<ul>
+<li>對依賴透明誠實</li>
+<li>Dependency Injection</li>
+</ul>
+</li>
+<li>
+<p>Testable</p>
+<ul>
+<li>No mock</li>
+</ul>
+</li>
+<li>
+<p>Reasonable</p>
+<ul>
+<li>引用透明性 <code>Referential Transparency</code>: 當可以用 result 替代程式碼(完全不改動), 此段程式具有引用透明性</li>
+<li>方便 Equational reasoning(等式推導) 分析程式碼</li>
+</ul>
+</li>
+<li>
+<p>Parallel Code</p>
+<ul>
+<li>因為不需要 access shared memory. pure function 完全可以並行執行</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="pointfree">Pointfree</h3>
+<ul>
+<li>Pointfree style means never having to say your data</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 非 pointfree，因為我們提到資料：name
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">initials</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">name</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">name</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39; &#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">toUpperCase</span>, <span style="color:#a6e22e">head</span>)).<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;. &#39;</span>);
+};
+
+<span style="color:#75715e">// pointfree
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">initials</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;. &#39;</span>), <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">toUpperCase</span>, <span style="color:#a6e22e">head</span>)), <span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39; &#39;</span>));
+
+<span style="color:#a6e22e">initials</span>(<span style="color:#e6db74">&#34;hunter stockton thompson&#34;</span>);
+<span style="color:#75715e">// &#39;H. S. T&#39;
+</span></code></pre></div><hr>
+<h3 id="declatative-coding">Declatative Coding</h3>
+<p><strong>宣告式開發</strong></p>
+<blockquote>
+<p>告訴電腦做什麼而不是怎麼做</p>
+</blockquote>
+<blockquote>
+<p>類似 SQL, 宣告要做什麼而不是一步步寫下去</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 命令式
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">authenticate</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">form</span>) {
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toUser</span>(<span style="color:#a6e22e">form</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">logIn</span>(<span style="color:#a6e22e">user</span>);
+};
+
+<span style="color:#75715e">// 宣告式
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">authenticate</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">logIn</span>, <span style="color:#a6e22e">toUser</span>);
+</code></pre></div><hr>
+<h3 id="hindley-milner-type-system">Hindley-Milner Type System</h3>
+<p><strong>FP 描述方法</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system">Wiki</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// setLength :: String -&gt; Number
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">strLength</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">s</span> =&gt; <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span>
+
+<span style="color:#75715e">// join :: String -&gt; [String] -&gt; String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">join</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">what</span>, <span style="color:#a6e22e">xs</span>) =&gt; <span style="color:#a6e22e">xs</span>.<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">what</span>));
+
+<span style="color:#75715e">// match :: Regex -&gt; String -&gt; [String]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">match</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">reg</span>, <span style="color:#a6e22e">s</span>) =&gt; <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">match</span>(<span style="color:#a6e22e">reg</span>));
+
+<span style="color:#75715e">// replace :: Regex -&gt; String -&gt; String -&gt; String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">replace</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">reg</span>, <span style="color:#a6e22e">sub</span>, <span style="color:#a6e22e">s</span>) =&gt; <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#a6e22e">reg</span>, <span style="color:#a6e22e">sub</span>));
+
+<span style="color:#75715e">// head :: [a] -&gt; a
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">xs</span> =&gt; <span style="color:#a6e22e">xs</span>[<span style="color:#ae81ff">0</span>];
+
+<span style="color:#75715e">// filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">filter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">xs</span>) =&gt; <span style="color:#a6e22e">xs</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">f</span>));
+
+<span style="color:#75715e">// reduce :: ((b, a) -&gt; b) -&gt; b -&gt; [a] -&gt; b
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">reduce</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">xs</span>) =&gt; <span style="color:#a6e22e">xs</span>.<span style="color:#a6e22e">reduce</span>(<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">x</span>));
+</code></pre></div><h4 id="constraints-約束-interface">Constraints: 約束 interface</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// sort :: Ord a =&gt; [a] -&gt; [a]
+</span></code></pre></div><p>這樣的寫法表示 <code>a</code> 需要實作 <code>Ord</code> interface</p>
+<h4 id="narrowing-the-possibility-縮小可能性">Narrowing the possibility 縮小可能性</h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Parametricity"><code>Parametricity</code></a></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// head :: [a] -&gt; a
+</span></code></pre></div><p>因為沒有明確說明 a 的型態, a 可以是任何型態 =&gt; head 必需支援所有型態.</p>
+<p>head 語意上表示第一個 =&gt; 足夠提示去猜測 head 用法</p>
+<hr>
+<h3 id="the-mightly-container">The Mightly Container</h3>
+<p>什麼是 Container ?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span> {
+    <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">x</span>) {
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span>;
+    }
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Container</span>(<span style="color:#a6e22e">x</span>);
+    }
+}
+</code></pre></div><hr>
+<h3 id="functor">Functor</h3>
+<blockquote>
+<p>A Functor is a type that implement <code>map</code> and obeys some laws</p>
+</blockquote>
+<blockquote>
+<p>Functor is <code>Mapable</code></p>
+</blockquote>
+<blockquote>
+<p>Also called <code>Identity</code></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">Container</span>.<span style="color:#a6e22e">protype</span>.<span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">f</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Container</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span>));
+};
+</code></pre></div><hr>
+<h3 id="schrödingers-maybe">Schrödinger’s Maybe</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Maybe</span> {
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Maybe</span>(<span style="color:#a6e22e">x</span>);
+    }
+
+    <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isNothing</span>() {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">undefined</span>;
+    }
+
+    <span style="color:#a6e22e">constructor</span> (<span style="color:#a6e22e">x</span>) {
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span>;
+    }
+
+    <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">fn</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">isNothing</span> <span style="color:#f92672">?</span> <span style="color:#66d9ef">this</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">fn</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>));
+    }
+
+    <span style="color:#a6e22e">inspect</span>() {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">isNothing</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;Nothing&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">`Just(</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">inspect</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">)`</span>;
+    }
+}
+</code></pre></div><h4 id="usecase">Usecase</h4>
+<ul>
+<li>Maybe 會在每個步驟中檢查是否 <code>null</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#e6db74">&#39;Malkovich Malkovich&#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">/a/ig</span>));
+<span style="color:#75715e">// Just(True)
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#66d9ef">null</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">/a/ig</span>));
+<span style="color:#75715e">// Nothing
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Boris&#39;</span> }).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">prop</span>(<span style="color:#e6db74">&#39;age&#39;</span>)).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">10</span>));
+<span style="color:#75715e">// Nothing
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Dinah&#39;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">14</span> }).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">prop</span>(<span style="color:#e6db74">&#39;age&#39;</span>)).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">10</span>));
+<span style="color:#75715e">// Just(24)
+</span></code></pre></div><ul>
+<li>透過 <code>Maybe</code> 在發生錯誤時 return nothing 則 <code>map</code> 並不會觸發後面的步驟</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// withdraw :: Number -&gt; Account -&gt; Maybe(Account)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">withdraw</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">amount</span>, { <span style="color:#a6e22e">balance</span> }) =&gt;
+  <span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">balance</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">amount</span> <span style="color:#f92672">?</span> { <span style="color:#a6e22e">balance</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">balance</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">amount</span> } <span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>));
+
+<span style="color:#75715e">// This function is hypothetical, not implemented here... nor anywhere else.
+</span><span style="color:#75715e">// updateLedger :: Account -&gt; Account
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">updateLedger</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">account</span> =&gt; <span style="color:#a6e22e">account</span>;
+
+<span style="color:#75715e">// remainingBalance :: Account -&gt; String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">remainingBalance</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">balance</span> }) =&gt; <span style="color:#e6db74">`Your balance is $</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">balance</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+
+<span style="color:#75715e">// finishTransaction :: Account -&gt; String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">finishTransaction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">remainingBalance</span>, <span style="color:#a6e22e">updateLedger</span>);
+
+
+<span style="color:#75715e">// getTwenty :: Account -&gt; Maybe(String)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getTwenty</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">finishTransaction</span>), <span style="color:#a6e22e">withdraw</span>(<span style="color:#ae81ff">20</span>));
+
+<span style="color:#a6e22e">getTwenty</span>({ <span style="color:#a6e22e">balance</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200.00</span> }); 
+<span style="color:#75715e">// Just(&#39;Your balance is $180&#39;)
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">getTwenty</span>({ <span style="color:#a6e22e">balance</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10.00</span> });
+<span style="color:#75715e">// Nothing
+</span></code></pre></div><h4 id="releasing-the-value">Releasing the value</h4>
+<p><strong>If a program has no observable effect, does it even run?</strong></p>
+<ul>
+<li>透過檢查空值的 <code>carry</code> function: <code>maybe</code>, 最終我們完成了整個 flow. <code>getTwenty</code> 只會有兩種狀態 broke or balance</li>
+</ul>
+<blockquote>
+<p>這邊 <code>maybe</code> 意義上等於 <code>if (x !== null) { return f(x) }</code>, 但我們在撰寫的時候是透過宣告的方式, 而不是 return 再檢查</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// maybe :: b -&gt; (a -&gt; b) -&gt; Maybe a -&gt; b
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">maybe</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">v</span>, <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">m</span>) =&gt; {
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">isNothing</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">v</span>;
+  }
+
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">$value</span>);
+});
+
+<span style="color:#75715e">// getTwenty :: Account -&gt; String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getTwenty</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">maybe</span>(<span style="color:#e6db74">&#39;You\&#39;re broke!&#39;</span>, <span style="color:#a6e22e">finishTransaction</span>), <span style="color:#a6e22e">withdraw</span>(<span style="color:#ae81ff">20</span>));
+
+<span style="color:#a6e22e">getTwenty</span>({ <span style="color:#a6e22e">balance</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200.00</span> }); 
+<span style="color:#75715e">// &#39;Your balance is $180.00&#39;
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">getTwenty</span>({ <span style="color:#a6e22e">balance</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10.00</span> }); 
+<span style="color:#75715e">// &#39;You\&#39;re broke!&#39;
+</span></code></pre></div><hr>
+<h3 id="pure-error-handler">Pure error handler</h3>
+<h4 id="either">Either</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Either</span> {
+  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Right</span>(<span style="color:#a6e22e">x</span>);
+  }
+
+  <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">x</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span>;
+  }
+}
+
+<span style="color:#75715e">// `Left` -&gt; 忽略 `map` 直接 return value
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Left</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Either</span> {
+  <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+  }
+
+  <span style="color:#a6e22e">inspect</span>() {
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`Left(</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">inspect</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">)`</span>;
+  }
+}
+
+<span style="color:#75715e">// `Right` -&gt; `Container`
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Right</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Either</span> {
+  <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Either</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>));
+  }
+
+  <span style="color:#a6e22e">inspect</span>() {
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`Right(</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">inspect</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">)`</span>;
+  }
+}
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Left</span>(<span style="color:#a6e22e">x</span>);
+</code></pre></div><ul>
+<li>
+<p>透過 <code>Either</code> 來做 Error handler, 如果錯誤會 return <code>Left</code></p>
+</li>
+<li>
+<p>Example:</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">moment</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;moment&#39;</span>);
+
+<span style="color:#75715e">// getAge :: Date -&gt; User -&gt; Either(String, Number)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getAge</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">now</span>, <span style="color:#a6e22e">user</span>) =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">birthDate</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">moment</span>(<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">birthDate</span>, <span style="color:#e6db74">&#39;YYYY-MM-DD&#39;</span>);
+
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">birthDate</span>.<span style="color:#a6e22e">isValid</span>()
+    <span style="color:#f92672">?</span> <span style="color:#a6e22e">Either</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">now</span>.<span style="color:#a6e22e">diff</span>(<span style="color:#a6e22e">birthDate</span>, <span style="color:#e6db74">&#39;years&#39;</span>))
+    <span style="color:#f92672">:</span> <span style="color:#a6e22e">left</span>(<span style="color:#e6db74">&#39;Birth date could not be parsed&#39;</span>);
+});
+
+<span style="color:#a6e22e">getAge</span>(<span style="color:#a6e22e">moment</span>(), { <span style="color:#a6e22e">birthDate</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;2005-12-12&#39;</span> });
+<span style="color:#75715e">// Right(9)
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">getAge</span>(<span style="color:#a6e22e">moment</span>(), { <span style="color:#a6e22e">birthDate</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;July 4, 2001&#39;</span> });
+<span style="color:#75715e">// Left(&#39;Birth date could not be parsed&#39;)
+</span><span style="color:#75715e"></span>
+
+<span style="color:#75715e">//
+</span><span style="color:#75715e">////
+</span><span style="color:#75715e">//
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// fortune :: Number -&gt; String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fortune</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">concat</span>(<span style="color:#e6db74">&#39;If you survive, you will be &#39;</span>), <span style="color:#a6e22e">toString</span>, <span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">1</span>));
+
+<span style="color:#75715e">// zoltar :: User -&gt; Either(String, _)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">zoltar</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>), <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">fortune</span>), <span style="color:#a6e22e">getAge</span>(<span style="color:#a6e22e">moment</span>()));
+
+<span style="color:#a6e22e">zoltar</span>({ <span style="color:#a6e22e">birthDate</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;2005-12-12&#39;</span> });
+<span style="color:#75715e">// &#39;If you survive, you will be 10&#39;
+</span><span style="color:#75715e">// Right(undefined)
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">zoltar</span>({ <span style="color:#a6e22e">birthDate</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;balloons!&#39;</span> });
+<span style="color:#75715e">// Left(&#39;Birth date could not be parsed&#39;)
+</span></code></pre></div><h4 id="either-1"><code>either</code></h4>
+<ul>
+<li>跟 <code>Maybe</code> 有 <code>maybe</code> 一樣. <code>Either</code> 也有 <code>either</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// either :: (a -&gt; c) -&gt; (b -&gt; c) -&gt; Either a b -&gt; c
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">either</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">g</span>, <span style="color:#a6e22e">e</span>) =&gt; {
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span>;
+
+  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">constructor</span>) {
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Left</span><span style="color:#f92672">:</span>
+      <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">$value</span>);
+      <span style="color:#66d9ef">break</span>;
+
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">:</span>
+      <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">g</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">$value</span>);
+      <span style="color:#66d9ef">break</span>;
+
+    <span style="color:#75715e">// No Default
+</span><span style="color:#75715e"></span>  }
+
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+});
+
+<span style="color:#75715e">// zoltar :: User -&gt; _
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">zoltar</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>, <span style="color:#a6e22e">either</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">fortune</span>), <span style="color:#a6e22e">getAge</span>(<span style="color:#a6e22e">moment</span>()));
+
+<span style="color:#a6e22e">zoltar</span>({ <span style="color:#a6e22e">birthDate</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;2005-12-12&#39;</span> });
+<span style="color:#75715e">// &#39;If you survive, you will be 10&#39;
+</span><span style="color:#75715e">// undefined
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">zoltar</span>({ <span style="color:#a6e22e">birthDate</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;balloons!&#39;</span> });
+<span style="color:#75715e">// &#39;Birth date could not be parsed&#39;
+</span><span style="color:#75715e">// undefined
+</span></code></pre></div><hr>
+<h3 id="io-container">IO Container</h3>
+<ul>
+<li><code>getFromStorage</code> 不是 pure function. 他的 return 會依賴於外部環境 -&gt; 相同輸入不會有相同 return</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// getFromStorage :: String -&gt; (_ -&gt; String)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getFromStorage</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span> =&gt; () =&gt; <span style="color:#a6e22e">localStorage</span>[<span style="color:#a6e22e">key</span>];
+</code></pre></div><ul>
+<li>為了解決這個問題, 需要有一個 container <code>IO</code> 把他包起來</li>
+<li><code>IO</code> 會把 impure action 延遲到後面才執行, 可以理解是 <code>[funcA, funcB, funcB, ...]</code> 被累積在 queue 中,</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IO</span> {
+  <span style="color:#75715e">// IO(() =&gt; x) 這一段延遲了執行
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">IO</span>(() =&gt; <span style="color:#a6e22e">x</span>);
+  }
+
+  <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">fn</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fn</span>;
+  }
+
+  <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">fn</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">IO</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">fn</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>));
+  }
+
+  <span style="color:#a6e22e">inspect</span>() {
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`IO(</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">inspect</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">)`</span>;
+  }
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 下面的顯示值都是未執行的, 方便閱讀. 實際上我們並不知道實際的值.
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// ioWindow :: IO Window
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ioWindow</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">IO</span>(() =&gt; window);
+
+<span style="color:#a6e22e">ioWindow</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">win</span> =&gt; <span style="color:#a6e22e">win</span>.<span style="color:#a6e22e">innerWidth</span>);
+<span style="color:#75715e">// IO(1430)
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">ioWindow</span>
+  .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">prop</span>(<span style="color:#e6db74">&#39;location&#39;</span>))
+  .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">prop</span>(<span style="color:#e6db74">&#39;href&#39;</span>))
+  .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;/&#39;</span>));
+<span style="color:#75715e">// IO([&#39;http:&#39;, &#39;&#39;, &#39;localhost:8000&#39;, &#39;blog&#39;, &#39;posts&#39;])
+</span><span style="color:#75715e"></span>
+
+<span style="color:#75715e">// $ :: String -&gt; IO [DOM]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">$</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">selector</span> =&gt; <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">IO</span>(() =&gt; document.<span style="color:#a6e22e">querySelectorAll</span>(<span style="color:#a6e22e">selector</span>));
+
+<span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#myDiv&#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">head</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">div</span> =&gt; <span style="color:#a6e22e">div</span>.<span style="color:#a6e22e">innerHTML</span>);
+<span style="color:#75715e">// IO(&#39;I am some inner html&#39;)
+</span></code></pre></div><ul>
+<li>在 <code>$value()</code> 被調用之前, 都是 pure function. 最後 call <code>$value()</code> 的調用者承擔了運行的責任</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// url :: IO String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">IO</span>(() =&gt; window.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">href</span>);
+
+<span style="color:#75715e">// toPairs :: String -&gt; [[String]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toPairs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;=&#39;</span>)), <span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;&amp;&#39;</span>));
+
+<span style="color:#75715e">// params :: String -&gt; [[String]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">toPairs</span>, <span style="color:#a6e22e">last</span>, <span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;?&#39;</span>));
+
+<span style="color:#75715e">// findParam :: String -&gt; IO Maybe [String]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">findParam</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span> =&gt; <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>, <span style="color:#a6e22e">find</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">eq</span>(<span style="color:#a6e22e">key</span>), <span style="color:#a6e22e">head</span>)), <span style="color:#a6e22e">params</span>), <span style="color:#a6e22e">url</span>);
+
+<span style="color:#75715e">// -- Impure calling code ----------------------------------------------
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// run it by calling $value()!
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">findParam</span>(<span style="color:#e6db74">&#39;searchTerm&#39;</span>).<span style="color:#a6e22e">$value</span>();
+<span style="color:#75715e">// Just([&#39;searchTerm&#39;, &#39;wafflehouse&#39;])
+</span></code></pre></div><hr>
+<h3 id="asynchronous-tasks">Asynchronous Tasks</h3>
+<ul>
+<li>範例是一個 get DB connection 的 Asynchronous Task</li>
+<li>FP 的寫法一樣適用於 Asynchronous control.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Postgres.connect :: Url -&gt; IO DbConnection
+</span><span style="color:#75715e">// runQuery :: DbConnection -&gt; ResultSet
+</span><span style="color:#75715e">// readFile :: String -&gt; Task Error String
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// -- Pure application -------------------------------------------------
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// dbUrl :: Config -&gt; Either Error Url
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dbUrl</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">uname</span>, <span style="color:#a6e22e">pass</span>, <span style="color:#a6e22e">host</span>, <span style="color:#a6e22e">db</span> }) =&gt; {
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">uname</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">pass</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">host</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">db</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Either</span>.<span style="color:#66d9ef">of</span>(<span style="color:#e6db74">`db:pg://</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">uname</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">pass</span><span style="color:#e6db74">}</span><span style="color:#e6db74">@</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">host</span><span style="color:#e6db74">}</span><span style="color:#e6db74">5432/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">db</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+  }
+
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">left</span>(Error(<span style="color:#e6db74">&#39;Invalid config!&#39;</span>));
+};
+
+<span style="color:#75715e">// connectDb :: Config -&gt; Either Error (IO DbConnection)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">connectDb</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">Postgres</span>.<span style="color:#a6e22e">connect</span>), <span style="color:#a6e22e">dbUrl</span>);
+
+<span style="color:#75715e">// getConfig :: Filename -&gt; Task Error (Either Error (IO DbConnection))
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfig</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">connectDb</span>, <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>)), <span style="color:#a6e22e">readFile</span>);
+
+
+<span style="color:#75715e">// -- Impure calling code ----------------------------------------------
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">getConfig</span>(<span style="color:#e6db74">&#39;db.json&#39;</span>).<span style="color:#a6e22e">fork</span>(
+  <span style="color:#a6e22e">logErr</span>(<span style="color:#e6db74">&#39;couldn\&#39;t read file&#39;</span>),
+  <span style="color:#a6e22e">either</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>, <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">runQuery</span>)),
+);
+</code></pre></div><hr>
+<h3 id="point-functor-factory">Point functor factory</h3>
+<h4 id="pointed">Pointed</h4>
+<blockquote>
+<p>A pointed functor is a functor with an <code>of</code> method</p>
+</blockquote>
+<p><code>IO</code>, <code>Task</code> 的 constructors function(不知道中文翻譯, 姑且叫它構造函數) 期望 function as argument, 但 <code>Maybe</code>, <code>Either</code> 沒有.</p>
+<p><code>of</code> 的用途就很簡單明顯了. 為了方便讓我們把值放入 functor.</p>
+<hr>
+<h3 id="monadic-onions-monad">Monadic Onions: Monad</h3>
+<p><a href="https://en.wikipedia.org/wiki/Monad_(functional_programming)">wiki</a></p>
+<blockquote>
+<p>任何 functor 有定義 <code>join</code> &amp;&amp; <code>of</code> method, 然後服從一些基本定義就是 <code>monad</code>.</p>
+</blockquote>
+<blockquote>
+<p>Monads 是可以攤平 (透過 <code>join</code>) 的 Pointed functor (有定義 <code>of</code>)</p>
+</blockquote>
+<blockquote>
+<p>Monada 的特性是 排序計算, 分配 variable, 停止進一步執行.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">Maybe</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">join</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">join</span>() {
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">isNothing</span>() <span style="color:#f92672">?</span> <span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#66d9ef">null</span>) <span style="color:#f92672">:</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>;
+};
+
+<span style="color:#a6e22e">IO</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">join</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">unsafePerformIO</span>();
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mmo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#e6db74">&#39;nunchucks&#39;</span>));
+<span style="color:#75715e">// Maybe(Maybe(&#39;nunchucks&#39;))
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">mmo</span>.<span style="color:#a6e22e">join</span>();
+<span style="color:#75715e">// Maybe(&#39;nunchucks&#39;)
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ioio</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IO</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">IO</span>.<span style="color:#66d9ef">of</span>(<span style="color:#e6db74">&#39;pizza&#39;</span>));
+<span style="color:#75715e">// IO(IO(&#39;pizza&#39;))
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">ioio</span>.<span style="color:#a6e22e">join</span>();
+<span style="color:#75715e">// IO(&#39;pizza&#39;)
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ttt</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>(<span style="color:#e6db74">&#39;sewers&#39;</span>)));
+<span style="color:#75715e">// Task(Task(Task(&#39;sewers&#39;)));
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">ttt</span>.<span style="color:#a6e22e">join</span>();
+<span style="color:#75715e">// Task(Task(&#39;sewers&#39;))
+</span></code></pre></div><hr>
+<h3 id="transform">Transform</h3>
+<p>跟一般程式語言的 <code>intToStr</code>, <code>strToInt</code> 相同.</p>
+<p>我們也可以把 functor 轉換為另外一種 functor</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// idToMaybe :: Identity a -&gt; Maybe a
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">idToMaybe</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">$value</span>);
+
+<span style="color:#75715e">// idToIO :: Identity a -&gt; IO a
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">idToIO</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">IO</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">$value</span>);
+
+<span style="color:#75715e">// eitherToTask :: Either a b -&gt; Task a b
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">eitherToTask</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">either</span>(<span style="color:#a6e22e">Task</span>.<span style="color:#a6e22e">rejected</span>, <span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>);
+
+<span style="color:#75715e">// ioToTask :: IO a -&gt; Task () a
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ioToTask</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Task</span>((<span style="color:#a6e22e">reject</span>, <span style="color:#a6e22e">resolve</span>) =&gt; <span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">unsafePerform</span>()));
+
+<span style="color:#75715e">// maybeToTask :: Maybe a -&gt; Task () a
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">maybeToTask</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; (<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">isNothing</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">Task</span>.<span style="color:#a6e22e">rejected</span>() <span style="color:#f92672">:</span> <span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">$value</span>));
+
+<span style="color:#75715e">// arrayToMaybe :: [a] -&gt; Maybe a
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arrayToMaybe</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>[<span style="color:#ae81ff">0</span>]);
+</code></pre></div><p>根據 [Natural Transform](###https://Natural Transformation) 的定義. <code>doListyThings</code> == <code>doListyThings_</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// arrayToList :: [a] -&gt; List a
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arrayToList</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">List</span>.<span style="color:#66d9ef">of</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">doListyThings</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">sortBy</span>(<span style="color:#a6e22e">h</span>), <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">g</span>), <span style="color:#a6e22e">arrayToList</span>, <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>));
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">doListyThings_</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">sortBy</span>(<span style="color:#a6e22e">h</span>), <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">g</span>), <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>), <span style="color:#a6e22e">arrayToList</span>); <span style="color:#75715e">// law applied
+</span></code></pre></div><hr>
+<h3 id="monoids">Monoids</h3>
+<blockquote>
+<p>Monoids are about combination.</p>
+</blockquote>
+<blockquote>
+<p>What is combination?</p>
+<blockquote>
+<p>accumulation to concatenation to multiplication to choice, composition, ordering, evaluation.</p>
+</blockquote>
+</blockquote>
+<h4 id="semigroup">Semigroup</h4>
+<blockquote>
+<p>A Semigroup is a type with a concat method</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// A binary operation
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+
+<span style="color:#75715e">// We can run this on any amount of numbers
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span> ...
+
+<span style="color:#75715e">// Associativity
+</span><span style="color:#75715e"></span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>
+<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>)<span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>
+
+<span style="color:#75715e">// Semigroup
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Sum</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; ({
+  <span style="color:#a6e22e">x</span>,
+  <span style="color:#a6e22e">concat</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span> =&gt; <span style="color:#a6e22e">Sum</span>(<span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">x</span>)
+})
+
+<span style="color:#75715e">// Sum concat some other Sum always return a Sum
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">1</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">3</span>))  <span style="color:#75715e">// Sum(4)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">4</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">37</span>))  <span style="color:#75715e">// Sum(41`)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// why is this useful?
+</span><span style="color:#75715e">// Well, as with any interface
+</span><span style="color:#75715e">// we can swap out our instance to achieve different results
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Product</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; ({ <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">concat</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span> =&gt; <span style="color:#a6e22e">Product</span>(<span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">x</span>) })
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Min</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; ({ <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">concat</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span> =&gt; <span style="color:#a6e22e">Min</span>(<span style="color:#a6e22e">x</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">x</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">x</span>) })
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Max</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; ({ <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">concat</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span> =&gt; <span style="color:#a6e22e">Max</span>(<span style="color:#a6e22e">x</span> <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">x</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">x</span>) })
+</code></pre></div><h4 id="all-my-favourite-functors-are-semigroups">All my favourite functors are semigroups.</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">Identity</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">concat</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">other</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Identity</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">__value</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">__value</span>))
+}
+
+<span style="color:#a6e22e">Identity</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">4</span>)).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">Identity</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">1</span>)))
+<span style="color:#75715e">// Identity(Sum(5))
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// It is a semigroup if and only if its __value is a semigroup
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">Identity</span>.<span style="color:#66d9ef">of</span>(<span style="color:#ae81ff">4</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">Identity</span>.<span style="color:#66d9ef">of</span>(<span style="color:#ae81ff">1</span>))
+<span style="color:#75715e">// TypeError: this.__value.concat is not a function
+</span></code></pre></div><p>借由這樣的特性, concat 可以幫助我們堆疊這些 segigroups 成 cascading(級聯) 組合</p>
+<p>並且很清楚的被表示</p>
+<blockquote>
+<p>Anything made up entirely of semigroups, is itself, a semigroup.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Example 1:
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// formValues :: Selector -&gt; IO (Map String String)
+</span><span style="color:#75715e">// validate :: Map String String -&gt; Either Error (Map String String)
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">formValues</span>(<span style="color:#e6db74">&#39;#signup&#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">validate</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">formValues</span>(<span style="color:#e6db74">&#39;#terms&#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">validate</span>))
+<span style="color:#75715e">// IO(Right(Map({username: &#39;andre3000&#39;, accepted: true})))
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">formValues</span>(<span style="color:#e6db74">&#39;#signup&#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">validate</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">formValues</span>(<span style="color:#e6db74">&#39;#terms&#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">validate</span>))
+<span style="color:#75715e">// IO(Left(&#39;one must accept our totalitarian agreement&#39;))
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">serverA</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/friends&#39;</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">serverB</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/friends&#39;</span>))
+<span style="color:#75715e">// Task([friend1, friend2])
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// loadSetting :: String -&gt; Task Error (Maybe (Map String Boolean))
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">loadSetting</span>(<span style="color:#e6db74">&#39;email&#39;</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">loadSetting</span>(<span style="color:#e6db74">&#39;general&#39;</span>))
+<span style="color:#75715e">// Task(Maybe(Map({backgroundColor: true, autoSave: false})))
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Example 2:
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Analytics</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">clicks</span>, <span style="color:#a6e22e">path</span>, <span style="color:#a6e22e">idleTime</span>) =&gt; ({
+  <span style="color:#a6e22e">clicks</span>,
+  <span style="color:#a6e22e">path</span>,
+  <span style="color:#a6e22e">idleTime</span>,
+  <span style="color:#a6e22e">concat</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span> =&gt;
+    <span style="color:#a6e22e">Analytics</span>(<span style="color:#a6e22e">clicks</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">clicks</span>), <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">path</span>), <span style="color:#a6e22e">idleTime</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">idleTime</span>))
+})
+
+<span style="color:#a6e22e">Analytics</span>(<span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">2</span>), [<span style="color:#e6db74">&#39;/home&#39;</span>, <span style="color:#e6db74">&#39;/about&#39;</span>], <span style="color:#a6e22e">Right</span>(<span style="color:#a6e22e">Max</span>(<span style="color:#ae81ff">2000</span>))).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">Analytics</span>(<span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">1</span>), [<span style="color:#e6db74">&#39;/contact&#39;</span>], <span style="color:#a6e22e">Right</span>(<span style="color:#a6e22e">Max</span>(<span style="color:#ae81ff">1000</span>))))
+<span style="color:#75715e">// Analytics(Sum(3), [&#39;/home&#39;, &#39;/about&#39;, &#39;/contact&#39;], Right(Max(2000)))
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Case where we ignore what&#39;s inside and combine the containers themselves.
+</span><span style="color:#75715e">// Consider a type like Stream.
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">submitStream</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Stream</span>.<span style="color:#a6e22e">fromEvent</span>(<span style="color:#e6db74">&#39;click&#39;</span>, <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#submit&#39;</span>))
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">enterStream</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;Enter&#39;</span>, <span style="color:#a6e22e">Stream</span>.<span style="color:#a6e22e">fromEvent</span>(<span style="color:#e6db74">&#39;keydown&#39;</span>, <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#myForm&#39;</span>)))
+
+<span style="color:#a6e22e">submitStream</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">enterStream</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">submitForm</span>) <span style="color:#75715e">// Stream()
+</span></code></pre></div><h4 id="zero-acts">Zero acts</h4>
+<blockquote>
+<p>Zero acts as identity meaning any element added to 0, will return that very same element.</p>
+</blockquote>
+<blockquote>
+<p>a.k.a neutral/empty element</p>
+</blockquote>
+<blockquote>
+<p>實際用途上它們是扮演 default 值的角色</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// identity
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+Array.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; []
+String.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#e6db74">&#34;&#34;</span>
+<span style="color:#a6e22e">Sum</span>.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">0</span>)
+<span style="color:#a6e22e">Product</span>.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">Product</span>(<span style="color:#ae81ff">1</span>)
+<span style="color:#a6e22e">Min</span>.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">Min</span>(<span style="color:#66d9ef">Infinity</span>)
+<span style="color:#a6e22e">Max</span>.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">Max</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Infinity</span>)
+<span style="color:#a6e22e">All</span>.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">All</span>(<span style="color:#66d9ef">true</span>)
+<span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">Any</span>(<span style="color:#66d9ef">false</span>)
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">settings</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">prefix</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">overrides</span><span style="color:#f92672">=</span>[], <span style="color:#a6e22e">total</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>) =&gt; ...
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">settings</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">prefix</span><span style="color:#f92672">=</span>String.<span style="color:#a6e22e">empty</span>(), <span style="color:#a6e22e">overrides</span><span style="color:#f92672">=</span>Array.<span style="color:#a6e22e">empty</span>(), <span style="color:#a6e22e">total</span><span style="color:#f92672">=</span><span style="color:#a6e22e">Sum</span>.<span style="color:#a6e22e">empty</span>()) =&gt; ...
+</code></pre></div><h4 id="folding-down-the-house">Folding down the house</h4>
+<p>如果對 empty array 使用 concat 會導致 TypeError. 但如果搭配 Zero Acts, 就像下面的 <code>fold</code> function 一樣會帶來意想不到的效果</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// concat :: Semigroup s =&gt; s -&gt; s -&gt; s
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">concat</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">y</span> =&gt; <span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">y</span>)
+
+[<span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">1</span>), <span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">2</span>)].<span style="color:#a6e22e">reduce</span>(<span style="color:#a6e22e">concat</span>) <span style="color:#75715e">// Sum(3)
+</span><span style="color:#75715e"></span>
+[].<span style="color:#a6e22e">reduce</span>(<span style="color:#a6e22e">concat</span>) <span style="color:#75715e">// TypeError: Reduce of empty array with no initial value
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// fold :: Monoid m =&gt; m -&gt; [m] -&gt; m
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fold</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reduce</span>(<span style="color:#a6e22e">concat</span>)
+
+<span style="color:#a6e22e">fold</span>(<span style="color:#a6e22e">Sum</span>.<span style="color:#a6e22e">empty</span>(), [<span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">1</span>), <span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">2</span>)])
+<span style="color:#75715e">// Sum(3)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">fold</span>(<span style="color:#a6e22e">Sum</span>.<span style="color:#a6e22e">empty</span>(), [])
+<span style="color:#75715e">// Sum(0)
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">fold</span>(<span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">empty</span>(), [<span style="color:#a6e22e">Any</span>(<span style="color:#66d9ef">false</span>), <span style="color:#a6e22e">Any</span>(<span style="color:#66d9ef">true</span>)])
+<span style="color:#75715e">// Any(true)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">fold</span>(<span style="color:#a6e22e">Any</span>.<span style="color:#a6e22e">empty</span>(), [])
+<span style="color:#75715e">// Any(false)
+</span><span style="color:#75715e"></span>
+
+<span style="color:#a6e22e">fold</span>(<span style="color:#a6e22e">Either</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">Max</span>.<span style="color:#a6e22e">empty</span>()), [<span style="color:#a6e22e">Right</span>(<span style="color:#a6e22e">Max</span>(<span style="color:#ae81ff">3</span>)), <span style="color:#a6e22e">Right</span>(<span style="color:#a6e22e">Max</span>(<span style="color:#ae81ff">21</span>)), <span style="color:#a6e22e">Right</span>(<span style="color:#a6e22e">Max</span>(<span style="color:#ae81ff">11</span>))])
+<span style="color:#75715e">// Right(Max(21))
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">fold</span>(<span style="color:#a6e22e">Either</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">Max</span>.<span style="color:#a6e22e">empty</span>()), [<span style="color:#a6e22e">Right</span>(<span style="color:#a6e22e">Max</span>(<span style="color:#ae81ff">3</span>)), <span style="color:#a6e22e">Left</span>(<span style="color:#e6db74">&#39;error retrieving value&#39;</span>), <span style="color:#a6e22e">Right</span>(<span style="color:#a6e22e">Max</span>(<span style="color:#ae81ff">11</span>))])
+<span style="color:#75715e">// Left(&#39;error retrieving value&#39;)
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">fold</span>(<span style="color:#a6e22e">IO</span>.<span style="color:#66d9ef">of</span>([]), [<span style="color:#e6db74">&#39;.link&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>].<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">$</span>))
+<span style="color:#75715e">// IO([&lt;a&gt;, &lt;button class=&#34;link&#34;/&gt;, &lt;a&gt;])
+</span></code></pre></div><h4 id="not-quite-a-monoid">Not quite a monoid</h4>
+<p>有些 semigroups 不是 monoids. 無法提供初始 empty value. Like <code>First</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">First</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; ({ <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">concat</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span> =&gt; <span style="color:#a6e22e">First</span>(<span style="color:#a6e22e">x</span>) })
+
+<span style="color:#a6e22e">Map</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">First</span>(<span style="color:#ae81ff">123</span>), <span style="color:#a6e22e">isPaid</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Any</span>(<span style="color:#66d9ef">true</span>), <span style="color:#a6e22e">points</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">13</span>)}).<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">Map</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">First</span>(<span style="color:#ae81ff">2242</span>), <span style="color:#a6e22e">isPaid</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Any</span>(<span style="color:#66d9ef">false</span>), <span style="color:#a6e22e">points</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Sum</span>(<span style="color:#ae81ff">1</span>)}))
+<span style="color:#75715e">// Map({id: First(123), isPaid: Any(true), points: Sum(14)})
+</span></code></pre></div><h4 id="grand-unifying-theory">Grand unifying theory</h4>
+<h5 id="composition-as-a-monoid">Composition as a monoid</h5>
+<p>Functions of type <code>a -&gt; a</code>,
+where the domain is in the same set as the codemain, are called <code>endomorphisms</code>.
+我們可以實作 <code>Endo</code> function 去達成</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Endo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">run</span> =&gt; ({
+  <span style="color:#a6e22e">run</span>,
+  <span style="color:#a6e22e">concat</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span> =&gt;
+    <span style="color:#a6e22e">Endo</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">run</span>, <span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">run</span>))
+})
+
+<span style="color:#a6e22e">Endo</span>.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">Endo</span>(<span style="color:#a6e22e">identity</span>)
+
+
+<span style="color:#75715e">// in action
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// thingDownFlipAndReverse :: Endo [String] -&gt; [String]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">thingDownFlipAndReverse</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fold</span>(<span style="color:#a6e22e">Endo</span>(() =&gt; []), [<span style="color:#a6e22e">Endo</span>(<span style="color:#a6e22e">reverse</span>), <span style="color:#a6e22e">Endo</span>(<span style="color:#a6e22e">sort</span>), <span style="color:#a6e22e">Endo</span>(<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#39;thing down&#39;</span>)])
+
+<span style="color:#a6e22e">thingDownFlipAndReverse</span>.<span style="color:#a6e22e">run</span>([<span style="color:#e6db74">&#39;let me work it&#39;</span>, <span style="color:#e6db74">&#39;is it worth it?&#39;</span>])
+<span style="color:#75715e">// [&#39;thing down&#39;, &#39;let me work it&#39;, &#39;is it worth it?&#39;]
+</span></code></pre></div><h5 id="monad-as-a-monoid">Monad as a monoid</h5>
+<p>這個範例有些複雜, 建議 Google</p>
+<p><a href="https://medium.com/@michelestieven/a-monad-is-just-a-monoid-a02bd2524f66">https://medium.com/@michelestieven/a-monad-is-just-a-monoid-a02bd2524f66</a></p>
+<h5 id="applicative-as-a-monoid">Applicative as a monoid</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// concat :: f a -&gt; f b -&gt; f [a, b]
+</span><span style="color:#75715e">// empty :: () -&gt; f ()
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// ap :: Functor f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ap</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">map</span>(([<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">x</span>]) =&gt; <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">x</span>)), <span style="color:#a6e22e">concat</span>)
+</code></pre></div><hr>
+<h2 id="toolkits">Toolkits</h2>
+<hr>
+<h3 id="carry-function">Carry function</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">add</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">x</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">y</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y</span>
+    }
+}
+</code></pre></div><ul>
+<li>你可以一次性呼叫 curry function, 也可以每次只傳遞一部份參數</li>
+<li>每傳遞一個參數就回傳一個 function 處理剩下的參數</li>
+<li>pre-load</li>
+</ul>
+<hr>
+<h3 id="compose-function">Compose function</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">compose</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">g</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">x</span>) {
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">g</span>(<span style="color:#a6e22e">x</span>));
+  };
+};
+</code></pre></div><ul>
+<li>
+<p><code>g</code> 先執行, 再執行 <code>f</code>, <code>compose</code> 在 <code>g</code>, <code>f</code> 中建立了由右而左的資料流</p>
+</li>
+<li>
+<p><code>Associativity</code> 結合律, 無論怎麼組合結果都是相同的</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">associative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">g</span>, <span style="color:#a6e22e">h</span>)) <span style="color:#f92672">==</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">g</span>), <span style="color:#a6e22e">h</span>);
+</code></pre></div><hr>
+<h3 id="chain-pattern">Chain pattern</h3>
+<p><strong>Also called flatMap or <code>&gt;&gt;= (bind)</code>. Call join after map</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Chain :: Monad m =&gt; (a -&gt; m b) -&gt; ma -&gt; m b
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">chain</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">m</span>) =&gt; <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>).<span style="color:#a6e22e">join</span>());
+
+<span style="color:#75715e">// or
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Chain :: Monad m =&gt; (a -&gt; m b) -&gt; m a -&gt; m b
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">chain</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">f</span> =&gt; <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">join</span>, <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>))
+</code></pre></div><p>這邊是用 <code>chain</code> 重構 <code>map + join</code> 的例子</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// map/join
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">firstAddressStreet</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(
+  <span style="color:#a6e22e">join</span>,
+  <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">safeProp</span>(<span style="color:#e6db74">&#39;street&#39;</span>)),
+  <span style="color:#a6e22e">join</span>,
+  <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">safeHead</span>),
+  <span style="color:#a6e22e">safeProp</span>(<span style="color:#e6db74">&#39;addresses&#39;</span>),
+);
+
+<span style="color:#75715e">// chain
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">firstAddressStreet</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(
+  <span style="color:#a6e22e">chain</span>(<span style="color:#a6e22e">safeProp</span>(<span style="color:#e6db74">&#39;street&#39;</span>)),
+  <span style="color:#a6e22e">chain</span>(<span style="color:#a6e22e">safeHead</span>),
+  <span style="color:#a6e22e">safeProp</span>(<span style="color:#e6db74">&#39;addresses&#39;</span>),
+);
+
+<span style="color:#75715e">// map/join
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">applyPreferences</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(
+  <span style="color:#a6e22e">join</span>,
+  <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">setStyle</span>(<span style="color:#e6db74">&#39;#main&#39;</span>)),
+  <span style="color:#a6e22e">join</span>,
+  <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">log</span>),
+  <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>),
+  <span style="color:#a6e22e">getItem</span>,
+);
+
+<span style="color:#75715e">// chain
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">applyPreferences</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(
+  <span style="color:#a6e22e">chain</span>(<span style="color:#a6e22e">setStyle</span>(<span style="color:#e6db74">&#39;#main&#39;</span>)),
+  <span style="color:#a6e22e">chain</span>(<span style="color:#a6e22e">log</span>),
+  <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>),
+  <span style="color:#a6e22e">getItem</span>,
+);
+</code></pre></div><hr>
+<h3 id="applicative-functors">Applicative Functors</h3>
+<blockquote>
+<p>__An applicative functor is a pointed functor with an <code>ap</code> method</p>
+</blockquote>
+<h4 id="ap-function"><code>ap</code> function</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 基本定義
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Container</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">ap</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">otherContainer</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">otherContainer</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>);
+};
+</code></pre></div><blockquote>
+<p><code>map</code> <code>f</code> is equivalent to <code>ap</code> a functor of f.</p>
+</blockquote>
+<blockquote>
+<p>We can place <code>x</code> into our container and <code>map(f)</code> OR we can lift both <code>f</code> &amp; <code>x</code> into our constainer and <code>ap</code> them.</p>
+</blockquote>
+<blockquote>
+<p>of/ap is equivalent to <code>map</code></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">F</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>) <span style="color:#f92672">===</span> <span style="color:#a6e22e">F</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">f</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">F</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>));
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 簡單範例
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">add</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#ae81ff">2</span>)).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">Maybe</span>.<span style="color:#66d9ef">of</span>(<span style="color:#ae81ff">3</span>));
+<span style="color:#75715e">// Maybe(5)
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">add</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>(<span style="color:#ae81ff">2</span>)).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>(<span style="color:#ae81ff">3</span>));
+<span style="color:#75715e">// Task(5)
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">
+<span style="color:#75715e">// Http.get :: String -&gt; Task Error HTML
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">renderPage</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">destinations</span>, <span style="color:#a6e22e">events</span>) =&gt; { <span style="color:#75715e">/* render page */</span> });
+
+<span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">renderPage</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">Http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/destinations&#39;</span>)).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">Http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/events&#39;</span>));
+<span style="color:#75715e">// Task(&#34;&lt;div&gt;some page with dest and events&lt;/div&gt;&#34;)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Http calls 會一起發動, 然後 render page 因為是 curry function 所以並不會等兩個都完成才 render.
+</span></code></pre></div><blockquote>
+<p><code>ap</code> function 的一項好處是可以 concurrently 執行</p>
+</blockquote>
+<blockquote>
+<p><code>ap</code> will never change container types on us</p>
+</blockquote>
+<h4 id="laws-of-ap-function">Laws of ap function</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Identity 
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">id</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">v</span>) <span style="color:#f92672">===</span> <span style="color:#a6e22e">v</span>;
+
+<span style="color:#75715e">// Identity example.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">v</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Identity</span>.<span style="color:#66d9ef">of</span>(<span style="color:#e6db74">&#39;Pillow Pets&#39;</span>);
+<span style="color:#a6e22e">Identity</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">id</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">v</span>) <span style="color:#f92672">===</span> <span style="color:#a6e22e">v</span>;
+
+<span style="color:#75715e">// Homomorhpism
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">f</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>)) <span style="color:#f92672">===</span> <span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">x</span>));
+
+<span style="color:#75715e">// Homomorhpism example.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Either</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">toUpperCase</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">Either</span>.<span style="color:#66d9ef">of</span>(<span style="color:#e6db74">&#39;oreos&#39;</span>)) <span style="color:#f92672">===</span> <span style="color:#a6e22e">Either</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">toUpperCase</span>(<span style="color:#e6db74">&#39;oreos&#39;</span>));
+
+<span style="color:#75715e">// Interchange: doesn&#39;t matter if we choose to lift our function into left or right side of `ap`
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">x</span>)) <span style="color:#f92672">==</span> <span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">f</span> =&gt; <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">x</span>)).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">v</span>);
+
+<span style="color:#75715e">// Composition: A way to check that our standard function composition holds when applying inside of containers.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>(<span style="color:#a6e22e">compose</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">u</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">v</span>).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">w</span>) <span style="color:#f92672">===</span> <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">w</span>));
+</code></pre></div><h3 id="traversable-interface">Traversable interface</h3>
+<blockquote>
+<p>Traversable is a powerful interface that gives us the ability to rearrange our types with the ease of a telekinetic interior decorator. We can achieve different effects with different orders as well as iron out those nasty type wrinkles that keep us from joining them down</p>
+</blockquote>
+<p>Traversable 有兩個重要的 function <code>sequence</code>, <code>traverse</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// sequence :: (Traversable t, Applicative f) =&gt; (a -&gt; f a) -&gt; t (f a) -&gt; f (t a)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sequence</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curry</span>((<span style="color:#66d9ef">of</span>, <span style="color:#a6e22e">x</span>) =&gt; <span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">sequence</span>(<span style="color:#66d9ef">of</span>));
+
+<span style="color:#75715e">// traverse
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">traverse</span>(<span style="color:#66d9ef">of</span>, <span style="color:#a6e22e">fn</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$value</span>.<span style="color:#a6e22e">reduce</span>(
+    (<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">a</span>) =&gt; <span style="color:#a6e22e">fn</span>(<span style="color:#a6e22e">a</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">b</span> =&gt; <span style="color:#a6e22e">bs</span> =&gt; <span style="color:#a6e22e">bs</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">b</span>)).<span style="color:#a6e22e">ap</span>(<span style="color:#a6e22e">f</span>),
+    <span style="color:#66d9ef">of</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">List</span>([])),
+  );
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Example 1
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// readFile :: FileName -&gt; Task Error String
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// firstWords :: String -&gt; String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">firstWords</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">intercalate</span>(<span style="color:#e6db74">&#39; &#39;</span>), <span style="color:#a6e22e">take</span>(<span style="color:#ae81ff">3</span>), <span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39; &#39;</span>));
+
+<span style="color:#75715e">// tldr :: FileName -&gt; Task Error String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">tldr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">firstWords</span>), <span style="color:#a6e22e">readFile</span>);
+
+<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">tldr</span>, [<span style="color:#e6db74">&#39;file1&#39;</span>, <span style="color:#e6db74">&#39;file2&#39;</span>]);
+<span style="color:#75715e">// [Task(&#39;hail the monarchy&#39;), Task(&#39;smash the patriarchy&#39;)]
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 這邊的 result 是 List of Tasks. 但更好的話會希望是 list of results
+</span><span style="color:#75715e"></span>
+
+<span style="color:#a6e22e">traverse</span>(<span style="color:#a6e22e">Task</span>.<span style="color:#66d9ef">of</span>, <span style="color:#a6e22e">tldr</span>, [<span style="color:#e6db74">&#39;file1&#39;</span>, <span style="color:#e6db74">&#39;file2&#39;</span>]);
+<span style="color:#75715e">// Task([&#39;hail the monarchy&#39;, &#39;smash the patriarchy&#39;]);
+</span><span style="color:#75715e">// After refactor
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Example 2
+</span><span style="color:#75715e">// getAttribute :: String -&gt; Node -&gt; Maybe String
+</span><span style="color:#75715e">// $ :: Selector -&gt; IO Node
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// getControlNode :: Selector -&gt; IO (Maybe (IO Node))
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getControlNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">$</span>)), <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">getAttribute</span>(<span style="color:#e6db74">&#39;aria-controls&#39;</span>)), <span style="color:#a6e22e">$</span>);
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getControlNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">chain</span>(<span style="color:#a6e22e">traverse</span>(<span style="color:#a6e22e">IO</span>.<span style="color:#66d9ef">of</span>, <span style="color:#a6e22e">$</span>)), <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">getAttribute</span>(<span style="color:#e6db74">&#39;aria-controls&#39;</span>)), <span style="color:#a6e22e">$</span>);
+<span style="color:#75715e">// After refactor
+</span></code></pre></div><h4 id="natural-consequence">Natural Consequence</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">traverse</span>(<span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>, <span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>) <span style="color:#f92672">===</span> <span style="color:#a6e22e">A</span>.<span style="color:#66d9ef">of</span>;
+</code></pre></div><hr>
+<h2 id="theory">Theory</h2>
+<h3 id="free-in-theorem">Free in Theorem</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// head :: [a] -&gt; a
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">head</span>) <span style="color:#f92672">===</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">head</span>, <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>));
+
+<span style="color:#75715e">// filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>), <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">p</span>, <span style="color:#a6e22e">f</span>))) <span style="color:#f92672">===</span> <span style="color:#a6e22e">compose</span>(<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">p</span>), <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">f</span>));
+</code></pre></div><p>head 跟 filter 這兩個 example 的結果是一樣的. 當然效能上有差, 但結果來說沒有問題</p>
+<hr>
+<h3 id="natural-transformation">Natural Transformation</h3>
+<p><img src="/img/mostly-adequate-guide-to-fp/natural_transformation.png" alt=""></p>
+<p><strong>待補</strong></p>
+<h2 id="source">Source</h2>
+<p><a href="https://www.youtube.com/watch?v=Nrp_LZ-XGsY&amp;ab_channel=NDCConferences">https://www.youtube.com/watch?v=Nrp_LZ-XGsY&amp;ab_channel=NDCConferences</a>
+<a href="https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf">https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf</a></p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jneo8" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,
+      {
+        delimiters: [
+          {left: '$$', right: '$$', display:true},
+          {left: '$', right: '$', display:false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ]
+      }
+    );"></script>
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+          2020 -
+        
+        2021
+         jneo8 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+        
+        <script src="/js/dark-mode.min.0213e1773e6d1c5a644f847c67a6f8abac49a3776e2976f6008038af8c5b76a1.js"></script>
+      
+    
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-171057898-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+    
+
+    
+  </body>
+
+</html>
