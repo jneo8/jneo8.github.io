@@ -4,7 +4,42 @@
   
   <url>
     <loc>https://jneo8.github.io/categories/</loc>
-    <lastmod>2021-03-30T22:11:18+08:00</lastmod>
+    <lastmod>2021-04-16T22:00:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/tags/python/</loc>
+    <lastmod>2021-04-16T22:00:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/series/python/</loc>
+    <lastmod>2021-04-16T22:00:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/categories/python/</loc>
+    <lastmod>2021-04-16T22:00:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/series/</loc>
+    <lastmod>2021-04-16T22:00:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/tags/</loc>
+    <lastmod>2021-04-16T22:00:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/tags/typing/</loc>
+    <lastmod>2021-04-16T22:00:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jneo8.github.io/posts/why-mypy/</loc>
+    <lastmod>2021-04-16T22:00:47+08:00</lastmod>
   </url>
   
   <url>
@@ -19,11 +54,6 @@
   
   <url>
     <loc>https://jneo8.github.io/posts/thefunctionalprogrammerstoolkit/</loc>
-    <lastmod>2021-03-30T22:11:18+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/tags/</loc>
     <lastmod>2021-03-30T22:11:18+08:00</lastmod>
   </url>
   
@@ -54,11 +84,6 @@
   
   <url>
     <loc>https://jneo8.github.io/posts/flink-invalidclassexception/</loc>
-    <lastmod>2021-01-15T10:23:13+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jneo8.github.io/series/</loc>
     <lastmod>2021-01-15T10:23:13+08:00</lastmod>
   </url>
   

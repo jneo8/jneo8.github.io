@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on jneo8.github.io</title>
+    <link>https://jneo8.github.io/categories/python/</link>
+    <description>Recent content in python on jneo8.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 Apr 2021 22:00:47 +0800</lastBuildDate><atom:link href="https://jneo8.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why Mypy?</title>
+      <link>https://jneo8.github.io/posts/why-mypy/</link>
+      <pubDate>Fri, 16 Apr 2021 22:00:47 +0800</pubDate>
+      
+      <guid>https://jneo8.github.io/posts/why-mypy/</guid>
+      <description>Why Mypy? What is Mypy? Mypy 是一個 static type checker for Python3 &amp;amp; Python2.7.
+嗯, static type checker. 一定會有一些朋友問說為什麼 python 需要 type checker. python 不是 dynamic-typed language 嘛? 要檢查 type 就不要寫 python 了阿
+沒關係我們慢慢解釋
+PEP &amp;ndash; 483 The Theory of Type Hints &amp;amp;&amp;amp; PEP 484 &amp;ndash; Type Hints PEP483, PEP484 是由 Guido van Rossum, Jukka Lehtosalo, Lukasz Langa 在 2014年提出的. 最後實現在了 python 3.5 上
+# 就像這樣可以指定回傳的 type -&amp;gt; str def func_a(a: str, b: str) -&amp;gt; str: return a + b 值得注意的一個特性是: python 的 type hints 是 Function Annotations, function annotations 是沒有強制力的.</description>
+    </item>
+    
+  </channel>
+</rss>
