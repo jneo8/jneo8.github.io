@@ -1,0 +1,54 @@
+{
+  "choices": [],
+  "macros": [
+    {
+      "name": "IMDB movies",
+      "id": "751c42ea-a784-4970-81cf-781bdabf6a66",
+      "commands": [
+        {
+          "name": "movies",
+          "type": "UserScript",
+          "id": "4fa77130-d2fd-42d0-9c03-71155e61228a",
+          "path": "scripts/movies.js",
+          "settings": {
+            "OMDb API Key": "85d68e1"
+          }
+        },
+        {
+          "name": "IMDB Template",
+          "type": "NestedChoice",
+          "id": "a851b61d-7b29-4bbf-80eb-c1114c421776",
+          "choice": {
+            "id": "94f6670c-d32a-4ba8-98a2-3ca099dd2a2d",
+            "name": "IMDB Template",
+            "type": "Template",
+            "command": false,
+            "templatePath": "Movie/MovieTemplate",
+            "fileNameFormat": {
+              "enabled": true,
+              "format": "{{VALUE:fileName}}"
+            },
+            "folder": {
+              "enabled": true,
+              "folders": [
+                "Movie"
+              ],
+              "chooseWhenCreatingNote": false,
+              "createInSameFolderAsActiveFile": false
+            },
+            "appendLink": false,
+            "incrementFileName": false,
+            "openFileInNewTab": {
+              "enabled": false,
+              "direction": "vertical",
+              "focus": true
+            },
+            "openFile": false,
+            "openFileInMode": "default"
+          }
+        }
+      ],
+      "runOnStartup": false
+    }
+  ]
+}
