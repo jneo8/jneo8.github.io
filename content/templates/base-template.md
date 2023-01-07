@@ -1,7 +1,7 @@
 --- 
 UID: <% tp.date.now(string="YYYYMMDDHHmm") %>
-draft: true
 title: "<% tp.file.title %>"
+draft: true
 tags:
 - articles
 ---
