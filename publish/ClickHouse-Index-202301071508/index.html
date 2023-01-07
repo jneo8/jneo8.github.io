@@ -1,0 +1,158 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="ClickHouse Index-202301071508 Summary How Clickhouse index work?
+Notes 介紹 Index 前, 先介紹一下 Clickhouse MergeTree 的儲存結構
+Partition 一個 Partition 可以有多個 parts. Clickhouse 每次 bulk insert 都會產生新的 part file, 相同 Partition 的 part 會在 insert 完後 10-15分鐘 merge, 合併一個 part file"><title>ClickHouse Index-202301071508</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://jneo8.com//icon.png><link href=https://jneo8.com/styles.706bb6073ba85d26809f9096dae23a6b.min.css rel=stylesheet><link href=https://jneo8.com/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://jneo8.com/js/darkmode.f52bbb93a2caaffeee5a05995b383961.min.js></script>
+<script src=https://jneo8.com/js/util.5e39932758f9ecaf45fd54506ed61416.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script src=https://jneo8.com/js/popover.6da9b273c092cc16fc1aa904d71a2163.min.js></script>
+<script src=https://jneo8.com/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
+<script src=https://jneo8.com/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
+<script src=https://jneo8.com/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://jneo8.com/",fetchData=Promise.all([fetch("https://jneo8.com/indices/linkIndex.d6272384180824219ab92b1d95454584.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://jneo8.com/indices/contentIndex.84a3f080282cf10025f595da7477fefe.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://jneo8.com",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://jneo8.com",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/jneo8.com\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-171057898-1","auto"),ga("send","pageview"))</script><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://jneo8.com/js/full-text-search.51f0b1753e9b30839d053f8a98cc20d1.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://jneo8.com/>jneo8.com</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>ClickHouse Index-202301071508</h1><p class=meta>Last updated
+Jan 7, 2023
+<a href=https://github.com/jneo8/jneo8.github.io/tree/hugo/content/publish/ClickHouse%20Index-202301071508.md rel=noopener>Edit Source</a></p><ul class=tags><li><a href=https://jneo8.com/tags/articles/>Articles</a></li><li><a href=https://jneo8.com/tags/clickhouse/>Clickhouse</a></li><li><a href=https://jneo8.com/tags/database-index/>Database index</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#partition>Partition</a></li><li><a href=#primary-key>Primary Key</a><ol><li><a href=#granules>Granules</a></li><li><a href=#block>Block</a></li></ol></li><li><a href=#index>Index</a><ol><li><a href=#所以整個過程是什麼->所以整個過程是什麼 ?</a></li></ol></li><li><a href=#tips>Tips</a></li></ol></nav></details></aside><a href=#clickhouse-index-202301071508><h1 id=clickhouse-index-202301071508><span class=hanchor arialabel=Anchor># </span>ClickHouse Index-202301071508</h1></a><a href=#summary><h1 id=summary><span class=hanchor arialabel=Anchor># </span>Summary</h1></a><p>How Clickhouse index work?</p><a href=#notes><h1 id=notes><span class=hanchor arialabel=Anchor># </span>Notes</h1></a><p>介紹 Index 前, 先介紹一下 Clickhouse MergeTree 的儲存結構</p><a href=#partition><h2 id=partition><span class=hanchor arialabel=Anchor># </span>Partition</h2></a><p>一個 Partition 可以有多個 parts. Clickhouse 每次 bulk insert 都會產生新的 part file, 相同 Partition 的 part 會在 insert 完後 10-15分鐘 merge, 合併一個 part file</p><p>Partition Format 有兩種: <code>Wide</code>, <code>Compact</code></p><ul><li><code>Wide</code>: Column 分開儲存, default.</li><li><code>Compact</code>: 所有 Column 一起儲存, 適合頻率大, 小量的 insert.</li></ul><p>文件中有一段話講 partition key 的設計</p><blockquote><p>A merge only works for data parts that have the same value for the partitioning expression.</p><p>This means you shouldn’t make overly granular partitions (more than about a thousand partitions). Otherwise, the SELECT query performs poorly because of an unreasonably large number of files in the file system and open file descriptors.</p></blockquote><p>白話就是 partition 在 table 內不應該過多, 會降低 select 效能. 自己的心得就是針對不同的 data source 選擇適合的 partition key 可以有效改善效能瓶頸</p><a href=#primary-key><h2 id=primary-key><span class=hanchor arialabel=Anchor># </span>Primary Key</h2></a><p>跟一般 RMDB 不同的是, Clickhouse Primary Key 並沒有表示重複數據的意思.
+而是依照 Primary Key 排序. 由於 Clickhouse 內可以設定多個 Primary Key, 比如說 <strong>(Area, UserID)</strong>, 表示說 Part 內數據先依照 <strong>Area</strong> 排序, <strong>Area</strong> 內再依照 <strong>UserID</strong> 排序.</p><a href=#granules><h3 id=granules><span class=hanchor arialabel=Anchor># </span>Granules</h3></a><p>Granules 是 Clickhouse data 的最小單位, granules 包含一個數量的 rows. Clickhouse 會拿 granules 第一筆資料的 Primary Key 當 mark.</p><ul><li><p>針對每個 Part, 會有個 index file <code>.idx</code> 儲存這些 mark value.</p></li><li><p>針對每個 Columns, 就算不是 Primary Key, 也會儲存這些 mark. <code>.mrk</code> (透過 mark 在 column file 找資料)</p></li></ul><blockquote><ul><li><code>.idx</code> 存這些 mark value, <code>.mrk</code> 則是存兩個偏移值 <code>.bin 的偏移值定位到 compressed block</code> & <code>compressed block 解壓後的文件偏移量</code></li></ul></blockquote><a href=#block><h3 id=block><span class=hanchor arialabel=Anchor># </span>Block</h3></a><p>Block 是 Clickhouse Column 的壓縮單位, 包含多個 Granules, 至於是多少要看
+<a href=https://clickhouse.tech/docs/en/operations/settings/settings/#min-compress-block-size rel=noopener>min_compress_block_size</a> &
+<a href=https://clickhouse.tech/docs/en/operations/settings/settings/#max-compress-block-size rel=noopener>max_compress_block_size</a>決定.</p><ul><li>每次寫入一個 Granules (default <code>index_granularity</code> 8192 rows), Clickhouse 會檢查 data size<ul><li>如果 &lt; <code>min_compress_block_size</code> 會繼續拿取 data</li><li>如果 > <code>min_compress_block_size</code> & &lt; <code>max_compress_block_size</code> 會壓縮並寫入磁碟</li><li>如果 > <code>max_compress_block_size</code>, 會依照 <code>compress_block_size</code> 截斷並生成 block</li></ul></li></ul><p>一個 <code>.bin (Date file)</code> 內包含多個 compress block</p><p>結構圖如下:</p><p><img src=https://jneo8.com//img/clickhouse/clickhouse-mergetree-layout-within-a-single-part.jpg width=auto alt></p><hr><a href=#index><h2 id=index><span class=hanchor arialabel=Anchor># </span>Index</h2></a><p>所以 Select Index 如何發揮作用呢 ？</p><ul><li>Create Table T ORDER BY A<ul><li>A 有 Primary Index, B 沒有</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>T</span><span class=p>(</span><span class=n>A</span><span class=w> </span><span class=nb>Int</span><span class=p>,</span><span class=w> </span><span class=n>B</span><span class=w> </span><span class=nb>Int</span><span class=p>)</span><span class=w> </span><span class=n>MergeTree</span><span class=w> </span><span class=k>order</span><span class=w> </span><span class=k>by</span><span class=w> </span><span class=n>A</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><ul><li>這邊 insert 三次, 所以會有三個 part 產生</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>insert</span><span class=w> </span><span class=k>into</span><span class=w> </span><span class=n>T</span><span class=w> </span><span class=k>values</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>insert</span><span class=w> </span><span class=k>into</span><span class=w> </span><span class=n>T</span><span class=w> </span><span class=k>values</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>insert</span><span class=w> </span><span class=k>into</span><span class=w> </span><span class=n>T</span><span class=w> </span><span class=k>values</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>select</span><span class=w> </span><span class=k>database</span><span class=p>,</span><span class=w> </span><span class=k>table</span><span class=p>,</span><span class=w> </span><span class=n>name</span><span class=p>,</span><span class=w> </span><span class=n>primary_key_bytes_in_memory</span><span class=p>,</span><span class=w> </span><span class=n>marks_bytes</span><span class=p>,</span><span class=w> </span><span class=k>rows</span><span class=w>  </span><span class=k>from</span><span class=w> </span><span class=k>system</span><span class=p>.</span><span class=n>parts</span><span class=w> </span><span class=k>where</span><span class=w> </span><span class=k>table</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;T&#39;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>┌─database─┬─table─┬─name──────┬─primary_key_bytes_in_memory─┬─marks_bytes─┬─rows─┐
+</span></span><span class=line><span class=cl>│ default  │ T     │ all_1_1_0 │                           8 │          80 │    1 │
+</span></span><span class=line><span class=cl>│ default  │ T     │ all_2_2_0 │                           8 │          80 │    1 │
+</span></span><span class=line><span class=cl>│ default  │ T     │ all_3_3_0 │                           8 │          80 │    1 │
+</span></span><span class=line><span class=cl>└──────────┴───────┴───────────┴─────────────────────────────┴─────────────┴──────┘
+</span></span></code></pre></td></tr></table></div></div><ul><li>開啟 Tracing</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>set</span><span class=w> </span><span class=n>send_logs_level</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;trace&#39;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><ul><li>針對 B 做 Query</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>T</span><span class=w> </span><span class=k>where</span><span class=w> </span><span class=n>B</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>1</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>... &lt;Debug&gt; executeQuery: (from 127.0.0.1:53134) select * from T where B &gt; 1
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; ContextAccess (default): Access granted: SELECT(A, B) ON default.T
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// primary index 沒作用
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>... &lt;Debug&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Key condition: unknown
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Not using primary index on part all_1_1_0
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Not using primary index on part all_2_2_0
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Not using primary index on part all_3_3_0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// Clickhouse 掃過全部三個 Partition
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>... &lt;Debug&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Selected 3 parts by partition key, 3 parts by primary key, 3 marks by primary key, 3 marks to read from 3 ranges
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Reading approx. 3 rows with 3 streams
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; InterpreterSelectQuery: FetchColumns -&gt; Complete
+</span></span><span class=line><span class=cl>┌─A─┬─B─┐
+</span></span><span class=line><span class=cl>│ 1 │ 2 │
+</span></span><span class=line><span class=cl>└───┴───┘
+</span></span><span class=line><span class=cl>... &lt;Information&gt; executeQuery: Read 3 rows, 24.00 B in 0.004743004 sec., 632 rows/sec., 4.94 KiB/sec.
+</span></span><span class=line><span class=cl>... &lt;Debug&gt; MemoryTracker: Peak memory usage (for query): 0.00 B.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>1 rows in set. Elapsed: 0.007 sec. 
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>T</span><span class=w> </span><span class=k>where</span><span class=w> </span><span class=n>A</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=mi>1</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>... &lt;Debug&gt; executeQuery: (from 127.0.0.1:53134) SELECT * from T where A &gt; 1
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; ContextAccess (default): Access granted: SELECT(A, B) ON default.T
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 找到 Primary key, 透過找 LEFT/RIGHT boundary 選擇 partition
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>... &lt;Debug&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Key condition: (column 0 in [2, +inf))
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Running binary search on index range for part all_2_2_0 (2 marks)
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Running binary search on index range for part all_1_1_0 (2 marks)
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (LEFT) boundary mark: 1
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (RIGHT) boundary mark: 2
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (LEFT) boundary mark: 1
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found empty range in 1 steps
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (RIGHT) boundary mark: 2
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found empty range in 1 steps
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Running binary search on index range for part all_3_3_0 (2 marks)
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (LEFT) boundary mark: 0
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found (RIGHT) boundary mark: 2
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Found continuous range in 2 steps
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 這邊顯示只選到 1 個 partition
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>... &lt;Debug&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Selected 3 parts by partition key, 1 parts by primary key, 1 marks by primary key, 1 marks to read from 1 ranges
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; default.T (9eae30d1-c8fa-4630-af28-88484187ddbe) (SelectExecutor): Reading approx. 1 rows with 1 streams
+</span></span><span class=line><span class=cl>... &lt;Trace&gt; InterpreterSelectQuery: FetchColumns -&gt; Complete
+</span></span><span class=line><span class=cl>┌─A─┬─B─┐
+</span></span><span class=line><span class=cl>│ 2 │ 1 │
+</span></span><span class=line><span class=cl>└───┴───┘
+</span></span><span class=line><span class=cl>... &lt;Information&gt; executeQuery: Read 1 rows, 8.00 B in 0.005239063 sec., 190 rows/sec., 1.49 KiB/sec.
+</span></span><span class=line><span class=cl>... &lt;Debug&gt; MemoryTracker: Peak memory usage (for query): 0.00 B.
+</span></span></code></pre></td></tr></table></div></div><a href=#所以整個過程是什麼-><h3 id=所以整個過程是什麼-><span class=hanchor arialabel=Anchor># </span>所以整個過程是什麼 ?</h3></a><ol><li>Partition Key -> Partition</li><li>Mark LEFT/RIGHT -> 選 Partition</li><li>Primary key 找符合條件的 marks</li><li>mark -> 要讀取的範圍</li></ol><p>Clickhouse Primary Index 是 Sparse Index, 針對特定 row 的 query 基本上很慢 (看整段過程就知道了), 但對條件過濾就友善很多了.</p><p>所以 Clickhouse Index 的概念是什麼？</p><p><em>如何跳過更多的資料, 找到需要掃過的範圍</em></p><p>跳過的 Block 多了, 解壓縮的 Block 就少了. 可以很大程度的減少 I/O.</p><p>就像切蛋糕, 看能夠切幾刀找到需要的資料</p><a href=#tips><h2 id=tips><span class=hanchor arialabel=Anchor># </span>Tips</h2></a><ul><li><p>Unique: 避免太獨特的 primary key, 效果會很差</p></li><li><p>Long data range: 反之太常見的 Primary key 就會失去效果, 需要掃過的 range 過長</p></li><li><p>Primary Key 順序: Order by (A, B, C) or (B, A, C). 因為是 Sparse Index, 如果順序錯了有機會多讀取很多資料. 慎重考慮 query 條件 && Primary Key 的設定</p></li><li><p>事後加入 Data Skipping Index, 對已經存在的資料並不會馬上發生作用. 而是需要 Part merge process 跑完後才會生效</p></li><li><p>預設的 <code>min_compress_block_size</code> & <code>max_compress_block_size</code> 已經優化過了, 沒事別動.</p></li></ul><hr><a href=#references><h1 id=references><span class=hanchor arialabel=Anchor># </span>References</h1></a><p><a href=https://www.slideshare.net/Altinity/webinar-secrets-of-clickhouse-query-performance-by-robert-hodges-173379008 rel=noopener>https://www.slideshare.net/Altinity/webinar-secrets-of-clickhouse-query-performance-by-robert-hodges-173379008</a>
+<a href=https://stackoverflow.com/questions/60255863/how-understand-the-granularity-and-block-in-clickhouse rel=noopener>https://stackoverflow.com/questions/60255863/how-understand-the-granularity-and-block-in-clickhouse</a>
+<a href=https://github.com/ClickHouse/ClickHouse/issues/7473 rel=noopener>https://github.com/ClickHouse/ClickHouse/issues/7473</a>
+<a href=https://stackoverflow.com/questions/60142967/how-to-understand-part-and-partition-of-clickhouse rel=noopener>https://stackoverflow.com/questions/60142967/how-to-understand-part-and-partition-of-clickhouse</a>
+<a href=https://www.wangfenjin.com/posts/clickhouse-od/ rel=noopener>https://www.wangfenjin.com/posts/clickhouse-od/</a></p></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://jneo8.com/js/graph.abd4bc2af3869a96524d7d23b76152c7.js></script></div></div><div id=contact_buttons><footer><p>Made by jneo8 using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://jneo8.com/>Home</a></li><li><a href=https://twitter.com/lin_jneo8>Twitter</a></li><li><a href=https://github.com/jneo8>GitHub</a></li></ul></footer></div></div></body></html>
