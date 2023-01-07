@@ -8,6 +8,6 @@ enableToc: false
 This a jneo8, a software engineer who focus on cloud native/database/devops/backend topics.
 
 
-## Topics
+# Articles
 
-- [python](/tags/python)
+- [List of articles](/tags/articles)
