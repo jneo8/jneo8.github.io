@@ -1,0 +1,163 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="python asyncio-202301071423 Summary 在這篇文章你會學到:
+ AsyncIO 基本概念 Awaitable: Coroutines, Tasks and Future AsyncIO Context Manager & Iterator  Notes What is AsyncIO ?"><title>python asyncio-202301071423</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://jneo8.com//icon.png><link href=https://jneo8.com/styles.706bb6073ba85d26809f9096dae23a6b.min.css rel=stylesheet><link href=https://jneo8.com/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://jneo8.com/js/darkmode.f52bbb93a2caaffeee5a05995b383961.min.js></script>
+<script src=https://jneo8.com/js/util.5e39932758f9ecaf45fd54506ed61416.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script type=module>
+      import mermaid from 'https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script><script src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script src=https://jneo8.com/js/popover.6da9b273c092cc16fc1aa904d71a2163.min.js></script>
+<script src=https://jneo8.com/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
+<script src=https://jneo8.com/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
+<script src=https://jneo8.com/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://jneo8.com/",fetchData=Promise.all([fetch("https://jneo8.com/indices/linkIndex.d6272384180824219ab92b1d95454584.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://jneo8.com/indices/contentIndex.d2b569cc08318ee3207e294ea44ee6a1.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://jneo8.com",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://jneo8.com",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/jneo8.com\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-171057898-1","auto"),ga("send","pageview"))</script><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://jneo8.com/js/full-text-search.51f0b1753e9b30839d053f8a98cc20d1.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://jneo8.com/>jneo8.com</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>python asyncio-202301071423</h1><p class=meta>Last updated
+Jan 7, 2023
+<a href=https://github.com/jneo8/jneo8.github.io/tree/hugo/content/publish/python%20asyncio-202301071423.md rel=noopener>Edit Source</a></p><ul class=tags><li><a href=https://jneo8.com/tags/articles/>Articles</a></li><li><a href=https://jneo8.com/tags/python/>Python</a></li><li><a href=https://jneo8.com/tags/asyncio/>Asyncio</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#what-is-asyncio->What is AsyncIO ?</a></li><li><a href=#event-loop>Event Loop</a></li><li><a href=#callback>Callback</a></li><li><a href=#awaitables>Awaitables</a><ol><li><a href=#coroutineshttpsdocspythonorg39libraryasyncio-taskhtmlcoroutines><a href=https://docs.python.org/3.9/library/asyncio-task.html#coroutines>Coroutines</a></a></li><li><a href=#tasks>Tasks</a></li><li><a href=#futurehttpsdocspythonorg39libraryasyncio-futurehtmlasynciofuture><a href=https://docs.python.org/3.9/library/asyncio-future.html#asyncio.Future>Future</a></a></li></ol></li><li><a href=#context-manager--iterator>Context Manager && Iterator</a><ol><li><a href=#asynchronous-context-manager>Asynchronous Context Manager</a></li><li><a href=#asynchronous-iterator>Asynchronous Iterator</a></li></ol></li></ol><ol><li><a href=#pep-list>PEP List</a></li><li><a href=#source>Source</a></li></ol></nav></details></aside><a href=#python-asyncio-202301071423><h1 id=python-asyncio-202301071423><span class=hanchor arialabel=Anchor># </span>python asyncio-202301071423</h1></a><a href=#summary><h1 id=summary><span class=hanchor arialabel=Anchor># </span>Summary</h1></a><p>在這篇文章你會學到:</p><ul><li>AsyncIO 基本概念</li><li>Awaitable: Coroutines, Tasks and Future</li><li>AsyncIO Context Manager & Iterator</li></ul><a href=#notes><h1 id=notes><span class=hanchor arialabel=Anchor># </span>Notes</h1></a><a href=#what-is-asyncio-><h2 id=what-is-asyncio-><span class=hanchor arialabel=Anchor># </span>What is AsyncIO ?</h2></a><p>看一下官方 Document 的解釋</p><blockquote><p><a href=https://docs.python.org/3.9/library/asyncio.html rel=noopener><strong>asyncio is a library to write concurrent code using the async/await syntax.</strong></a></p></blockquote><p>常見的誤區是許多剛接觸的人沒有辦法分辨出 <strong>multithreading vs mulitprocessing vs asyncio</strong>, 但這篇並不會詳細分析什麼情況要使用那一種 concurrency, 為了方便還是給一下基本原則:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>if</span> <span class=n>io_bound</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>io_very_slow</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Use Asyncio&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>       <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Use Threads&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Multi Processing&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>那什麼是 AsyncIO ?</p><p>當CPU 執行速度比 IO 快, 為了節省 CPU 等待的浪費, 所以在 CPU 等待 IO 的過程中讓 CPU 去執行其它任務</p><p>個人最喜歡的比喻是像
+<a href=https://en.wikipedia.org/wiki/The_Queen%27s_Gambit_%28miniseries%29 rel=noopener>The Queen&rsquo;s Gambit</a> 中有一段女主角一個人跟整個西洋棋社下棋的片段</p><p>主角就是運作速度極快的 CPU, 其它人則是速度比較慢的 IO. 主角並不會等待 A 下完才換跟 B 下棋. 而是一但有人移動棋子了, 她就會切換過去給出她的下一步</p><p>這樣因為 CPU 跟 IO 不等速, 節省時間而切換 CPU 的狀況就是 AsyncIO</p><p>先來張基本流程示意圖</p><div class=mermaid>graph LR
+style handler fill:#bbf
+style EventLoop fill:#f9f
+style IO fill:#abc
+handler --> EventLoop((Event Loop))
+EventLoop -- trigger callback ---> handler
+EventLoop -- Register Callback ---> IO((IO))
+IO -- Operation Complete ---> EventLoop</div><p>想要了解 python asyncio, 就需要理解幾個相關詞跟概念</p><ul><li><strong>Event loop</strong></li><li><strong>Callback</strong></li><li><strong>Coroutines</strong></li><li><strong>Tasks</strong></li><li><strong>Futures</strong></li></ul><p>那我們開始吧!</p><a href=#event-loop><h2 id=event-loop><span class=hanchor arialabel=Anchor># </span>Event Loop</h2></a><blockquote><p>西洋棋的比喻: 監聽中的對手名單</p></blockquote><p>負責跑 asynchronous tasks && callbacks</p><p>Event loop 會跑在 單一 thread (main thread) 中, 就像一個 todo list</p><p>main thread 會監聽這個 TODO List, 等待它們完成後 呼叫 Callback</p><a href=#callback><h2 id=callback><span class=hanchor arialabel=Anchor># </span>Callback</h2></a><blockquote><p>西洋棋的比喻: 對手(任務)</p></blockquote><blockquote><p>A subroutine function which is passed as an argument to be executed at some point in the future.</p></blockquote><p>關於 callback 其實在 JS 中很常見, python 中的 callback function:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func_b</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;func_b&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func_a</span><span class=p>(</span><span class=n>callback</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;func_a&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>callback</span><span class=p>()</span>  <span class=c1># exec callback func</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>func_a</span><span class=p>(</span><span class=n>func_b</span><span class=p>)</span>  <span class=c1># func_b is callback func_b for func_a</span>
+</span></span><span class=line><span class=cl><span class=c1>#  func_a</span>
+</span></span><span class=line><span class=cl><span class=c1>#  func_b</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 asyncio 中, callback 是透過 event loop schedule function 被註冊到 EventLoop</p><p>EventLoop 的 schedule functions</p><ul><li><a href=https://docs.python.org/3/library/asyncio-eventloop.html#scheduling-callbacks rel=noopener>Scheduling callbacks</a></li><li><a href=https://docs.python.org/3/library/asyncio-eventloop.html#scheduling-delayed-callbacks rel=noopener>Scheduling delayed callbacks</a></li></ul><a href=#awaitables><h2 id=awaitables><span class=hanchor arialabel=Anchor># </span>Awaitables</h2></a><blockquote><p>Future-like object or a coroutine object</p></blockquote><p>Python 有三個主要的 awaitable objects.</p><ul><li><strong>Coroutines</strong></li><li><strong>Tasks</strong></li><li><strong>Futures</strong> .</li></ul><h3 id=coroutineshttpsdocspythonorg39libraryasyncio-taskhtmlcoroutines><a href=https://docs.python.org/3.9/library/asyncio-task.html#coroutines rel=noopener>Coroutines</a></h3><p>Coroutine function: 可以中途 enter/exit/resumed 的 function</p><p>感覺跟 callback 很像對吧?</p><p>因為 callback 是 low-level API 中的概念(在 EventLoop 中實做). 而 Coroutines 是 high-level API. 透過 <code>asyncio.run</code> 執行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># nested 是一個 Coroutine</span>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>nested</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>42</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>nested</span><span class=p>()</span>  <span class=c1># 因為沒有 await, 所以 nested 並不會執行</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=k>await</span> <span class=n>nested</span><span class=p>())</span>  <span class=c1># 這邊會印出 42</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><p>Python Coroutine 在 3.4 asyncio 出現之後從原本的 <strong>Generator-based coroutines</strong>,
+多加了 <strong>Native coroutines</strong></p><p>而其實 Coroutine 這個詞彙在 python 可以同時表示:</p><ul><li>A coroutine function： <code>async def</code> function;</li><li>A coroutine object: an object returned by calling a coroutine function.</li></ul><p>所以當有人說 coroutine, 在 python 內可能是</p><ul><li><strong>Native coroutines</strong> / <strong>Generator-based coroutines</strong></li><li><strong>Coroutine function</strong> / <strong>Coroutine object</strong></li></ul><p><strong>怎麼區分 Native coroutines && Generator-based coroutines 呢?</strong></p><ol><li><p>Native coroutine 沒有 <code>__iter__</code> and <code>__next__</code> methods.</p><ul><li>不能 iterated over</li><li>不能傳給 <code>iter()</code>, <code>list()</code>, <code>tuple()</code> &mldr;等等內建語法</li><li>不支援原本的 <code>for ... in loop</code> 語法</li></ul></li><li><p>Generators-based coroutines 可不可以使用 <code>yield from</code> ?</p><ul><li>不能對 Native Coroutine 使用 <code>yield from</code> -> <code>TypeError</code></li><li>透過
+<a href=https://docs.python.org/3/library/asyncio-task.html#asyncio.coroutine rel=noopener>@asyncio.coroutine</a> decorator 包裝過的 generator 對 Native coroutine 使用 <code>yield from</code></li></ul></li><li><p>inspect</p><ul><li><code>inspect.isgenerator()</code> && <code>inspect.isgeneratorfunction()</code><ul><li>Native coroutines return False</li></ul></li><li>詳細的 inspect 可以看
+<a href=https://docs.python.org/3/library/inspect.html rel=noopener>doc</a></li></ul></li></ol><a href=#tasks><h3 id=tasks><span class=hanchor arialabel=Anchor># </span>Tasks</h3></a><ul><li><p>Task 設計是為了讓 coroutines 並發執行, 調度使用的</p></li><li><p>一個 Event loop 同時只會跑一個 task</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>say_after</span><span class=p>(</span><span class=n>delay</span><span class=p>,</span> <span class=n>what</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=n>delay</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>what</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;start&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 將 task1 &amp;&amp; task2 註冊到 event loop 中</span>
+</span></span><span class=line><span class=cl>    <span class=n>task1</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>create_task</span><span class=p>(</span><span class=n>say_after</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=s2>&#34;hello&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>task1</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>create_task</span><span class=p>(</span><span class=n>say_after</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=s2>&#34;world&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 等到 兩個 task 都執行完, 大約需要兩秒(不是三秒)</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>task1</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>task2</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=futurehttpsdocspythonorg39libraryasyncio-futurehtmlasynciofuture><a href=https://docs.python.org/3.9/library/asyncio-future.html#asyncio.Future rel=noopener>Future</a></h3><blockquote><p>Future objects are used to bridge low-level callback-based code with high-level async</p></blockquote><ul><li><p>asynchronous operation 回傳的最終結果</p></li><li><p>Futures 是 low-level 的 awaitable object</p></li><li><p>通常 application level 不會需要操作到 future</p></li><li><p>Task && Coroutines 都是 <strong>future-like</strong> object</p><blockquote><p>future-like object
+An object with an <strong>await</strong> method, or a C object with tp_as_async->am_await function, returning an iterator. Can be consumed by an await expression in a coroutine. A coroutine waiting for a Future-like object is suspended until the Future-like object&rsquo;s <strong>await</strong> completes, and returns the result. See Await Expression for details.</p></blockquote></li></ul><a href=#context-manager--iterator><h2 id=context-manager--iterator><span class=hanchor arialabel=Anchor># </span>Context Manager && Iterator</h2></a><a href=#asynchronous-context-manager><h3 id=asynchronous-context-manager><span class=hanchor arialabel=Anchor># </span>Asynchronous Context Manager</h3></a><p><code>async with</code></p><p>基本的 python context manager 需要定義兩個 funcs, <code>__enter__</code> && <code>__exit__</code>.</p><p>python asynchronous context manager 則是需要定義兩個 magic method: <code>__aenter__</code> && <code>__aexit__</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>AsyncContextManager</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>async</span> <span class=k>def</span> <span class=fm>__aenter__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>await</span> <span class=n>log</span><span class=p>(</span><span class=s1>&#39;entering context&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>async</span> <span class=k>def</span> <span class=fm>__aexit__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>exc_type</span><span class=p>,</span> <span class=n>exc</span><span class=p>,</span> <span class=n>tb</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>await</span> <span class=n>log</span><span class=p>(</span><span class=s1>&#39;exiting context&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#asynchronous-iterator><h3 id=asynchronous-iterator><span class=hanchor arialabel=Anchor># </span>Asynchronous Iterator</h3></a><p><code>async for</code></p><p>基本 Iterator 需要定義 <code>__iter__</code>, <code>__next__</code></p><p>Async Iterator -> <code>__aiter__</code>, <code>__anext__</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>AsyncIterable</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__aiter__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span>
+</span></span><span class=line><span class=cl>    <span class=k>async</span> <span class=k>def</span> <span class=fm>__anext__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>data</span> <span class=o>=</span> <span class=k>await</span> <span class=bp>self</span><span class=o>.</span><span class=n>fetch_data</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>data</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>data</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>StopAsyncIteration</span>
+</span></span></code></pre></td></tr></table></div></div><hr><a href=#recap><h1 id=recap><span class=hanchor arialabel=Anchor># </span>Recap</h1></a><p>如果是第一次接觸 python 的 asyncio 的人, 有可能會搞混 Tasks,
+Future, Coroutines 這些詞彙的意思.</p><p>老實說第一次接觸時也是一頭混亂. 寫這篇時也是不斷的翻 PEP 的內容.</p><p>Asyncio 的 API 變動其實滿快的. 所以詳細還是要看 doc</p><p>一個成熟的工程師除了使用工具解決問題, 其實還要了解使用的時機跟內部的實作去避免踩雷跟解釋出自己是如何解決問題的</p><p>想要研究(自虐) 的人還是把 PEP 看完會有更深的了解喔</p><hr><a href=#references><h1 id=references><span class=hanchor arialabel=Anchor># </span>References</h1></a><a href=#pep-list><h2 id=pep-list><span class=hanchor arialabel=Anchor># </span>PEP List</h2></a><p><a href=https://www.python.org/dev/peps/pep-0479/ rel=noopener>PEP 479 &ndash; Change StopIteration handling inside generators</a>
+<a href=https://www.python.org/dev/peps/pep-0492/ rel=noopener>PEP 492</a></p><a href=#source><h2 id=source><span class=hanchor arialabel=Anchor># </span>Source</h2></a><ul><li><a href="https://www.youtube.com/watch?v=iG6fr81xHKA&ab_channel=PyCon2017" rel=noopener>https://www.youtube.com/watch?v=iG6fr81xHKA&ab_channel=PyCon2017</a></li><li><a href=https://jimmy-huang.medium.com/python-asyncio-%E5%8D%94%E7%A8%8B-%E4%BA%8C-e717018bb984 rel=noopener>https://jimmy-huang.medium.com/python-asyncio-%E5%8D%94%E7%A8%8B-%E4%BA%8C-e717018bb984</a></li><li><a href=https://blog.taiker.space/python-async-io-in-python-a-complete-walkthrough/ rel=noopener>https://blog.taiker.space/python-async-io-in-python-a-complete-walkthrough/</a></li><li><a href=http://masnun.rocks/2016/10/06/async-python-the-different-forms-of-concurrency/ rel=noopener>http://masnun.rocks/2016/10/06/async-python-the-different-forms-of-concurrency/</a></li></ul></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://jneo8.com/js/graph.abd4bc2af3869a96524d7d23b76152c7.js></script></div></div><div id=contact_buttons><footer><p>Made by jneo8 using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://jneo8.com/>Home</a></li><li><a href=https://twitter.com/lin_jneo8>Twitter</a></li><li><a href=https://github.com/jneo8>GitHub</a></li></ul></footer></div></div></body></html>
