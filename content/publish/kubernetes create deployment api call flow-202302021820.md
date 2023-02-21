@@ -14,7 +14,7 @@ A diagram describes the flow create a simple deployment in kubernetes
 
 # Notes
 
-![[kubenetes-api-call-flow.png]]
+![](attachments/kubenetes-api-call-flow.png)
 
 ---
 # References
