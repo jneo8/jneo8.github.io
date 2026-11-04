@@ -27,28 +27,29 @@ configuration:
       body: IBM Plex Sans
       code: IBM Plex Mono
     colors:
-      # HD-2D (Octopath Traveler) palette: parchment & indigo ink with navy links and gold hover by day,
-      # deep night-navy UI with gold links and sky-blue hover by night
+      # Baldur's Gate palette: parchment & brown ink by day, black leather & gold by night
       lightMode:
-        light: "#f3ead8"
-        lightgray: "#e1d4b9"
-        gray: "#9b8d73"
-        darkgray: "#3b3a4f"
-        dark: "#1c1a2e"
-        secondary: "#2c4a7a"
-        tertiary: "#b4832a"
-        highlight: rgba(44, 74, 122, 0.12)
-        textHighlight: "#f2d16b88"
+        # Baldur's Gate by day: warm parchment, brown ink, deep-red links, dark-gold hover
+        light: "#f1e6cf"
+        lightgray: "#dccbab"
+        gray: "#9a876a"
+        darkgray: "#3a2e24"
+        dark: "#1e1610"
+        secondary: "#8b2e2e"
+        tertiary: "#9a7a2c"
+        highlight: rgba(139, 46, 46, 0.10)
+        textHighlight: "#e2c46a88"
       darkMode:
-        light: "#141a2e"
-        lightgray: "#232c48"
-        gray: "#6b7390"
-        darkgray: "#d8d2bf"
-        dark: "#f3ead8"
-        secondary: "#e0b55a"
-        tertiary: "#8fb3e0"
-        highlight: rgba(224, 181, 90, 0.15)
-        textHighlight: "#c9a44966"
+        # Baldur's Gate: warm black leather, parchment text, gold trim, deep-red hover
+        light: "#141010"
+        lightgray: "#2a221c"
+        gray: "#7d6b55"
+        darkgray: "#e3d5b8"
+        dark: "#f5ecd8"
+        secondary: "#c9a35c"
+        tertiary: "#d1584a"
+        highlight: rgba(201, 163, 92, 0.14)
+        textHighlight: "#b08a3a66"
 plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true

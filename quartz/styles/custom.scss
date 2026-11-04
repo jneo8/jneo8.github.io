@@ -11,9 +11,9 @@
   --pixel-shadow: var(--lightgray);
 }
 :root[saved-theme="dark"] {
-  // night UI: gold-trimmed boxes like the in-game menus
+  // night UI: gold-trimmed boxes like the in-game dialogue frames; shadow uses the panel colour
   --pixel-border: var(--secondary);
-  --pixel-shadow: #0b0e1a;
+  --pixel-shadow: var(--lightgray);
 }
 
 // Bitmap headings: no anti-aliasing where the platform allows it, a little tracking.
