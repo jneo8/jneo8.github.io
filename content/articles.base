@@ -1,11 +1,9 @@
-# Obsidian Base: all notes tagged `articles`, newest first. Embedded on the home page via ![[articles.base]].
 filters:
   and:
     - file.ext == "md"
     - file.hasTag("articles")
     - file.name != "index"
 formulas:
-  # file names carry a 12-digit UID suffix ("-202301071508"); show the clean name but keep the link
   article: link(file.path, file.name.slice(0, -13))
   published: created.slice(0, 10)
 properties:
