@@ -5,8 +5,8 @@ filters:
     - file.hasTag("articles")
     - file.name != "index"
 formulas:
-  # titles carry a 12-digit UID suffix ("-202301071508"); show the clean name but keep the link
-  article: link(file.path, title.slice(0, -13))
+  # file names carry a 12-digit UID suffix ("-202301071508"); show the clean name but keep the link
+  article: link(file.path, file.name.slice(0, -13))
   published: created.slice(0, 10)
 properties:
   formula.article:

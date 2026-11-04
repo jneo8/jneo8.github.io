@@ -4,7 +4,10 @@ node_modules
 public
 prof
 tsconfig.tsbuildinfo
-.obsidian
+# Obsidian: keep vault settings, drop per-machine state and plugin data (may hold API keys)
+content/.obsidian/workspace.json
+content/.obsidian/workspace-mobile.json
+content/.obsidian/plugins/*/data.json
 .quartz-cache
 private/
 .replit

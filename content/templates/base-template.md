@@ -1,12 +1,10 @@
---- 
-UID: <% tp.date.now(string="YYYYMMDDHHmm") %>
-title: "<% tp.file.title %>"
+---
+UID: {{date:YYYYMMDDHHmm}}
+created: {{date:YYYY-MM-DD[T]HH:mm:ssZ}}
 draft: true
 tags:
-- articles
+  - articles
 ---
-
-# <% tp.file.title %>
 
 # Summary
 
