@@ -12,3 +12,6 @@ replit.nix
 .quartz/
 quartz/cli/tui/dist/
 .turbo/
+
+# local plugin lockfile stores absolute paths; CI installs plugins with --from-config
+quartz.lock.json

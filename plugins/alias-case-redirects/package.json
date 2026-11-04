@@ -1,0 +1,26 @@
+{
+  "name": "alias-case-redirects",
+  "version": "1.0.0",
+  "description": "Emit case-preserving redirect pages for frontmatter aliases (Quartz 5 lowercases alias slugs; this keeps old mixed-case URLs working).",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "quartz": {
+    "name": "alias-case-redirects",
+    "displayName": "Alias Case Redirects",
+    "category": "emitter",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 51,
+    "defaultEnabled": true,
+    "defaultOptions": {}
+  }
+}
