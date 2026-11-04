@@ -12,34 +12,43 @@ configuration:
     - templates
     - draft
     - .obsidian
+    - "**/*.excalidraw.md" # Obsidian drawing sources; articles embed the exported png
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
+      # Pixel / HD-2D flavour: bitmap-style gothic for the title and headings, clean sans for body
+      title:
+        name: DotGothic16
+        weights: [400]
+      header:
+        name: DotGothic16
+        weights: [400]
+      body: IBM Plex Sans
       code: IBM Plex Mono
     colors:
+      # HD-2D (Octopath Traveler) palette: parchment & indigo ink with navy links and gold hover by day,
+      # deep night-navy UI with gold links and sky-blue hover by night
       lightMode:
-        light: "#faf8f8"
-        lightgray: "#f0f0f0"
-        gray: "#b8b8b8"
-        darkgray: "#4e4e4e"
-        dark: "#141021"
-        secondary: "#284b63"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#f5dfaf88"
+        light: "#f3ead8"
+        lightgray: "#e1d4b9"
+        gray: "#9b8d73"
+        darkgray: "#3b3a4f"
+        dark: "#1c1a2e"
+        secondary: "#2c4a7a"
+        tertiary: "#b4832a"
+        highlight: rgba(44, 74, 122, 0.12)
+        textHighlight: "#f2d16b88"
       darkMode:
-        light: "#1e1e21"
-        lightgray: "#292633"
-        gray: "#646464"
-        darkgray: "#d4d4d4"
-        dark: "#fbfffe"
-        secondary: "#6b879a"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#574010"
+        light: "#141a2e"
+        lightgray: "#232c48"
+        gray: "#6b7390"
+        darkgray: "#d8d2bf"
+        dark: "#f3ead8"
+        secondary: "#e0b55a"
+        tertiary: "#8fb3e0"
+        highlight: rgba(224, 181, 90, 0.15)
+        textHighlight: "#c9a44966"
 plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true
@@ -161,12 +170,15 @@ plugins:
   - source: "@quartz-community/tag-page"
     enabled: true
   - source: "@quartz-community/explorer"
-    enabled: true
+    enabled: false # one folder, 14 notes: Recent Notes + the home-page table + tags cover it
     layout:
       position: left
       priority: 50
   - source: "@quartz-community/graph"
     enabled: true
+    options:
+      localGraph:
+        depth: -1 # small site: show the whole map on every page
     layout:
       position: right
       priority: 10
@@ -193,6 +205,7 @@ plugins:
     layout:
       position: beforeBody
       priority: 20
+      condition: not-index
   - source: "@quartz-community/tag-list"
     enabled: false
     layout:
@@ -243,11 +256,13 @@ plugins:
     options:
       title: Recent Notes
       limit: 5
-      linkToMore: false
-      showTags: true
+      linkToMore: tags/articles # renders "See N more" when there are more notes
+      showTags: false
+      hideTagPages: true
+      hideFolderPages: true
     layout:
       position: left
-      priority: 25
+      priority: 40 # after the search/darkmode toolbar (35), before the explorer (50)
   - source: "@quartz-community/spacer"
     enabled: true
     options: {}
@@ -277,6 +292,7 @@ plugins:
       position: beforeBody
       priority: 15
       display: all
+      condition: not-index
   - source: "@quartz-community/obsidian-plugin-excalidraw"
     enabled: true
     options:

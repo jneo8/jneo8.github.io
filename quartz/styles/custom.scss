@@ -1,3 +1,164 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// ---------------------------------------------------------------------------
+// Pixel / HD-2D (Octopath Traveler-style) touches.
+// Colours and fonts come from quartz.config.yaml; this file only shapes them:
+// hard edges, 2px "menu box" borders with a flat offset shadow, bitmap headings.
+// ---------------------------------------------------------------------------
+
+:root {
+  --pixel-border: var(--darkgray);
+  --pixel-shadow: var(--lightgray);
+}
+:root[saved-theme="dark"] {
+  // night UI: gold-trimmed boxes like the in-game menus
+  --pixel-border: var(--secondary);
+  --pixel-shadow: #0b0e1a;
+}
+
+// Bitmap headings: no anti-aliasing where the platform allows it, a little tracking.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.page-title,
+.article-title {
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+  letter-spacing: 0.02em;
+}
+
+// Site title as an RPG name plate.
+.page-title {
+  margin: 0;
+  a {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border: 2px solid var(--pixel-border);
+    box-shadow: 4px 4px 0 var(--pixel-shadow);
+    background: var(--light);
+    color: var(--dark);
+    text-decoration: none;
+    &:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--pixel-shadow);
+      color: var(--secondary);
+    }
+  }
+}
+
+// Square everything off.
+a.internal,
+.callout,
+code,
+pre,
+img,
+video,
+audio,
+.popover > .popover-inner,
+.text-highlight,
+figure[data-rehype-pretty-code-figure] > [data-rehype-pretty-code-title],
+.search > .search-container > .search-space,
+.search > .search-container > .search-space > .search-bar,
+.search > .search-container > .search-space > .search-layout,
+.search > .search-button,
+.darkmode,
+.graph > .graph-outer,
+.graph > .global-graph-outer > .global-graph-container,
+.explorer button,
+.tag-link,
+.breadcrumb-container,
+button {
+  border-radius: 0 !important;
+}
+
+// Side panels, code blocks and callouts become bordered "menu boxes".
+.graph > .graph-outer,
+.graph > .global-graph-outer > .global-graph-container,
+.popover > .popover-inner,
+.search > .search-container > .search-space,
+pre,
+.callout {
+  border: 2px solid var(--pixel-border);
+  box-shadow: 4px 4px 0 var(--pixel-shadow);
+}
+.callout {
+  border-left-width: 2px; // Quartz uses a thick coloured left bar; keep the box uniform
+}
+.recent-notes,
+.backlinks,
+.toc {
+  border: 2px solid var(--pixel-border);
+  box-shadow: 4px 4px 0 var(--pixel-shadow);
+  padding: 0.6rem 0.8rem;
+  background: var(--light);
+  & > h3,
+  & > button > h3 {
+    margin-top: 0;
+  }
+}
+
+// Links: flat 2px underline instead of the default thin one.
+.center a.internal,
+.center a.external {
+  text-decoration: none;
+  border-bottom: 2px solid var(--secondary);
+  &:hover {
+    border-bottom-color: var(--tertiary);
+  }
+}
+a.internal {
+  background: transparent;
+  padding: 0;
+}
+
+// Search button in the toolbar: pixel chip.
+.search > .search-button {
+  border: 2px solid var(--pixel-border);
+  background: var(--light);
+  box-shadow: 3px 3px 0 var(--pixel-shadow);
+}
+.darkmode,
+.readermode {
+  border: 2px solid var(--pixel-border);
+  background: var(--light);
+  box-shadow: 3px 3px 0 var(--pixel-shadow);
+  padding: 0.25rem;
+  box-sizing: content-box;
+}
+
+// Pixel-art images (gif / anything tagged |pixel in Obsidian embeds) stay crisp when scaled.
+img[src$=".gif"],
+img.pixel {
+  image-rendering: pixelated;
+}
+
+// Horizontal rule as a dotted pixel line.
+hr {
+  border: 0;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gray) 0 4px,
+    transparent 4px 8px
+  );
+}
+
+// Left pane: compact Recent Notes so five entries fit comfortably.
+.sidebar.left .recent-notes {
+  h3 {
+    font-size: 0.9rem;
+  }
+  .recent-ul li {
+    margin: 0.6rem 0;
+    .desc h3 {
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+    .meta {
+      font-size: 0.75rem;
+    }
+  }
+}
