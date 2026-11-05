@@ -17,6 +17,15 @@ setup:
 serve port=port:
     npx quartz build --serve --port {{port}}
 
+# Serve with content/draft/ included (temporarily drops `draft` from ignorePatterns; restored on exit)
+serve-drafts port=port:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    cp quartz.config.yaml .quartz.config.yaml.bak
+    trap '[ -f .quartz.config.yaml.bak ] && mv .quartz.config.yaml.bak quartz.config.yaml' EXIT
+    sed -i '/^    - draft$/d' quartz.config.yaml
+    npx quartz build --serve --port {{port}}
+
 # Build the static site into public/
 build:
     npx quartz build
@@ -37,24 +46,20 @@ plugins-update:
 upgrade:
     npx quartz upgrade
 
-# Create a new article from the Obsidian template (just new "My Title")
+# Create a new draft in content/draft/ with the same frontmatter as the Obsidian template (just new "My Title")
 new title:
     #!/usr/bin/env bash
     set -euo pipefail
     uid="$(date +%Y%m%d%H%M)"
-    file="content/publish/{{title}}-${uid}.md"
+    file="content/draft/{{title}}-${uid}.md"
     [ -e "$file" ] && { echo "exists: $file"; exit 1; }
     cat > "$file" <<MD
     ---
     UID: ${uid}
-    created: $(date +%Y-%m-%dT%H:%M:00%:z)
-    title: "{{title}}"
-    draft: true
+    created: $(date +%Y-%m-%dT%H:%M:%S%:z)
     tags:
-    - articles
+      - articles
     ---
-
-    # {{title}}
 
     # Summary
 
